@@ -64,7 +64,7 @@ body {
 }
 
 ::-moz-selection {
-  background: var(--theme-success-500);
+  background: var(--color-dark-50);
   color: var(--color-base-800);
 }
 
@@ -99,11 +99,7 @@ h6 {
 }
 
 p {
-  margin: var(--base) 0;
-
-  @include mid-break {
-    margin: calc(var(--base) * .75) 0;
-  }
+  margin: 0;
 }
 
 ul,
