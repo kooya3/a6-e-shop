@@ -110,7 +110,7 @@ ol {
 }
 
 a {
-  color: currentColor;
+  color: var(--color-dark-500);
 
   &:focus {
     opacity: .8;
