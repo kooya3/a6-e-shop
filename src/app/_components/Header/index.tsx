@@ -23,10 +23,7 @@ export async function Header() {
 
   return (
     <>
-      <header className={classes.header}>
- 
-        
-      </header>
+
     </>
   )
 }
