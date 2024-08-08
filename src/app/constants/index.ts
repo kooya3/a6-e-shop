@@ -5,4 +5,10 @@ export const inclusions = [
       icon: '/assets/icons/shipping.svg',
     },
     
+    {
+        title: 'Online Support',
+        description: '24 hours a day, 7 days a week',
+        icon: '/assets/icons/support.svg',
+      },
+      
     
