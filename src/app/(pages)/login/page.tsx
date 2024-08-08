@@ -15,7 +15,7 @@ export default async function Login() {
   })
 
   return (
-    <Gutter className={classes.login}>
+    <Gutter {classes.login}>
 
 
     </Gutter>
