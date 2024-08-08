@@ -10,7 +10,9 @@ export const Footer: GlobalConfig = {
   fields: [
     {
       name: 'copyright',
+      label: 'copyright',
       type: 'text',
+      required: true,
     },
     {
       name: 'navItems',
