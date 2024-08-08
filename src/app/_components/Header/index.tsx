@@ -10,7 +10,7 @@ import { fetchHeader } from '../../_api/fetchGlobals'
 import { Gutter } from '../Gutter'
 import { HeaderNav } from './Nav'
 
-import classes from './index.module.scss'
+
 
 export async function Header() {
   let header: Header | null = null
