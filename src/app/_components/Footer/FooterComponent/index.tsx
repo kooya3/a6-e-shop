@@ -23,7 +23,7 @@ const FooterComponent = () => {
               alt={inclusion.title}
               width={36}
               height={36}
-              
+              className={classes.icon}
               />
             </li>
           )}
