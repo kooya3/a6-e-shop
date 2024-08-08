@@ -6,6 +6,7 @@ import Link from 'next/link'
 import classes from './index.module.scss'
 import Image from 'next/image'
 import { HeaderNav } from '../Nav'
+import MobileNav from './MobileNav'
 
 const HeaderComponent = ({ header }: { header: Header }) => {
   return (
@@ -16,7 +17,7 @@ const HeaderComponent = ({ header }: { header: Header }) => {
             </Link>
 
             <HeaderNav header={header}/>
-            <HeaderMobileNav />
+            <MobileNav />
         </Gutter>
     </nav>
   )
