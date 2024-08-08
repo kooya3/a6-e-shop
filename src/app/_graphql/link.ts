@@ -11,8 +11,6 @@ export const LINK_FIELDS = ({ disableAppearance, disableLabel }: Args = {}): str
   url
   icon {
     url
-    width
-    height
   }
   reference {
     relationTo
