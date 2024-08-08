@@ -5,3 +5,4 @@ export const inclusions = [
       icon: '/assets/icons/shipping.svg',
     },
     
+    
