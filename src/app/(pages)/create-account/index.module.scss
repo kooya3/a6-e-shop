@@ -1,5 +1,7 @@
-@import "../../_css/common";
+@import '../../_css/common';
 
 .createAccount {
-  margin-bottom: var(--block-padding);
-}
+  display: grid;
+  grid-template-columns: 1fr 45%;
+  height: 100vh;
+  overflow: auto;
