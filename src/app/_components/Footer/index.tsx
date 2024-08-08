@@ -22,8 +22,6 @@ export async function Footer() {
     <footer className={classes.footer}>
       <Gutter className={classes.wrap}>
         <Link href="/">
-          <picture>
-            <img
 
     </>
   )
