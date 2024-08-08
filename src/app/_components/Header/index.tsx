@@ -26,9 +26,7 @@ export async function Header() {
       <header className={classes.header}>
         <Gutter className={classes.wrap}>
           <Link href="/">
-            {/* Cannot use the `<picture>` element here with `srcSet`
-              Instead, we just use CSS to invert the color via `filter: invert(1)` based on `[data-theme="dark"]`
-            */}
+            
  
         
       </header>
