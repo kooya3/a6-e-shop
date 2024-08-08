@@ -9,6 +9,11 @@ export const LINK_FIELDS = ({ disableAppearance, disableLabel }: Args = {}): str
   type
   newTab
   url
+  icon {
+    url
+    width
+    height
+  }
   reference {
     relationTo
     value {
