@@ -20,6 +20,8 @@ import { Gutter } from '../../_components/Gutter'
 // If you are not using Payload Cloud then this line can be removed, see `../../../README.md#cache`
 export const dynamic = 'force-dynamic'
 
+import classes from './index.module.scss'
+
 export default async function Page({ params: { slug = 'home' } }) {
   const { isEnabled: isDraftMode } = draftMode()
 
@@ -34,8 +36,6 @@ export default async function Page({ params: { slug = 'home' } }) {
     })
 
     categories = await fetchDocs<Category>('categories');
-
-
 
   } catch (error) {
     // when deploying this template on Payload Cloud, this page needs to build before the APIs are live
