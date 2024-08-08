@@ -35,6 +35,7 @@ export const HeaderNav: React.FC<{ header: HeaderType }> = ({ header }) => {
       label="Login"
       onClick={() => (window.location.href = '/login')}
       />}
+      {user && <CartLink}
     </nav>
   )
 }
