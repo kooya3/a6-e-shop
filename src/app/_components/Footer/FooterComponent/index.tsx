@@ -25,6 +25,8 @@ const FooterComponent = () => {
               height={36}
               className={classes.icon}
               />
+
+              <h4>{inclusion.title}</h4>
             </li>
           )}
         </ul>
