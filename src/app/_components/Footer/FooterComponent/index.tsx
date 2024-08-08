@@ -13,6 +13,7 @@ import { Button } from 'payload/components';
 
 const FooterComponent = ({ footer }: { footer: Footer }) => {
   const pathName = usePathname();
+  const navItems = footer?.navItems || [];
 
 
   return (
