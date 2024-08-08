@@ -31,8 +31,7 @@ export async function Footer() {
           </picture>
         </Link>
         <nav className={classes.nav}>
-          <ThemeSelector />
-          {navItems.map(({ link }, i)
+
     </>
   )
 }
