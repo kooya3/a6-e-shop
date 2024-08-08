@@ -25,8 +25,7 @@ export async function Header() {
     <>
       <header className={classes.header}>
         <Gutter className={classes.wrap}>
-          <Link href="/">
-            
+
  
         
       </header>
