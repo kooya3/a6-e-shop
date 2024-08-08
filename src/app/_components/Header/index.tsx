@@ -24,8 +24,6 @@ export async function Header() {
   return (
     <>
       <header className={classes.header}>
-        <Gutter className={classes.wrap}>
-
  
         
       </header>
