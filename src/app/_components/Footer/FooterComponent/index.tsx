@@ -1,37 +1,37 @@
-"use client";
+'use client'
 
 import React from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+
+import { Footer, Media } from '../../../../payload/payload-types'
+import { inclusions, noHeaderFooterUrls, profileNavItems } from '../../../constants'
+import { Button } from '../../Button'
+import { Gutter } from '../../Gutter'
 
 import classes from './index.module.scss'
-import { inclusions, noHeaderFooterUrls, profileNavItems } from '../../../constants'
-import { usePathname } from 'next/navigation'
-import { Gutter } from '../../Gutter'
-import Image from 'next/image';
-import Link from 'next/link';
-import { Footer } from '../../../../payload/payload-types';
-import { Button } from 'payload/components';
 
 const FooterComponent = ({ footer }: { footer: Footer }) => {
-  const pathName = usePathname();
-  const navItems = footer?.navItems || [];
-
+  const pathname = usePathname()
+  const navItems = footer?.navItems || []
 
   return (
-    <footer className={noHeaderFooterUrls.includes(pathName) ? classes.hide : ''}>
+    <footer className={noHeaderFooterUrls.includes(pathname) ? classes.hide : ''}>
       <Gutter>
         <ul className={classes.inclusions}>
-          {inclusions.map((inclusion) => (
+          {inclusions.map(inclusion => (
             <li key={inclusion.title}>
-              <Image 
-              src={inclusion.icon}
-              alt={inclusion.title}
-              width={36}
-              height={36}
-              className={classes.icon}
+              <Image
+                src={inclusion.icon}
+                alt={inclusion.title}
+                width={36}
+                height={36}
+                className={classes.icon}
               />
 
-              <h4 className={classes.title}>{inclusion.title}</h4>
-              <p className={classes.description}>{inclusion.description}</p>
+              <h5 className={classes.title}>{inclusion.title}</h5>
+              <p>{inclusion.description}</p>
             </li>
           ))}
         </ul>
@@ -40,27 +40,29 @@ const FooterComponent = ({ footer }: { footer: Footer }) => {
       <div className={classes.footer}>
         <Gutter>
           <div className={classes.wrap}>
-            <Link href="/"> 
-            <Image src="/logo-white.svg" alt="Logo" width={170} height={60} />
+            <Link href="/">
+              <Image src="/logo-white.svg" alt="logo" width={170} height={50} />
             </Link>
 
-            <p>{footer.copyright}</p>
+            <p>{footer?.copyright}</p>
+
             <div className={classes.socialLinks}>
-              {profileNavItems.map((item) => {
-                const icon = '';
-                
+              {navItems.map(item => {
+                const icon = ''
+
                 return (
                   <Button
-                  key={item.link.label}
-                  el="link"
-                  href={item.link.url}
-                  newTab={true}
-                  className={classes.socialLinks}
-                  >
+                    key={item.link.label}
+                    el="link"
+                    href={item.link.url}
+                    newTab={true}
+                    className={classes.socialLinkItem}
+                  >                    
                     {item.link.label}
                   </Button>
                 )
               })}
+            </div>
           </div>
         </Gutter>
       </div>
