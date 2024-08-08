@@ -31,9 +31,6 @@ export async function Header() {
               And so `@media (prefers-color-scheme: dark)` will not work
               Instead, we just use CSS to invert the color via `filter: invert(1)` based on `[data-theme="dark"]`
             */}
-            <img
-              className={classes.logo}
-              alt="Payload Logo"
   
  
         
