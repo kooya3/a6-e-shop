@@ -19,9 +19,6 @@ export async function Footer() {
   const navItems = footer?.navItems || []
 
   return (<>
-    <footer className={classes.footer}>
-      <Gutter className={classes.wrap}>
-        <Link href="/">
 
     </>
   )
