@@ -9,7 +9,7 @@ const FooterComponent = () => {
 
 
   return (
-    <footer className={noHeaderFooterUrls.includes(pathName)} />
+    <footer className={noHeaderFooterUrls.includes(pathName) ? classes.hide : ''} />
   )
 }
 
