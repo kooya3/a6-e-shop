@@ -40,5 +40,8 @@ export const inclusions = [
             icon: '/assets/icons/logout.svg',
           },
         ]
-
+        
+        export const noHeaderFooterUrls = ['/create-account', '/login', '/recover-password']
+        
+    
     
