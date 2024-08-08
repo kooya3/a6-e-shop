@@ -15,9 +15,9 @@ export default async function Login() {
   })
 
   return (
-    <section>
-      <div>
-        
+    <section className={classes.login}>
+      <div className={classes.heroImg}>
+
       </div>
     </section>
   )
