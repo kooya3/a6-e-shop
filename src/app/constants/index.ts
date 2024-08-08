@@ -33,4 +33,12 @@ export const inclusions = [
             url: '/account/orders',
             icon: '/assets/icons/orders.svg',
           },
+
+          {
+            title: 'Logout',
+            url: '/logout',
+            icon: '/assets/icons/logout.svg',
+          },
+        ]
+
     
