@@ -1,7 +1,7 @@
-@use '../../_css/queries.scss' as *;
+@use '../../../_css/queries.scss' as *;
 
 .footer {
-  padding: calc(var(--base) * 4) 0;
+  padding: 30px 0;
   background-color: var(--theme-elevation-1000);
   color: var(--theme-elevation-0);
 
@@ -10,7 +10,7 @@
   }
 }
 
-:global([data-theme="dark"]) {
+:global([data-theme='dark']) {
   .footer {
     background-color: var(--theme-elevation-50);
     color: var(--theme-elevation-1000);
@@ -20,24 +20,40 @@
 .wrap {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
   gap: calc(var(--base) / 2) var(--base);
+
+  @include small-break {
+    margin-top: 30px;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
 }
 
 .logo {
-  width: 150px;
+  width: 170px;
 }
 
-.nav {
-  display: flex;
-  gap: calc(var(--base) / 4) var(--base);
-  align-items: center;
-  flex-wrap: wrap;
-  opacity: 1;
-  transition: opacity 100ms linear;
-  visibility: visible;
+.hr {
+  border-color: var(--color-white-500-20);
+}
 
-  > * {
-    text-decoration: none;
-  }
+.socialLinks {
+  display: flex;
+  gap: 20px;
+}
+
+.socialLinkItem {
+  width: 100%;
+}
+
+.socialIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.hide {
+  display: none;
 }
