@@ -47,7 +47,7 @@ export async function Footer() {
             Payload
           </Link>
         </nav>
-      </Gutter>
+
     </footer>
     </>
   )
