@@ -16,6 +16,12 @@ export const inclusions = [
         icon: '/assets/icons/payment.svg',
       },
     ]
-    
+    export const profileNavItems = [
+        {
+          title: 'Personal Information',
+          url: '/account',
+          icon: '/assets/icons/user.svg',
+        },
+      
     
     
