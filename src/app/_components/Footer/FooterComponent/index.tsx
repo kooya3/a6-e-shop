@@ -16,7 +16,7 @@ const FooterComponent = () => {
     <footer className={noHeaderFooterUrls.includes(pathName) ? classes.hide : ''}>
       <Gutter>
         <ul className={classes.inclusions}>
-          {inclusions.map((inclusion, index) => (
+          {inclusions.map((inclusion) => (
             <li key={inclusion.title}>
               <Image 
               src={inclusion.icon}
