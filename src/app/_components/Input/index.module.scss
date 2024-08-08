@@ -13,10 +13,10 @@
   background: none;
   background-color: var(--theme-elevation-100);
   color: var(--theme-elevation-1000);
-  height: calc(var(--base) * 2);
+  height: 52px;
   line-height: calc(var(--base) * 2);
-  padding: 0 calc(var(--base) / 2);
-  font-size: inherit;
+  padding: 16px;
+  font-size: 16px;
 
   &:focus {
     border: none;
