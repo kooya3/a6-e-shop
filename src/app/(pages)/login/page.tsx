@@ -15,10 +15,11 @@ export default async function Login() {
   })
 
   return (
-    <Gutter {classes.login}>
-
-
-    </Gutter>
+    <section>
+      <div>
+        
+      </div>
+    </section>
   )
 }
 
