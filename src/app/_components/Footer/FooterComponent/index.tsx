@@ -49,8 +49,14 @@ const FooterComponent = ({ footer }: { footer: Footer }) => {
                 const icon = '';
                 
                 return (
-                  <Button>
-                    {}
+                  <Button
+                  key={item.link.label}
+                  el="link"
+                  href={item.link.url}
+                  newTab={true}
+                  className={classes.socialLinks}
+                  >
+                    {item.link.label}
                   </Button>
                 )
               })}
