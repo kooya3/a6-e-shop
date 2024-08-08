@@ -40,9 +40,7 @@ export async function Footer() {
             href="https://github.com/payloadcms/payload/tree/main/templates/ecommerce"
             target="_blank"
             rel="noopener noreferrer"
-          >
-            Source Code
-          </Link>
+     
     </>
   )
 }
