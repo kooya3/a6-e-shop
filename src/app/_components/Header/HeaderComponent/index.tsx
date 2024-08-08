@@ -7,10 +7,11 @@ import classes from './index.module.scss'
 import Image from 'next/image'
 import { HeaderNav } from '../Nav'
 import MobileNav from './MobileNav'
+import { noHeaderFooterUrls } from '../../../constants'
 
 const HeaderComponent = ({ header }: { header: Header }) => {
   return (
-    <nav className={[classes.header]}>
+    <nav className={[classes.header, noHeaderFooterUrls.includes(pathname) && classes.hide]}>
         <Gutter className={classes.wrap}>
             <Link href="/">
             <Image src="/logo-black.svg" alt="logo" width={170} height={50} />
