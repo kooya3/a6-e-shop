@@ -28,4 +28,9 @@ export const inclusions = [
             icon: '/assets/icons/purchases.svg',
           },  
     
+          {
+            title: 'My Orders',
+            url: '/account/orders',
+            icon: '/assets/icons/orders.svg',
+          },
     
