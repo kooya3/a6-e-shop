@@ -22,6 +22,10 @@ export const inclusions = [
           url: '/account',
           icon: '/assets/icons/user.svg',
         },
-      
+        {
+            title: 'My Purchases',
+            url: '/account/purchases',
+            icon: '/assets/icons/purchases.svg',
+          },  
     
     
