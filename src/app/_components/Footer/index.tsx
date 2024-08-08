@@ -45,8 +45,7 @@ export async function Footer() {
           </Link>
           <Link href="https://payloadcms.com" target="_blank" rel="noopener noreferrer">
             Payload
-          </Link>
-        </nav>
+
 
 
     </>
