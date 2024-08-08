@@ -10,5 +10,12 @@ export const inclusions = [
         description: '24 hours a day, 7 days a week',
         icon: '/assets/icons/support.svg',
       },
-      
+      {
+        title: 'Flexible Payment',
+        description: 'Pay with multiple credit cards',
+        icon: '/assets/icons/payment.svg',
+      },
+    ]
+    
+    
     
