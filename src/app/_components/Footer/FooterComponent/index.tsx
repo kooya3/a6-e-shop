@@ -27,6 +27,7 @@ const FooterComponent = () => {
               />
 
               <h4 className={classes.title}>{inclusion.title}</h4>
+              <p className={classes.description}>{inclusion.description}</p>
             </li>
           ))}
         </ul>
