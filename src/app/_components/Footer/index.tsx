@@ -48,7 +48,7 @@ export async function Footer() {
           </Link>
         </nav>
 
-    </footer>
+
     </>
   )
 }
