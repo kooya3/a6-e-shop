@@ -17,8 +17,7 @@ export default async function Login() {
   return (
     <Gutter className={classes.login}>
       <RenderParams className={classes.params} />
-     
-      <LoginForm />
+
     </Gutter>
   )
 }
