@@ -1,7 +1,7 @@
 @import "../../../_css/common";
 
 .form {
-  width: 66.66%;
+  width: 100%;
   margin-bottom: var(--base);
   display: flex;
   flex-direction: column;
@@ -9,9 +9,6 @@
   margin-top: 30px;
   align-items: flex-start;
 
-  @include mid-break {
-    width: 100%;
-  }
 }
 
 .submit {
