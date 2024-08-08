@@ -13,12 +13,12 @@ export async function Footer() {
   try {
     footer = await fetchFooter()
   } catch (error) {
-
+    console.log(error)
   }
 
   const navItems = footer?.navItems || []
 
-  return (
+  return (<>
     <footer className={classes.footer}>
       <Gutter className={classes.wrap}>
         <Link href="/">
@@ -49,5 +49,6 @@ export async function Footer() {
         </nav>
       </Gutter>
     </footer>
+    </>
   )
 }
