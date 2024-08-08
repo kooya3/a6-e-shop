@@ -1,9 +1,10 @@
 import React from 'react'
+import { Header } from '../../../../payload/payload-types'
 
-const index = () => {
+const HeaderComponent = ({ header }: { header: Header }) => {
   return (
-    <div>index</div>
+    <div>HeaderComponent</div>
   )
 }
 
-export default index
+export default HeaderComponent
