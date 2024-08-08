@@ -14,3 +14,13 @@
     background-image: url('/assets/images/image-2.svg');
   }
 
+  p {
+    color: var(--color-gray-500);
+  }
+}
+
+.formTitle {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
