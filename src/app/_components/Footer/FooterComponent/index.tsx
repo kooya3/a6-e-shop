@@ -26,9 +26,9 @@ const FooterComponent = () => {
               className={classes.icon}
               />
 
-              <h4>{inclusion.title}</h4>
+              <h4 className={classes.title}>{inclusion.title}</h4>
             </li>
-          )}
+          ))}
         </ul>
       </Gutter>
     </footer>
