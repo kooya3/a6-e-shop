@@ -37,7 +37,7 @@ export async function Header() {
               src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/payload/src/admin/assets/images/payload-logo-light.svg"
             />
           </Link>
-          <HeaderNav header={header} />
+          <HeaderNav {header} />
         
       </header>
     </>
