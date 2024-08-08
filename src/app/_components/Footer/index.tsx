@@ -33,8 +33,6 @@ export async function Footer() {
         <nav className={classes.nav}>
           <ThemeSelector />
           {navItems.map(({ link }, i) => {
-            return <CMSLink key={i} {...link} />
-          })}
 
     </>
   )
