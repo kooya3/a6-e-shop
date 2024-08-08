@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react'
 import { Header } from '../../../../payload/payload-types'
 import { Gutter } from '../../Gutter'
