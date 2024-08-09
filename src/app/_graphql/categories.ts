@@ -13,6 +13,13 @@ export const CATEGORIES = `
     Categories(limit: 300) {
     docs {
       id
+      title
+      media {
+        alt
+        width
+        height
+        url
+      }
     }
     }
   }
