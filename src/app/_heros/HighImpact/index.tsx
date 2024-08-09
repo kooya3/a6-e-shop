@@ -28,9 +28,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ richText, media, links 
             })}
           </ul>
         )}
-        </div>
-
-        
+        </div>        
       </div>
     </section>
   )
