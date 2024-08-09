@@ -21,6 +21,7 @@ import { generateMeta } from '../../_utilities/generateMeta'
 export const dynamic = 'force-dynamic'
 
 import classes from './index.module.scss'
+import Categories from '../../_components/Categories'
 
 export default async function Page({ params: { slug = 'home' } }) {
   const { isEnabled: isDraftMode } = draftMode()
@@ -63,8 +64,7 @@ export default async function Page({ params: { slug = 'home' } }) {
           <Hero {...hero} />
 
           <Gutter className={classes.home}>
-            <p>Hello</p>
-            {/* <Categories categories={categories} /> */}
+            <Categories categories={categories} /> 
           </Gutter>
         </section>
       ) : (
