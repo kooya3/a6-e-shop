@@ -64,7 +64,7 @@ ${PRODUCT_CATEGORIES}
         slug
         title
         priceJSON
-        ${CATEGORIES}
+        ${PRODUCT_CATEGORIES}
         ${META}
       }
     }
