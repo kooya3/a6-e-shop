@@ -1,9 +1,9 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: ''
+title: ADD A CHECKOUT PAGE
 labels: ''
-assignees: ''
+assignees: kooya3
 
 ---
 
