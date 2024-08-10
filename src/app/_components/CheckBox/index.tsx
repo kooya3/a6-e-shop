@@ -23,7 +23,9 @@ export const Checkbox: React.FC<CheckboxProps> = ({ label, value, isSelected, on
         type="checkbox"
         checked={isChecked}
         onChange={handleCheckboxChange}
-
+        className={classes.checkbox}
+      />
+      {label}
     </label>
   )
 }
