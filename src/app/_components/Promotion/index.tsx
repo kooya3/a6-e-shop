@@ -4,7 +4,7 @@ import classes from './index.module.scss'
 
 const Promotion = () => {
   return (
-    <div>Promotion</div>
+    <section>Promotion</section>
   )
 }
 
