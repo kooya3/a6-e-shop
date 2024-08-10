@@ -1,6 +1,7 @@
 import React from 'react'
 
 import classes from './index.module.scss'
+import Link from 'next/link'
 
 
 const Categories = () => {
@@ -11,6 +12,10 @@ const Categories = () => {
         <Link href="/products">
         Show More!
         </Link>
+
+        <div className={classes.list}>
+          
+        </div>
       </div>
     </section>
   )
