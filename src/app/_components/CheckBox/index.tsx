@@ -11,3 +11,9 @@ interface CheckboxProps {
 
 export const Checkbox: React.FC<CheckboxProps> = ({ label, value, isSelected, onClickHandler }) => {
   const [isChecked, setIsChecked] = useState(isSelected)
+
+  const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setIsChecked(e.target.checked)
+    onClickHandler(value)
+  }
+
