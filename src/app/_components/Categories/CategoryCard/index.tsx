@@ -5,7 +5,9 @@ import Link from 'next/link'
 
 const CategoryCard= () => {
   return (
-    <Link href="/products"></Link>
+    <Link href="/products" className={classes.card}>
+        
+    </Link>
   )
 }
 
