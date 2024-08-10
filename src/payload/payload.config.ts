@@ -30,7 +30,7 @@ import { priceUpdated } from './stripe/webhooks/priceUpdated'
 import { productUpdated } from './stripe/webhooks/productUpdated'
 
 const generateTitle: GenerateTitle = () => {
-  return 'D&S E-Shop'
+  return 'My Store'
 }
 
 const mockModulePath = path.resolve(__dirname, './emptyModuleMock.js')

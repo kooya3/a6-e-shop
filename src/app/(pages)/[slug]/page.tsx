@@ -63,8 +63,8 @@ export default async function Page({ params: { slug = 'home' } }) {
         <section>
           <Hero {...hero} />
 
-          <Gutter>
-            {/* Categories */}
+          <Gutter className={classes.home}> 
+            <Categories categories={categories} />            
           </Gutter>
           </section>
       ) : (
