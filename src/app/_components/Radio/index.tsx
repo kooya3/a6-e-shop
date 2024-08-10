@@ -24,5 +24,9 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
   return (
     <label className={classes.radioWrapper}>
       <input
+        type="radio"
+        checked={isSelected}
+        onChange={handleRadioChange}
 
+  )
 }
