@@ -4,7 +4,7 @@ import classes from './index.module.scss'
 import Link from 'next/link'
 
 
-const Categories = () => {
+const Categories = ({ categories }: { categories: Category[] }) => {
   return (
     <section className={classes.container}>
       <div className={classes.titleWrapper}>
@@ -14,7 +14,10 @@ const Categories = () => {
         </Link>
 
         <div className={classes.list}>
-          
+          {categories.map((category) => (
+            <CategoryCard />
+          )}
+
         </div>
       </div>
     </section>
