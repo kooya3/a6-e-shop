@@ -12,4 +12,6 @@ interface RadioButtonProps {
 
 export const RadioButton: React.FC<RadioButtonProps> = ({
   label,
-  
+  value,
+  isSelected,
+ 
