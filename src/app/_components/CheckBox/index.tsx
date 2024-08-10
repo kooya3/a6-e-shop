@@ -17,3 +17,5 @@ export const Checkbox: React.FC<CheckboxProps> = ({ label, value, isSelected, on
     onClickHandler(value)
   }
 
+  return (
+    <label className={classes.checkboxWrapper}>
