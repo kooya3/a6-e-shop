@@ -2,10 +2,10 @@ import React from 'react'
 
 import classes from './index.module.scss'
 
-const index = () => {
+const CategoryCard= () => {
   return (
-    <div>index</div>
+    <div>Category Card</div>
   )
 }
 
-export default index
+export default CategoryCard
