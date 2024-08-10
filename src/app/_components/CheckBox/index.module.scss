@@ -19,3 +19,8 @@
     outline: none;
     cursor: pointer;
   }
+  
+  .checkbox:checked {
+    background-color: var(--color-dark-500);
+    position: relative;
+  }
