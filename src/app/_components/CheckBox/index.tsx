@@ -1,9 +1,3 @@
-import React from 'react'
+import React, { ChangeEvent, useState } from 'react'
 
-const CheckBox = () => {
-  return (
-    <div>CheckBox</div>
-  )
-}
-
-export default CheckBox
+import classes from './index.module.scss'
