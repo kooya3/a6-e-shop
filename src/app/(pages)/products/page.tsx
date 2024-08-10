@@ -7,6 +7,7 @@ import { Category, Page } from '../../../payload/payload-types'
 import { fetchDoc } from '../../_api/fetchDoc'
 import { draftMode } from 'next/headers'
 import { fetchDocs } from '../../_api/fetchDocs'
+import { HR } from '../../_components/HR'
 
 const Products = async () => {
 
@@ -32,6 +33,7 @@ const Products = async () => {
         <Gutter className={classes.products}>
             <Filters />
             <Blocks  blocks={page.layout} disableTopPadding={true} />
+            <HR />
         </Gutter>
     </div>
   )
