@@ -8,7 +8,7 @@ import { fetchDoc } from '../../_api/fetchDoc'
 import { draftMode } from 'next/headers'
 import { fetchDocs } from '../../_api/fetchDocs'
 
-const products = () => {
+const Products = async () => {
 
     const {isEnabled: isDraftMode} = draftMode()
 
@@ -22,7 +22,7 @@ const products = () => {
             draft: isDraftMode,
         })
 
-        categories = await fetchDocs<Category>(`categories`, {)
+        categories = await fetchDocs<Category>(`categories`)
     } catch (error) {
         console.error(error) // eslint-disable-line no-console
     }
@@ -31,10 +31,10 @@ const products = () => {
     <div className={classes.container}>
         <Gutter className={classes.products}>
             <Filters />
-            <Blocks  blocks={layout} disableTopPadding={true} />
+            <Blocks  blocks={page.layout} disableTopPadding={true} />
         </Gutter>
     </div>
   )
 }
 
-export default products
+export default Products
