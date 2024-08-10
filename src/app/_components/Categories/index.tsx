@@ -2,6 +2,7 @@ import React from 'react'
 
 import classes from './index.module.scss'
 import Link from 'next/link'
+import CategoryCard from './CategoryCard'
 
 
 const Categories = ({ categories }: { categories: Category[] }) => {
@@ -16,7 +17,7 @@ const Categories = ({ categories }: { categories: Category[] }) => {
         <div className={classes.list}>
           {categories.map((category) => (
             <CategoryCard />
-          )}
+          ))}
 
         </div>
       </div>
