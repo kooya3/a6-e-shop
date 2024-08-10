@@ -27,6 +27,10 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
         type="radio"
         checked={isSelected}
         onChange={handleRadioChange}
-
+        className={classes.radio}
+        name={groupName}
+      />
+      {label}
+    </label>
   )
 }
