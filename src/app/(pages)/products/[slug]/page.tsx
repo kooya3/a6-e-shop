@@ -59,9 +59,7 @@ export default async function Product({ params: { slug } }) {
                       {
                         type: 'p',
                         children: [
-                          {
-                            text: 'selected for this page. Admins can select any 
-                          },
+                         
 
                           
                         ],
