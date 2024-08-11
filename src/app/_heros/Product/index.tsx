@@ -23,16 +23,7 @@ export const ProductHero: React.FC<{
   } = product
 
   return (
-    <Fragment>
-      {!stripeProductID && (
-        <Gutter>
-          <Message
-            className={classes.warning}
-            warning={
-            }
-          />
-        </Gutter>
-      )}
+
       <Gutter className={classes.productHero}>
         <div className={classes.content}>
           <div className={classes.categories}>
