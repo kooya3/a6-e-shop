@@ -58,7 +58,7 @@ export const ProductHero: React.FC<{
             return (
               <Fragment key={index}>
                 {titleToUse}
-                {!isLast && <Fragment>, &nbsp;</Fragment>}
+                {!isLast && <Fragment>, &nbsp;</Fragment>}{' '}
                 <span className={classes.separator}>
                   |
                 </span>
