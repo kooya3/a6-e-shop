@@ -6,6 +6,7 @@ import classes from './index.module.scss'
 import { useFilter } from '../../../_providers/Filter'
 import { Category } from '../../../../payload/payload-types'
 import { Checkbox } from '../../../_components/Checkbox'
+import { HR } from '../../../_components/HR'
 
 
 
@@ -24,7 +25,7 @@ const Filters = ({ categories }: { categories: Category[] }) => {
         </h6>
         <div className={classes.categories}>
           {categories.map((category) => {
-            const isSelected = false;
+            const isSelected = categoryFilters.includes(category.id)
 
 
           return <Checkbox
@@ -37,6 +38,8 @@ const Filters = ({ categories }: { categories: Category[] }) => {
 
           })}          
         </div>
+        <HR className={classes.hr} />
+        <h6 className={classes.title}>Sort By</h6>
       </div>
       </div>
 
