@@ -10,6 +10,7 @@ import { useFilter } from '../../../_providers/Filter'
 
 import classes from './index.module.scss'
 
+
 const Filters = ({ categories }: { categories: Category[] }) => {
   const { categoryFilters, sort, setCategoryFilters, setSort } = useFilter()
 
