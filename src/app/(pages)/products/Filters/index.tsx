@@ -14,8 +14,17 @@ import { RadioButton } from '../../../_components/Radio'
 const Filters = ({ categories }: { categories: Category[] }) => {
   const {categoryFilters, sort, setCategoryFilters, setSort} = useFilter()
 
-  const handleCategories = (categoryId: string) => {}
-  const handleSort = (value: string) => setSort(value)
+  const handleCategories = (categoryId: string) => {
+    if(categoryFilters.includes(categoryId)) {
+      const updatedCategories = categoryFilters.filter(id => 
+      id!==categoryId)
+
+      setCategoryFilters(updatedCategories)
+    } else {
+      setCategoryFilters([...categoryFilters, categoryId])
+    }
+  }
+  
 
   return (
     <div className={classes.filters}>
