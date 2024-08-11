@@ -58,12 +58,7 @@ export default async function Product({ params: { slug } }) {
               },
                       {
                         type: 'p',
-                        children: [
-                         
-
-                          
-                        ],
-                      },
+                        
             ],
             docs: relatedProducts,
           },
