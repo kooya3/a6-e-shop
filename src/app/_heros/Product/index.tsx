@@ -34,6 +34,10 @@ export const ProductHero: React.FC<{
         <RichText content={metaImage.caption} className={classes.caption} />
       )}
 
+      <div className={classes.details}>
+        
+      </div>
+
 
       <div className={classes.categories}>
         {categories?.map((category, index) => {
