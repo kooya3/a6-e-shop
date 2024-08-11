@@ -65,10 +65,7 @@ export default async function Cart() {
                                               warning={
                                                 <Fragment>
                                                   {'To enable checkout, you must '}
-                                                  <a
-                                                    href="https://dashboard.stripe.com/test/apikeys"
-                                                 
-                                                  >
+                                                                                                 >
 
 
                                   
