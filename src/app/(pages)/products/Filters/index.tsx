@@ -4,7 +4,7 @@ import classes from './index.module.scss'
 
 const Filters = () => {
   return (
-    <div>Filters</div>
+    <div className={classes.filters}>Filters</div>
   )
 }
 
