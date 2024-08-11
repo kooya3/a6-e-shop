@@ -29,10 +29,7 @@ export const ProductHero: React.FC<{
           <Message
             className={classes.warning}
             warning={
-              <Fragment>
-                {'This product is not yet connected to Stripe. To link this product, '}
-                
-                  
+              <Fragment>                 
 
               </Fragment>
             }
