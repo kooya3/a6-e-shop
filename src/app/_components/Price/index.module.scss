@@ -25,6 +25,11 @@
   > * {
     margin: 0;
   }
+
+  @include small-break {
+    font-size: 16px;
+    grid-template-columns: 1fr;
+  }
 }
 
 .priceBreakdown {
