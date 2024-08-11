@@ -3,12 +3,14 @@
 import React from 'react'
 
 import classes from './index.module.scss'
+import { useFilter } from '../../../_providers/Filter'
 
 const Filters = () => {
-  const {categoryFilters, sort, setcCategoryFilters, setSort} = useFilter()
+  const {categoryFilters, sort, setCategoryFilters, setSort} = useFilter()
 
-  const handleCategories() {
-
+  const handleCategories = (categoryId: string) => {
+  
+  }
 
   return (
     <div className={classes.filters}>
