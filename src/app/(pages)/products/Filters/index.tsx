@@ -24,17 +24,21 @@ const Filters = ({ categories }: { categories: Category[] }) => {
         <div className={classes.categories}>
           {categories.map((category) => {
             const isSelected = false;
-          })}
 
-          return (
-            <Checkbox
+
+          return <Checkbox
               key={category.id}
               label={category.title}
+              value={category.id}
+              isSelecte={isSelected}
+              onClickHandler={handleCategories}
+
             />
-          )
+          })}
           
         </div>
-      </div></div>
+      </div>
+      </div>
 
 
   )
