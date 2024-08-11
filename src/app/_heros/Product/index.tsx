@@ -35,7 +35,6 @@ export const ProductHero: React.FC<{
                   href={`${process.env.NEXT_PUBLIC_SERVER_URL}/admin/collections/products/${id}`}
                 >
                   
-                </Link>
 
               </Fragment>
             }
