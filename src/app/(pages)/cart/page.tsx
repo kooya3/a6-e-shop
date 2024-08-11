@@ -67,11 +67,9 @@ export default async function Cart() {
                                                   {'To enable checkout, you must '}
                                                   <a
                                                     href="https://dashboard.stripe.com/test/apikeys"
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
+                                                 
                                                   >
-                                                    {'obtain your Stripe API Keys'}
-                                                  
+
 
                                   
                                                   >
