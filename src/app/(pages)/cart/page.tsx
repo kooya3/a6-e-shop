@@ -76,7 +76,7 @@ export default async function Cart() {
                                                   <a
                                                     href="https://github.com/payloadcms/payload/blob/main/templates/ecommerce/README.md#stripe"
                                                     target="_blank"
-                                                    rel="noopener noreferrer"
+                                  
                                                   >
                                                    
                                                   </a>
