@@ -60,7 +60,7 @@ export default async function Product({ params: { slug } }) {
                         type: 'p',
                         children: [
                           {
-                            text: 'The products displayed here are individually selected for this page. Admins can select any number of out for the "Archive" block to automatically populate 
+                            text: 'selected for this page. Admins can select any number of out for the "Archive" block to automatically populate 
                           },
 
                           
