@@ -34,7 +34,7 @@ export default async function Product({ params: { slug } }) {
     notFound()
   }
 
-  const { layout, relatedProducts } = product
+  const { relatedProducts } = product
 
   return (
     <React.Fragment>

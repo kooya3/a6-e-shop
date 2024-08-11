@@ -22,7 +22,7 @@ export const ProductHero: React.FC<{
         )}
       </div>
 
-      
+
       <div className={classes.details}>
         <h3 className={classes.title}>{title}</h3>
 
