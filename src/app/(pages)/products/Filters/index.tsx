@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 
 import classes from './index.module.scss'
@@ -10,6 +12,8 @@ const Filters = () => {
           Product Categories
         </h6>
       </div></div>
+
+
   )
 }
 
