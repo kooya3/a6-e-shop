@@ -63,9 +63,7 @@ export default async function Cart() {
                                             <Message
                                               className={classes.message}
                                               warning={
-                                                <Fragment>
-                                                  {'To enable checkout, you must '}
-                                                                                                 >
+                                         >
 
 
                                   
