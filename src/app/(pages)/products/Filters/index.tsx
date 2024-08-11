@@ -48,6 +48,13 @@ const Filters = ({ categories }: { categories: Category[] }) => {
             onRadioChange={handleSort}
             groupName="sort"
           />
+          <RadioButton 
+            label="Oldest"
+            value="createdAt"
+            isSelected={sort === 'createdAt'}
+            onRadioChange={handleSort}
+            groupName="sort"
+          />
         </div>
       </div>
       </div>
