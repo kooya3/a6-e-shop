@@ -82,8 +82,7 @@
             .cols-thirds {
               grid-column-end: span 3;
 
-              @include mid-break {
-                grid-column-end: span 6;
+
               }
 
 
