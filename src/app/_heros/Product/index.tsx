@@ -24,7 +24,6 @@ export const ProductHero: React.FC<{
 
   return (
       <Gutter className={classes.productHero}>
-        <div className={classes.content}>
           <div className={classes.categories}>
             {categories?.map((category, index) => {
               if (typeof category === 'object' && category !== null) {
@@ -56,8 +55,7 @@ export const ProductHero: React.FC<{
             </p>
           </div>
           <Price product={product} button={false} />
-          <AddToCartButton product={product} className={classes.addToCartButton} />
-        </div>
+
         <div className={classes.media}>
           <div className={classes.mediaWrapper}>
             {!metaImage && <div className={classes.placeholder}>No image</div>}
