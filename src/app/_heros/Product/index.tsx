@@ -36,7 +36,7 @@ export const ProductHero: React.FC<{
                 >
                   edit this product in the admin panel
                 </Link>
-                {'.'}
+
               </Fragment>
             }
           />
