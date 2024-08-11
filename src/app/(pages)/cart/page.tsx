@@ -61,10 +61,7 @@ export default async function Cart() {
                                         {!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY && (
                                           <Gutter>
                                             <Message
-                                              className={classes.message}
-                                              warning={
-                                         >
-
+                            
 
                                   
                                                   >
