@@ -78,7 +78,7 @@ export default async function Cart() {
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                   >
-                                                    {'README'}
+                                                   
                                                   </a>
  
                                                 </Fragment>
