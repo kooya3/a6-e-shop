@@ -198,7 +198,7 @@ export const CollectionArchive: React.FC<Props> = props => {
                 )
               }
 
-              return null
+            return 
             })}
           </div>
           {results.totalPages > 1 && populateBy !== 'selection' && (
