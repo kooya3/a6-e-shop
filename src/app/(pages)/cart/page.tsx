@@ -63,11 +63,6 @@ export default async function Cart() {
                                             <Message
                             
 
-                                  
-                                                  >
-                                                   
-                                                  </a>
- 
                                                 </Fragment>
                                               }
                                             />
