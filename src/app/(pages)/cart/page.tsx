@@ -71,9 +71,7 @@ export default async function Cart() {
                                                     rel="noopener noreferrer"
                                                   >
                                                     {'obtain your Stripe API Keys'}
-                                                  </a>
-                                                  {' then set them as environment variables. See the '}
-                                                  <a
+                                                  
 
                                   
                                                   >
