@@ -25,6 +25,9 @@ const Filters = ({ categories }: { categories: Category[] }) => {
     }
   }
   
+  const handleSort = (value: string) => {
+    setSort(value)
+  }
 
   return (
     <div className={classes.filters}>
