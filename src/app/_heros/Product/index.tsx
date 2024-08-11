@@ -38,6 +38,11 @@ export const ProductHero: React.FC<{
         <h3 className={classes.title}>
         {title}
         </h3>        
+
+
+        <div className={classes.categoryWrapper}>
+
+        </div>
       </div>
 
 
