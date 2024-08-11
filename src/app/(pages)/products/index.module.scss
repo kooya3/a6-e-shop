@@ -7,4 +7,9 @@
 .products {
     display: grid;
     grid-template-columns: 1fr 75%;
+    gap: 60px;
+
+    @include Large-break {
+        
+    }
 }
