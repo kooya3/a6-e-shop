@@ -15,7 +15,7 @@ const Filters = ({ categories }: { categories: Category[] }) => {
   const {categoryFilters, sort, setCategoryFilters, setSort} = useFilter()
 
   const handleCategories = (categoryId: string) => {}
-  const handleSort = () =>  {}
+  const handleSort = (value: string) => setSort(value)
 
   return (
     <div className={classes.filters}>
