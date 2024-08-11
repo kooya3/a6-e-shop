@@ -64,11 +64,7 @@ export default async function Product({ params: { slug } }) {
                           },
                           {
                             type: 'link',
-                            url: `/admin/collections/products/${product.id}`,
-                            children: [
-                              
-                            ],
-                          },
+                            
                           
                         ],
                       },
