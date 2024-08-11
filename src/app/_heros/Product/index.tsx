@@ -29,9 +29,6 @@ export const ProductHero: React.FC<{
           <Message
             className={classes.warning}
             warning={
-              <Fragment>                 
-
-              </Fragment>
             }
           />
         </Gutter>
