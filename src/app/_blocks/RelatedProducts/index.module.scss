@@ -70,8 +70,6 @@
             .cols-half {
               grid-column-end: span 6;
 
-              @include mid-break {
-                grid-column-end: span 6;
               }
 
 
