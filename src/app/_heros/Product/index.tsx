@@ -23,7 +23,6 @@ export const ProductHero: React.FC<{
   } = product
 
   return (
-
       <Gutter className={classes.productHero}>
         <div className={classes.content}>
           <div className={classes.categories}>
@@ -71,6 +70,5 @@ export const ProductHero: React.FC<{
           )}
         </div>
       </Gutter>
-    </Fragment>
   )
 }
