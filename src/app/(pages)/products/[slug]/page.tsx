@@ -60,7 +60,7 @@ export default async function Product({ params: { slug } }) {
                         type: 'p',
                         children: [
                           {
-                            text: 'The products displayed here are individually selected for this page. Admins can select any number of related products to display here and the layout will adjust accordingly. Alternatively, you could swap this out for the "Archive" block to automatically populate 
+                            text: 'The products displayed here are individually selected for this page. Admins can select any number of out for the "Archive" block to automatically populate 
                           },
 
                           
