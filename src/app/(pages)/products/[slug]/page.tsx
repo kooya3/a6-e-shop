@@ -39,7 +39,6 @@ export default async function Product({ params: { slug } }) {
   return (
     <React.Fragment>
       <ProductHero product={product} />
-      <Blocks blocks={layout} />
       {product?.enablePaywall && <PaywallBlocks productSlug={slug as string} disableTopPadding />}
       <Blocks
         disableTopPadding
