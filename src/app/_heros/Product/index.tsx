@@ -31,9 +31,7 @@ export const ProductHero: React.FC<{
             warning={
               <Fragment>
                 {'This product is not yet connected to Stripe. To link this product, '}
-                <Link
-                  href={`${process.env.NEXT_PUBLIC_SERVER_URL}/admin/collections/products/${id}`}
-                >
+                
                   
 
               </Fragment>
