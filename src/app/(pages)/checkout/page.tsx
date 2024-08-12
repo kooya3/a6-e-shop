@@ -64,9 +64,7 @@ export default async function Checkout() {
                                   richText={[
                                     {
                                       type: 'h1',
-                                      children: [
-                                        
-                                      ],
+                                      
                                     },
                                     
                                   ]}
