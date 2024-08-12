@@ -30,7 +30,7 @@ export default async function Checkout() {
 
   return (
     <div className={classes.checkout}>
-      <Gutter className={classes.checkoutPage}>
+      <Gutters>
         <CheckoutPage settings={settings} />
       </Gutter>
     </div>
