@@ -32,9 +32,7 @@ export default async function Checkout() {
                                 <Fragment>
                                   {!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY && (
                                     <Gutter>
-                                      <Message
-                                        
-                                      />
+                                      
                                     </Gutter>
                                   )}
 
