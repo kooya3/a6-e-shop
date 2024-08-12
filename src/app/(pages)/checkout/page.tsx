@@ -62,12 +62,7 @@ export default async function Checkout() {
                                     type="lowImpact"
                                     media={null}
                                     richText={[
-                                      {
-                                        type: 'h1',
-                                        children: [
-                                          
-                                        ],
-                                      },
+                                      
                                     ]}
                                   />
     
