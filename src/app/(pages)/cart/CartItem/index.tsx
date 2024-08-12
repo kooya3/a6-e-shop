@@ -26,6 +26,13 @@ const CartItem = ({ product, title, metaImage, qty, addItemToCart }) => {
     addItemToCart({ product, quantity: Number(updatedQty) })
   }
 
+  const enterQty = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const updatedQty = Number(e.target.value)
+
+    setQuantity(updatedQty)
+    addItemToCart({ product, quantity: Number(updatedQty) })
+  }
+
     </li>
   )
 }
