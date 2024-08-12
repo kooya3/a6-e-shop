@@ -33,10 +33,7 @@ export default async function Checkout() {
                                   {!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY && (
                                     <Gutter>
                                       <Message
-                                        className={classes.message}
-                                        warning={
-                                         
-                                        }
+                                        
                                       />
                                     </Gutter>
                                   )}
