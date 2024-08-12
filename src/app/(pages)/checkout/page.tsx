@@ -59,9 +59,7 @@ export default async function Checkout() {
                                   </Gutter>
                                 )}
                                 <LowImpactHero
-                                  type="lowImpact"
-                                  media={null}
-                                  
+                                 
                                     
                                 
                                 />
