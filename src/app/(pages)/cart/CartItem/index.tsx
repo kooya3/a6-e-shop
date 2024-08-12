@@ -4,7 +4,9 @@ import classes from './index.module.scss'
 
 const CartItem = () => {
   return (
-    <div>CartItem</div>
+    <li className={classes.item}>
+
+    </li>
   )
 }
 
