@@ -35,16 +35,7 @@ export default async function Checkout() {
                                       <Message
                                         className={classes.message}
                                         warning={
-                                          <Fragment>
-                                            {'To enable checkout, you must '}
-                                            <a
-                                              href="https://dashboard.stripe.com/test/apikeys"
-                                              target="_blank"
-                                              rel="noopener noreferrer"
-                                            >
-
-                                           
-                                          </Fragment>
+                                         
                                         }
                                       />
                                     </Gutter>
