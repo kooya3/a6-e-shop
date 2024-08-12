@@ -14,7 +14,7 @@ import { useCart } from '../../../_providers/Cart'
 import { useTheme } from '../../../_providers/Theme'
 import cssVariables from '../../../cssVariables'
 import { CheckoutForm } from '../CheckoutForm'
-import { CheckoutItem } from '../checkoutItem'
+import { CheckoutItem } from '../CheckoutItem'
 
 import classes from './index.module.scss'
 

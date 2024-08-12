@@ -60,7 +60,7 @@ export default async function Orders() {
                       {'Total: '}
                       {new Intl.NumberFormat('en-US', {
                         style: 'currency',
-                        currency: 'usd',
+                        currency: 'kes',
                       }).format(order.total / 100)}
                     </p>
                     <p className={classes.orderDate}>{`Ordered On: ${formatDateTime(
