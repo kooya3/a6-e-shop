@@ -70,10 +70,7 @@ export default async function Checkout() {
                                         },
                                       ],
                                     },
-                                    {
-                                      type: 'paragraph',
-                                      
-                                    },
+                                    
                                   ]}
                                 />
                                 <Gutter className={classes.checkoutPage}>
