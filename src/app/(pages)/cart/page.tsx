@@ -57,12 +57,13 @@ export default async function Cart() {
   }
 
   return (
-    <Fragment>
+    <div className={classes.container}>
       <Gutter>
+        <h3>Cart</h3>
         <CartPage settings={settings} page={page} />
       </Gutter>
-      <Blocks blocks={page?.layout} />
-    </Fragment>
+      <Blocks blocks={page?.layout} disableBottomPadding />
+    </div>
   )
 }
 
