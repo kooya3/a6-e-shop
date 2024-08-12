@@ -85,9 +85,7 @@ export default async function Checkout() {
                                             },
                                           ],
                                         },
-                                        {
-                                          text: ' like ',
-                                        },
+                                        
                                         
                                        
                                       ],
