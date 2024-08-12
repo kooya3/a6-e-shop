@@ -29,9 +29,9 @@ export default async function Checkout() {
   }
 
   return (
-    <div>
-      <Gutter>
-        <CheckoutPage />
+    <div className={classes.checkout}>
+      <Gutters>
+        <CheckoutPage settings={settings} />
       </Gutter>
     </div>
   )
