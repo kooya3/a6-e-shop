@@ -42,9 +42,7 @@ export default async function Checkout() {
                                               target="_blank"
                                               rel="noopener noreferrer"
                                             >
-                                              {'obtain your Stripe API Keys'}
-                                            </a>
-                                            {' then set them as environment variables. See the '}
+
                                            
                                           </Fragment>
                                         }
