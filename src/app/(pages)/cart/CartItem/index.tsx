@@ -1,14 +1,7 @@
-import React from 'react'
+'use client'
 
-import classes from './index.module.scss'
+import React, { useState } from 'react'
 
-const CartItem = () => {
-  return (
-    <li className={classes.item}>
-        <h6>
-            TITLE
-        </h6>
-    </li>
   )
 }
 
