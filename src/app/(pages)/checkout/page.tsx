@@ -80,9 +80,7 @@ export default async function Checkout() {
                                           type: 'link',
                                           url: 'https://stripe.com/docs/testing#cards',
                                           children: [
-                                            {
-                                              text: 'test credit card',
-                                            },
+                                            
                                           ],
                                         },
                                         
