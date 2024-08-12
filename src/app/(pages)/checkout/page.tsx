@@ -72,13 +72,7 @@ export default async function Checkout() {
                                     },
                                     {
                                       type: 'paragraph',
-                                      children: [
-                                        
-                                        
-                                        
-                                        
-                                       
-                                      ],
+                                      
                                     },
                                   ]}
                                 />
