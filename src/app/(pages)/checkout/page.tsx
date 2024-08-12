@@ -30,11 +30,7 @@ export default async function Checkout() {
 
   return (
                                 <Fragment>
-                                  {!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY && (
-                                    <Gutter>
-                                      
-                                    </Gutter>
-                                  )}
+                                  
 
                                 </Fragment>
   )
