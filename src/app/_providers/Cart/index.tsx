@@ -21,6 +21,7 @@ export type CartContext = {
   cartIsEmpty: boolean | undefined
   clearCart: () => void
   isProductInCart: (product: Product) => boolean
+  currency: string
   cartTotal: {
     formatted: string
     raw: number
@@ -251,7 +252,7 @@ export const CartProvider = props => {
     setTotal({
       formatted: (newTotal / 100).toLocaleString('en-US', {
         style: 'currency',
-        currency: 'USD',
+        currency: 'KES',
       }),
       raw: newTotal,
     })
@@ -267,6 +268,7 @@ export const CartProvider = props => {
         clearCart,
         isProductInCart,
         cartTotal: total,
+        currency: 'KES',
         hasInitializedCart,
       }}
     >
