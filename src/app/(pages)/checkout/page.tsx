@@ -61,9 +61,7 @@ export default async function Checkout() {
                                   <LowImpactHero
                                     type="lowImpact"
                                     media={null}
-                                    richText={[
-                                      
-                                    ]}
+                                    
                                   />
     
                    
