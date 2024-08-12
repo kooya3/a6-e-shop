@@ -65,12 +65,8 @@ export default async function Checkout() {
                                       {
                                         type: 'h1',
                                         children: [
-                                          {
-                                            text: 'Checkout',
-                                          },
+                                          
                                         ],
-                                      },
-                                      {
                                       },
                                     ]}
                                   />
