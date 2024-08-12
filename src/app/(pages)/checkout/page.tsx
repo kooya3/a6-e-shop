@@ -99,7 +99,7 @@ export default async function Checkout() {
                                       },
                                     ]}
                                   />
-                                  <Gutter className={classes.checkoutPage}>
+    
                    
                                   </Gutter>
                                 </Fragment>
