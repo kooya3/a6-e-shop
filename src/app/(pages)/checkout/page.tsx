@@ -58,11 +58,7 @@ export default async function Checkout() {
                                     />
                                   </Gutter>
                                 )}
-                                <LowImpactHero
-                                 
-                                    
                                 
-                                />
                                 <Gutter className={classes.checkoutPage}>
                              
                                 </Gutter>
