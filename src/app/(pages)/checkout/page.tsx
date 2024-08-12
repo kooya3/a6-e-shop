@@ -52,7 +52,7 @@ export default async function Checkout() {
                                             >
                                               {'README'}
                                             </a>
-                                            {' for more details.'}
+                                        
                                           </Fragment>
                                         }
                                       />
