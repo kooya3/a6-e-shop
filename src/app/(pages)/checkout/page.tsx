@@ -76,10 +76,7 @@ export default async function Checkout() {
                                         {
                                           text: `This is a self-hosted, secure checkout using Stripe's Payment Element component. To create a mock purchase, use a `,
                                         },
-                                        {
-                                          type: 'link',
-                                       
-                                        },
+                                        
                                         
                                         
                                        
