@@ -29,6 +29,11 @@ export default async function Checkout() {
   }
 
   return (
+    <div>
+      <Gutter>
+        <CheckoutPage />
+      </Gutter>
+    </div>
   )
 }
 
