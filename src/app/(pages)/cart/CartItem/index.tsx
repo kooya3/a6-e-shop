@@ -33,7 +33,8 @@ const CartItem = ({ product, title, metaImage, qty, addItemToCart }) => {
     addItemToCart({ product, quantity: Number(updatedQty) })
   }
 
-    </li>
+  return (
+    
   )
 }
 
