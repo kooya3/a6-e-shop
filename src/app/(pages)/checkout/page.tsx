@@ -92,9 +92,7 @@ export default async function Checkout() {
                                             text: '4242 4242 4242 4242',
                                             bold: true,
                                           },
-                                          {
-                                            text: ' with any future date and CVC. An order will be generated in Stripe and will appear in your account. In production, this checkout form will require a real card with sufficient funds.',
-                                          },
+                                          
                                         ],
                                       },
                                     ]}
