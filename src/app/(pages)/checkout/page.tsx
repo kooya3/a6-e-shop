@@ -50,7 +50,6 @@ export default async function Checkout() {
                                               target="_blank"
                                               rel="noopener noreferrer"
                                             >
-                                              {'README'}
                                             </a>
                                         
                                           </Fragment>
