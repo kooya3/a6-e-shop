@@ -29,10 +29,6 @@ export default async function Checkout() {
   }
 
   return (
-                                <Fragment>
-                                  
-
-                                </Fragment>
   )
 }
 
