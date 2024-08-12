@@ -25,7 +25,7 @@ export const CartPage: React.FC<{
 
   const { user } = useAuth()
 
-  const { cart, cartIsEmpty, addItemToCart, cartTotal, hasInitializedCart } = useCart()
+  const { cart, cartIsEmpty, addItemToCart, currency, cartTotal, hasInitializedCart } = useCart()
 
   return (
     <Fragment>
@@ -103,7 +103,7 @@ export const CartPage: React.FC<{
 
                 <div className={classes.row}>
                   <p className={classes.cartTotal}>Delivery Charge</p>
-                  <p className={classes.cartTotal}>{classes.currency}</p>  {/* // Implement the functionality to calculate the delivery charge and display it here */}
+                  <p className={classes.cartTotal}>{currency}</p>  {/* // Implement the functionality to calculate the delivery charge and display it here */}
                 </div>
 
                 <div className={classes.row}>
