@@ -64,8 +64,6 @@ export default async function Checkout() {
                                     
                                   />
     
-                   
-                                  </Gutter>
                                 </Fragment>
   )
 }
