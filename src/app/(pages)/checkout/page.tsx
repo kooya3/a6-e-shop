@@ -88,10 +88,7 @@ export default async function Checkout() {
                                         {
                                           text: ' like ',
                                         },
-                                        {
-                                          text: '4242 4242 4242 4242',
-                                          bold: true,
-                                        },
+                                        
                                        
                                       ],
                                     },
