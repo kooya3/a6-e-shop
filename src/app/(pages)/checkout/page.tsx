@@ -47,13 +47,9 @@ export default async function Checkout() {
                                           {' then set them as environment variables. See the '}
                                           <a
                                             href="https://github.com/payloadcms/payload/blob/main/templates/ecommerce/README.md#stripe"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
+                                            
                                           >
-                                            {'README'}
-                                          </a>
-                                          {' for more details.'}
-                                        </Fragment>
+                                          
                                       }
                                     />
                                   </Gutter>
