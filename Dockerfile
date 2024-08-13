@@ -1,4 +1,4 @@
-ARG NODE_VERSION=14
+ARG NODE_VERSION=18
 
 # Setup the build container.
 FROM node:${NODE_VERSION}-alpine AS build
@@ -29,4 +29,4 @@ COPY --from=build /home/node /home/node
 EXPOSE 3000
 
 # Run the service.
-CMD ["yarn", "run", "serve
+CMD ["yarn", "run", "serve"]
