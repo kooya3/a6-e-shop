@@ -1,27 +1,31 @@
-FROM node:18.8-alpine as base
+version: '3'
 
-FROM base as builder
+services:
+  payload:
+    image: node:18-alpine
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/home/node/app
+      - node_modules:/home/node/app/node_modules
+    working_dir: /home/node/app/
+    command: sh -c "yarn install && yarn dev"
+    depends_on:
+      - mongo
+    env_file:
+      - .env
 
-WORKDIR /home/node/app
-COPY package*.json ./
+  mongo:
+    image: mongo:latest
+    ports:
+      - '27017:27017'
+    command:
+      - --storageEngine=wiredTiger
+    volumes:
+      - data:/data/db
+    logging:
+      driver: none
 
-COPY . .
-RUN yarn install
-RUN yarn build
-
-FROM base as runtime
-
-ENV NODE_ENV=production
-ENV PAYLOAD_CONFIG_PATH=dist/payload.config.js
-
-WORKDIR /home/node/app
-COPY package*.json  ./
-COPY yarn.lock ./
-
-RUN yarn install --production
-COPY --from=builder /home/node/app/dist ./dist
-COPY --from=builder /home/node/app/build ./build
-
-EXPOSE 3000
-
-CMD ["node", "dist/server.js"]
+volumes:
+  data:
+  node_modules:
