@@ -107,7 +107,7 @@ Thank you for considering contributing to a6-e-shop! We value your contributions
 
 ## Need Help?
 
-If you have any questions or need assistance, feel free to open an issue on GitHub, and we'll be happy to help!
+If you have any questions or need assistance, feel free to open an issue on GitHub, and we'll be happy to help
 
 ---
 
