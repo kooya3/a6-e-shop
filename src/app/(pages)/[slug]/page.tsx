@@ -20,9 +20,10 @@ import { generateMeta } from '../../_utilities/generateMeta'
 // If you are not using Payload Cloud then this line can be removed, see `../../../README.md#cache`
 export const dynamic = 'force-dynamic'
 
-import classes from './index.module.scss'
 import Categories from '../../_components/Categories'
 import Promotion from '../../_components/Promotion'
+
+import classes from './index.module.scss'
 
 export default async function Page({ params: { slug = 'home' } }) {
   const { isEnabled: isDraftMode } = draftMode()
