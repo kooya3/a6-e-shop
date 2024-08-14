@@ -6,16 +6,15 @@ FROM node:${NODE_VERSION}-alpine AS build
 WORKDIR /home/node
 
 # Install dependencies.
-COPY package*.json .
+COPY package*.json yarn.lock ./
 
-RUN yarn install
+RUN yarn install --frozen-lockfile
 
 # Copy the source files.
-COPY src src
-COPY tsconfig.json .
+COPY . .
 
 # Build the application.
-RUN yarn run build && yarn run serve
+RUN yarn build
 
 # Setup the runtime container.
 FROM node:${NODE_VERSION}-alpine
@@ -23,7 +22,7 @@ FROM node:${NODE_VERSION}-alpine
 WORKDIR /home/node
 
 # Copy the built application.
-COPY --from=build /home/node /home/node
+COPY --from=build /home/node .
 
 # Expose the service's port.
 EXPOSE 3000
