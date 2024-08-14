@@ -15,7 +15,7 @@ COPY src src
 COPY tsconfig.json .
 
 # Build the application.
-RUN yarn build && yarn cache clean
+RUN yarn run build && yarn run serve
 
 # Setup the runtime container.
 FROM node:${NODE_VERSION}-alpine
