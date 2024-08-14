@@ -40,6 +40,9 @@ dotenv.config({
 })
 
 export default buildConfig({
+    rateLimit: {
+      trustProxy: true,
+    },
   admin: {
     user: Users.slug,
     bundler: webpackBundler(), // bundler-config
