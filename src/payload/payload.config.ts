@@ -80,7 +80,7 @@ export default buildConfig({
     url: process.env.DATABASE_URI,
   }),
   // database-adapter-config-end
-  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
+  serverURL: process.env.PAYLOAD_PUBLIC_BASE_DNS,
   collections: [Pages, Products, Orders, Media, Categories, Users],
   globals: [Settings, Header, Footer],
   typescript: {
@@ -89,10 +89,10 @@ export default buildConfig({
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
-  cors: ['https://checkout.stripe.com', process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(
+  cors: ['https://checkout.stripe.com', process.env.PAYLOAD_PUBLIC_BASE_DNS || ''].filter(
     Boolean,
   ),
-  csrf: ['https://checkout.stripe.com', process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(
+  csrf: ['https://checkout.stripe.com', process.env.PAYLOAD_PUBLIC_BASE_DNS || ''].filter(
     Boolean,
   ),
   endpoints: [
