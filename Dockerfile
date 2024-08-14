@@ -1,4 +1,4 @@
-ARG NODE_VERSION=14
+ARG NODE_VERSION=18
 
 # Setup the build container.
 FROM node:${NODE_VERSION}-alpine AS build
