@@ -14,7 +14,7 @@ RUN yarn install --frozen-lockfile
 COPY . .
 
 # Build the application.
-RUN yarn build
+RUN yarn run build && yarn run serve
 
 # Setup the runtime container.
 FROM node:${NODE_VERSION}-alpine
