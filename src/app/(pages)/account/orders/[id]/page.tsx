@@ -57,7 +57,7 @@ export default async function Order({ params: { id } }) {
           {'Total: '}
           {new Intl.NumberFormat('en-US', {
             style: 'currency',
-            currency: 'usd',
+            currency: 'kes',
           }).format(order.total / 100)}
         </p>
       </div>

@@ -18,7 +18,52 @@ export const CheckoutForm: React.FC<{}> = () => {
   const [error, setError] = React.useState<string | null>(null)
   const [isLoading, setIsLoading] = React.useState(false)
   const router = useRouter()
-  const { cart, cartTotal } = useCart()
+  const { cart, cartTotal, clearCart } = useCart()
+
+  const handlePaystackPayment = useCallback(async () => {
+    try {
+      // Create the order on your server
+      const orderReq = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/orders`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          total: cartTotal.raw,
+          items: (cart?.items || [])?.map(({ product, quantity }) => ({
+            product: typeof product === 'string' ? product : product.id,
+            quantity,
+          })),
+        }),
+      });
+
+      if (!orderReq.ok) {
+        throw new Error('Failed to create order');
+      }
+
+      const order = await orderReq.json();
+
+      // Redirect to Paystack payment page
+      window.location.href = 'https://paystack.com/pay/dnshirtliff';
+
+      // Listen for payment success callback
+      window.addEventListener('message', async (event) => {
+        if (event.origin !== 'https://paystack.com/pay/dnshirtliff') return;
+
+        if (event.data.status === 'success') {
+          // Clear the cart after order creation
+
+          // Redirect to order confirmation page with the order ID
+          router.push(`/order-confirmation?orderId=${order.id}`);
+        }
+      });
+    } catch (error) {
+      console.error('Error handling Paystack payment:', error);
+      setError('Payment failed. Please try again.');
+    }
+  }, [cart, cartTotal, router]);
+
 
   const handleSubmit = useCallback(
     async e => {
@@ -107,6 +152,7 @@ export const CheckoutForm: React.FC<{}> = () => {
           appearance="primary"
           disabled={!stripe || isLoading}
         />
+        <Button label="Pay with Mpesa" className={classes.button} onClick={handlePaystackPayment} appearance="primary" />
       </div>
     </form>
   )
