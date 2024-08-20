@@ -1,7 +1,7 @@
 export const inclusions = [
     {
       title: 'Free Shipping',
-      description: 'Free shipping for order above $150',
+      description: 'Free shipping for order above Ksh. 8000',
       icon: '/assets/icons/shipping.svg',
     },
     
@@ -12,7 +12,7 @@ export const inclusions = [
       },
       {
         title: 'Flexible Payment',
-        description: 'Pay with multiple credit cards',
+        description: 'Pay with multiple credit cards or M-Pesa',
         icon: '/assets/icons/payment.svg',
       },
     ]
