@@ -15,6 +15,7 @@ import classes from './index.module.scss'
 type FormData = {
   name: string
   email: string
+  phoneNumber: string
   password: string
   passwordConfirm: string
 }
@@ -64,7 +65,7 @@ const CreateAccountForm: React.FC = () => {
         clearTimeout(timer)
         if (redirect) router.push(redirect as string)
         else router.push(`/`)
-      window.location.href = '/'
+        window.location.href = '/'
       } catch (_) {
         clearTimeout(timer)
         setError('There was an error with the credentials provided. Please try again.')
@@ -84,12 +85,22 @@ const CreateAccountForm: React.FC = () => {
         error={errors.email}
         type="email"
       />
+
       <Input
         name="name"
         label="Full Name"
         required
         register={register}
         error={errors.name}
+        type="text"
+      />
+
+      <Input
+        name="phoneNumber"
+        label="Phone Number"
+        required
+        register={register}
+        error={errors.phoneNumber}
         type="text"
       />
 
