@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import type { AxiosRequestConfig } from "axios"
 import axios from "axios";
 
