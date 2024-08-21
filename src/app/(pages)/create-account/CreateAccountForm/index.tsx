@@ -65,14 +65,14 @@ const CreateAccountForm: React.FC = () => {
         addNewCustomerIfNonExist(
           {
           "Name": data.name,
-          "Phone_No":"254799679275",
+          "Phone_No":"254700679275",
           "E_Mail": data.email,
           "Customer_Price_Group":"RETAIL MKT",
           "Customer_Disc_Group":"CASH",
           "Customer_Posting_Group":"TRADE",
           "Gen_Bus_Posting_Group":"LOCAL",
           "VAT_Bus_Posting_Group":"LOCAL",
-          "Payment_Terms_Code":"CASH"
+          "Payment_Terms_Code":"CASH",
           },
           setSuccess,
           setError

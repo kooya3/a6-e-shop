@@ -7,9 +7,10 @@ dotenv.config({
   path: path.resolve(__dirname, '../.env'),
 })
 
+import cors from 'cors'
 import express from 'express'
 import payload from 'payload'
-import cors from 'cors'
+
 import { seed } from './payload/seed'
 
 const app = express()
@@ -18,7 +19,7 @@ const PORT = process.env.PORT || 3000
 app.use(cors({
   origin: 'http://localhost:3000',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
 const start = async (): Promise<void> => {
