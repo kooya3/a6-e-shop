@@ -2,7 +2,8 @@
 
 .recoverPassword {
   display: grid;
-  grid-template-columns: 1fr 45%;
+  grid-template-columns: 1fr;
+  align-content: space-between;
   height: 100vh;
   font-family: var(--font-jost);
 
@@ -11,7 +12,6 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url('/assets/images/image-3.svg');
   }
 
   p {
@@ -25,7 +25,6 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url('/assets/images/image-3.svg');
 
   @include mid-break {
     background: none;
