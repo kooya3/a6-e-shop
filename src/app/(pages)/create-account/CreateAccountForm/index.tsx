@@ -67,7 +67,7 @@ const CreateAccountForm: React.FC = () => {
         addNewCustomerIfNonExist(
           {
           "Name": data.name,
-          "Phone_No":"254700679275",
+          "Phone_No": data.phoneNumber.toString(),
           "E_Mail": data.email,
           "Customer_Price_Group":"RETAIL MKT",
           "Customer_Disc_Group":"CASH",
