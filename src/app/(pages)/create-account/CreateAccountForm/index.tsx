@@ -57,7 +57,7 @@ const CreateAccountForm: React.FC = () => {
     async (data: FormData) => {
       const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/users`, {
         method: 'POST',
-        body: JSON.stringify({ ...data, phoneNumber: '789' }),
+        body: JSON.stringify({ ...data, phoneNumber: data.phoneNumber.replace('+', '') }),
         headers: {
           'Content-Type': 'application/json',
         },
