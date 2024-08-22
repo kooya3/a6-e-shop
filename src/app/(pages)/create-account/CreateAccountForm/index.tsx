@@ -9,8 +9,7 @@ import { Button } from '../../../_components/Button'
 import { Input } from '../../../_components/Input'
 import { Message } from '../../../_components/Message'
 import { useAuth } from '../../../_providers/Auth'
-
-import { addNewCustomerIfNonExist } from '../../../hooks/createAccounts'
+import { addNewCustomerIfNonExist } from '../../../hook/createAccounts'
 
 import classes from './index.module.scss'
 
