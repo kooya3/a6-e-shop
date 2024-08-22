@@ -1,5 +1,5 @@
 import React from 'react'
-import { FieldValues, UseFormRegister, Validate } from 'react-hook-form'
+import { FieldValues, UseFormRegister } from 'react-hook-form'
 
 import classes from './index.module.scss'
 
@@ -9,7 +9,7 @@ type Props = {
   register: UseFormRegister<FieldValues & any>
   required?: boolean
   error: any
-  type?: 'text' | 'number' | 'password' | 'email'
+  type?: 'text' | 'number' | 'password' | 'email' | 'tel'
   validate?: (value: string) => boolean | string
   disabled?: boolean
 }
@@ -47,6 +47,9 @@ export const Input: React.FC<Props> = ({
         })}
         disabled={disabled}
       />
+      {type === 'tel' && !error && (
+        <div className={classes.hintMessage}>Include your country code e.g +254</div>
+      )}
       {error && (
         <div className={classes.errorMessage}>
           {!error?.message && error?.type === 'required'
