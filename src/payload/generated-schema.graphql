@@ -4830,7 +4830,7 @@ type User {
   name: String
   roles: [User_roles!]
   purchases: [Product!]
-  stripeCustomerID: String
+  bcCustomerID: String
   cart: User_Cart
   skipSync: Boolean
   updatedAt: DateTime
@@ -6206,7 +6206,7 @@ input User_where {
   name: User_name_operator
   roles: User_roles_operator
   purchases: User_purchases_operator
-  stripeCustomerID: User_stripeCustomerID_operator
+  bcCustomerID: User_bcCustomerID_operator
   cart__items__product: User_cart__items__product_operator
   cart__items__quantity: User_cart__items__quantity_operator
   cart__items__id: User_cart__items__id_operator
@@ -6253,7 +6253,7 @@ input User_purchases_operator {
   exists: Boolean
 }
 
-input User_stripeCustomerID_operator {
+input User_bcCustomerID_operator {
   equals: String
   not_equals: String
   like: String
@@ -6347,7 +6347,7 @@ input User_where_and {
   name: User_name_operator
   roles: User_roles_operator
   purchases: User_purchases_operator
-  stripeCustomerID: User_stripeCustomerID_operator
+  bcCustomerID: User_bcCustomerID_operator
   cart__items__product: User_cart__items__product_operator
   cart__items__quantity: User_cart__items__quantity_operator
   cart__items__id: User_cart__items__id_operator
@@ -6364,7 +6364,7 @@ input User_where_or {
   name: User_name_operator
   roles: User_roles_operator
   purchases: User_purchases_operator
-  stripeCustomerID: User_stripeCustomerID_operator
+  bcCustomerID: User_bcCustomerID_operator
   cart__items__product: User_cart__items__product_operator
   cart__items__quantity: User_cart__items__quantity_operator
   cart__items__id: User_cart__items__id_operator
@@ -6390,7 +6390,7 @@ type UsersDocAccessFields {
   name: UsersDocAccessFields_name
   roles: UsersDocAccessFields_roles
   purchases: UsersDocAccessFields_purchases
-  stripeCustomerID: UsersDocAccessFields_stripeCustomerID
+  bcCustomerID: UsersDocAccessFields_bcCustomerID
   cart: UsersDocAccessFields_cart
   skipSync: UsersDocAccessFields_skipSync
   updatedAt: UsersDocAccessFields_updatedAt
@@ -6468,26 +6468,26 @@ type UsersDocAccessFields_purchases_Delete {
   permission: Boolean!
 }
 
-type UsersDocAccessFields_stripeCustomerID {
-  create: UsersDocAccessFields_stripeCustomerID_Create
-  read: UsersDocAccessFields_stripeCustomerID_Read
-  update: UsersDocAccessFields_stripeCustomerID_Update
-  delete: UsersDocAccessFields_stripeCustomerID_Delete
+type UsersDocAccessFields_bcCustomerID {
+  create: UsersDocAccessFields_bcCustomerID_Create
+  read: UsersDocAccessFields_bcCustomerID_Read
+  update: UsersDocAccessFields_bcCustomerID_Update
+  delete: UsersDocAccessFields_bcCustomerID_Delete
 }
 
-type UsersDocAccessFields_stripeCustomerID_Create {
+type UsersDocAccessFields_bcCustomerID_Create {
   permission: Boolean!
 }
 
-type UsersDocAccessFields_stripeCustomerID_Read {
+type UsersDocAccessFields_bcCustomerID_Read {
   permission: Boolean!
 }
 
-type UsersDocAccessFields_stripeCustomerID_Update {
+type UsersDocAccessFields_bcCustomerID_Update {
   permission: Boolean!
 }
 
-type UsersDocAccessFields_stripeCustomerID_Delete {
+type UsersDocAccessFields_bcCustomerID_Delete {
   permission: Boolean!
 }
 
@@ -10577,7 +10577,7 @@ type UsersFields {
   name: UsersFields_name
   roles: UsersFields_roles
   purchases: UsersFields_purchases
-  stripeCustomerID: UsersFields_stripeCustomerID
+  bcCustomerID: UsersFields_bcCustomerID
   cart: UsersFields_cart
   skipSync: UsersFields_skipSync
   updatedAt: UsersFields_updatedAt
@@ -10655,26 +10655,26 @@ type UsersFields_purchases_Delete {
   permission: Boolean!
 }
 
-type UsersFields_stripeCustomerID {
-  create: UsersFields_stripeCustomerID_Create
-  read: UsersFields_stripeCustomerID_Read
-  update: UsersFields_stripeCustomerID_Update
-  delete: UsersFields_stripeCustomerID_Delete
+type UsersFields_bcCustomerID {
+  create: UsersFields_bcCustomerID_Create
+  read: UsersFields_bcCustomerID_Read
+  update: UsersFields_bcCustomerID_Update
+  delete: UsersFields_bcCustomerID_Delete
 }
 
-type UsersFields_stripeCustomerID_Create {
+type UsersFields_bcCustomerID_Create {
   permission: Boolean!
 }
 
-type UsersFields_stripeCustomerID_Read {
+type UsersFields_bcCustomerID_Read {
   permission: Boolean!
 }
 
-type UsersFields_stripeCustomerID_Update {
+type UsersFields_bcCustomerID_Update {
   permission: Boolean!
 }
 
-type UsersFields_stripeCustomerID_Delete {
+type UsersFields_bcCustomerID_Delete {
   permission: Boolean!
 }
 
@@ -12323,7 +12323,7 @@ input mutationUserInput {
   name: String
   roles: [User_roles_MutationInput]
   purchases: [String]
-  stripeCustomerID: String
+  bcCustomerID: String
   cart: mutationUser_CartInput
   skipSync: Boolean
   updatedAt: String
@@ -12357,7 +12357,7 @@ input mutationUserUpdateInput {
   name: String
   roles: [UserUpdate_roles_MutationInput]
   purchases: [String]
-  stripeCustomerID: String
+  bcCustomerID: String
   cart: mutationUserUpdate_CartInput
   skipSync: Boolean
   updatedAt: String

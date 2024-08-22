@@ -4,8 +4,8 @@ import type { AxiosRequestConfig } from "axios"
 import axios from "axios";
 
 
-const username = 'davisapi'
-const password = 'zheghH5w631+AQ8GkKK6AMTEHGaPHP23aK8okWWQmGE='
+const username = ''
+const password = ''
 const token = Buffer.from(`${username}:${password}`).toString('base64');
 
 interface Customer {
