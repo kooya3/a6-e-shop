@@ -17,7 +17,6 @@ import classes from './index.module.scss'
 type FormData = {
   name: string
   email: string
-  email: Number
   phoneNumber: number
   password: string
   passwordConfirm: string
