@@ -9,6 +9,7 @@ import { Button } from '../../../_components/Button'
 import { Input } from '../../../_components/Input'
 import { Message } from '../../../_components/Message'
 import { useAuth } from '../../../_providers/Auth'
+
 import { addNewCustomerIfNonExist } from '../../../hooks/createAccounts'
 
 import classes from './index.module.scss'
@@ -16,9 +17,11 @@ import classes from './index.module.scss'
 type FormData = {
   name: string
   email: string
+  email: Number
   phoneNumber: number
   password: string
   passwordConfirm: string
+  
 }
 
 const CreateAccountForm: React.FC = () => {
@@ -99,11 +102,6 @@ const CreateAccountForm: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
-      <p>
-        {`This is where new customers can signup and create a new account. To manage all users, `}
-        <Link href="/admin/collections/users">login to the admin dashboard</Link>
-        {'.'}
-      </p>
       <Message error={error} success={success} className={classes.message} />
       <Input
         name="email"
@@ -121,7 +119,6 @@ const CreateAccountForm: React.FC = () => {
         error={errors.name}
         type="text"
       />
-
       <Input
         name="phoneNumber"
         label="Phone Number"
