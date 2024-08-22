@@ -18,6 +18,7 @@ type FormData = {
   phoneNumber: string
   password: string
   passwordConfirm: string
+  
 }
 
 const CreateAccountForm: React.FC = () => {
