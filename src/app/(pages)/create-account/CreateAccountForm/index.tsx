@@ -9,13 +9,14 @@ import { Button } from '../../../_components/Button'
 import { Input } from '../../../_components/Input'
 import { Message } from '../../../_components/Message'
 import { useAuth } from '../../../_providers/Auth'
+import { addNewCustomerIfNonExist } from '../../../hooks/createAccounts'
 
 import classes from './index.module.scss'
 
 type FormData = {
   name: string
   email: string
-  phoneNumber: string
+  phoneNumber: number
   password: string
   passwordConfirm: string
 }
@@ -27,6 +28,7 @@ const CreateAccountForm: React.FC = () => {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<string | null>(null)
 
   const {
     register,
@@ -60,12 +62,33 @@ const CreateAccountForm: React.FC = () => {
         setLoading(true)
       }, 1000)
 
+      if (response.ok) {
+        addNewCustomerIfNonExist(
+          {
+          "Name": data.name,
+          "Phone_No":"254700679275",
+          "E_Mail": data.email,
+          "Customer_Price_Group":"RETAIL MKT",
+          "Customer_Disc_Group":"CASH",
+          "Customer_Posting_Group":"TRADE",
+          "Gen_Bus_Posting_Group":"LOCAL",
+          "VAT_Bus_Posting_Group":"LOCAL",
+          "Payment_Terms_Code":"CASH",
+          },
+          setSuccess,
+          setError
+        )
+        // getExistingCustomer(
+        //   "254722679275"
+        // )
+      }
+
       try {
         await login(data)
         clearTimeout(timer)
         if (redirect) router.push(redirect as string)
         else router.push(`/`)
-        window.location.href = '/'
+      window.location.href = '/'
       } catch (_) {
         clearTimeout(timer)
         setError('There was an error with the credentials provided. Please try again.')
@@ -76,7 +99,12 @@ const CreateAccountForm: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
-      <Message error={error} className={classes.message} />
+      <p>
+        {`This is where new customers can signup and create a new account. To manage all users, `}
+        <Link href="/admin/collections/users">login to the admin dashboard</Link>
+        {'.'}
+      </p>
+      <Message error={error} success={success} className={classes.message} />
       <Input
         name="email"
         label="Email Address"
@@ -85,7 +113,6 @@ const CreateAccountForm: React.FC = () => {
         error={errors.email}
         type="email"
       />
-
       <Input
         name="name"
         label="Full Name"
@@ -96,14 +123,14 @@ const CreateAccountForm: React.FC = () => {
       />
 
       <Input
-        name="phoneNumber"
-        label="Phone Number"
-        required
-        register={register}
-        error={errors.phoneNumber}
-        type="text"
+      name="phoneNumber"
+      label="Phone Number"
+      required
+      register={register}
+      error={errors.phoneNumber}
+      type="number"
       />
-
+      
       <Input
         name="password"
         type="password"
