@@ -123,12 +123,12 @@ const CreateAccountForm: React.FC = () => {
       />
 
       <Input
-      name="phoneNumber"
-      label="Phone Number"
-      required
-      register={register}
-      error={errors.phoneNumber}
-      type="number"
+        name="phoneNumber"
+        label="Phone Number"
+        required
+        register={register}
+        error={errors.phoneNumber}
+        type="text"
       />
       
       <Input
