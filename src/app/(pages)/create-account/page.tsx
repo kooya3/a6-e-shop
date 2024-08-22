@@ -22,7 +22,7 @@ export default async function CreateAccount() {
           <RenderParams className={classes.params} />
 
           <div className={classes.formTitle}>
-            <h3>Create Account</h3>
+            <h3>Create Your Account</h3>
           </div>
           <CreateAccountForm />
         </div>
