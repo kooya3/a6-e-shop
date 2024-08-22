@@ -20,7 +20,7 @@
   margin: 100px 0;
 
   @include large-break {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   @include mid-break {
@@ -83,4 +83,7 @@
 
 .hide {
   display: none;
+}
+.section {
+  flex-wrap: wrap;
 }
