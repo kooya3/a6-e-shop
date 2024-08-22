@@ -3,6 +3,8 @@
 @use './type.scss' as *;
 @import "./theme.scss";
 
+@tailwind utilities;
+
 :root {
   --base: 24px;
   --font-body: 'Jost', sans-serif;
@@ -45,7 +47,7 @@ body,
 }
 
 body {
-  font-family: var(--font-jost);
+  font-family: var(--font-noto-sans);
   margin: 0;
   padding: 0;
   color: var(--color-dark-500);

@@ -11,7 +11,7 @@ const Categories = ({ categories }: { categories: Category[] }) => {
     <section className={classes.container}>
       <div className={classes.titleWrapper}>
         <h3>Shop by Categories</h3>
-        <Link href="/products">Show All</Link>
+        <Link href="/products" className={classes.titleWrapper}>Show All</Link>
       </div>
 
       <div className={classes.list}>
