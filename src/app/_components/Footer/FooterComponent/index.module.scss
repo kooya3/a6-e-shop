@@ -14,6 +14,7 @@
 .inclusions {
   display: grid;
   justify-content: center;
+  align-self: center;
   gap: 30px;
   padding: 0;
   grid-template-columns: repeat(4, 1fr);
@@ -83,4 +84,7 @@
 
 .hide {
   display: none;
+}
+.section {
+  flex-wrap: wrap;
 }
