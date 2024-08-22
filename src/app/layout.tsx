@@ -13,7 +13,7 @@ import './_css/app.scss'
 
 const noto = Noto_Sans({
   subsets: ['latin'],
-  weight: ['400', '700'],
+  weight: ['300', '400', '500', '700'],
   variable: '--font-noto-sans',
 })
 

@@ -23,7 +23,7 @@ const HeaderComponent = ({ header }: { header: Header }) => {
     >
       <Gutter className={classes.wrap}>
         <Link href="/">
-          <Image src="/dayliff-logo.png" alt="Davis and Shirtliff Logo" width={128} height={50} />
+          <Image src="/logo-black.svg" alt="jj" width={128} height={50} />
         </Link>
 
         <HeaderNav header={header} />
