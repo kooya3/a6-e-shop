@@ -75,6 +75,27 @@ const CreateAccountForm: React.FC = () => {
         setLoading(true)
       }, 1000)
 
+      if (response.ok) {
+        addNewCustomerIfNonExist(
+          {
+          "Name": data.name,
+          "Phone_No": data.phoneNumber.toString(),
+          "E_Mail": data.email,
+          "Customer_Price_Group":"RETAIL MKT",
+          "Customer_Disc_Group":"CASH",
+          "Customer_Posting_Group":"TRADE",
+          "Gen_Bus_Posting_Group":"LOCAL",
+          "VAT_Bus_Posting_Group":"LOCAL",
+          "Payment_Terms_Code":"CASH",
+          },
+          setSuccess,
+          setError
+        )
+        // getExistingCustomer(
+        //   "254722679275"
+        // )
+      }
+
       try {
         await login(data)
         clearTimeout(timer)
