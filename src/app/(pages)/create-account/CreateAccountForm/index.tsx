@@ -19,6 +19,7 @@ type FormData = {
   phoneNumber: number
   password: string
   passwordConfirm: string
+
   
 }
 
@@ -108,6 +109,8 @@ const CreateAccountForm: React.FC = () => {
         register={register}
         error={errors.email}
         type="email"
+        placeholder="Enter your email"
+        pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
       />
       <Input
         name="name"
@@ -116,6 +119,8 @@ const CreateAccountForm: React.FC = () => {
         register={register}
         error={errors.name}
         type="text"
+        placeholder="Enter your full name"
+        pattern="^[a-zA-Z\s]+$"
       />
       <Input
         name="phoneNumber"
@@ -124,6 +129,8 @@ const CreateAccountForm: React.FC = () => {
         register={register}
         error={errors.phoneNumber}
         type="text"
+        placeholder="072200000"
+        pattern="^(07|01)\d{8}$"
       />
       
       <Input
@@ -133,6 +140,8 @@ const CreateAccountForm: React.FC = () => {
         required
         register={register}
         error={errors.password}
+        placeholder='Password must be at least 8 characters long'
+        pattern=".*" // Add the pattern property with a valid regular expression to enforce a password policy.
       />
       <Input
         name="passwordConfirm"
@@ -142,6 +151,8 @@ const CreateAccountForm: React.FC = () => {
         register={register}
         validate={value => value === password.current || 'The passwords do not match'}
         error={errors.passwordConfirm}
+        pattern=".*" // Add the pattern property with a valid regular expression
+        placeholder="Enter your password again"
       />
       <Button
         type="submit"

@@ -102,8 +102,17 @@ const AccountForm: React.FC = () => {
             register={register}
             error={errors.email}
             type="email"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            placeholder="Enter your email"
           />
-          <Input name="name" label="Name" register={register} error={errors.name} />
+          <Input
+            name="name"
+            label="Name"
+            register={register}
+            error={errors.name}
+            pattern="[A-Za-z\s]+"
+            placeholder="Enter your name"
+          />
 
           <p>
             {'Change your account details below, or '}
@@ -137,6 +146,8 @@ const AccountForm: React.FC = () => {
             required
             register={register}
             error={errors.password}
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+            placeholder="Enter your password"
           />
           <Input
             name="passwordConfirm"
@@ -144,8 +155,12 @@ const AccountForm: React.FC = () => {
             label="Confirm Password"
             required
             register={register}
-            validate={value => value === password.current || 'The passwords do not match'}
+            validate={(value: string) =>
+              value === password.current || 'The passwords do not match'
+            }
             error={errors.passwordConfirm}
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+            placeholder="Confirm your password"
           />
         </Fragment>
       )}
