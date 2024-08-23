@@ -41,14 +41,14 @@ export const AdminBar: React.FC<{
             singular: collection === 'products' ? 'Product' : 'Page',
             plural: collection === 'products' ? 'Products' : 'Pages',
           }}
-          key={user?.id} // use key to get the admin bar to re-run its `me` request
-          cmsURL={process.env.NEXT_PUBLIC_SERVER_URL}
-          className={classes.payloadAdminBar}
-          classNames={{
-            user: classes.user,
-            logo: classes.logo,
-            controls: classes.controls,
-          }}
+          // key={user?.id} // use key to get the admin bar to re-run its `me` request
+          // cmsURL={process.env.NEXT_PUBLIC_SERVER_URL}
+          // className={classes.payloadAdminBar}
+          // classNames={{
+          //   user: classes.user,
+          //   logo: classes.logo,
+          //   controls: classes.controls,
+          // }}
           logo={<Title />}
           style={{
             position: 'relative',
