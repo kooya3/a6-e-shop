@@ -180,6 +180,7 @@ export interface Category {
   id: string;
   title: string;
   media?: string | Media | null;
+  code: string;
   parent?: (string | null) | Category;
   breadcrumbs?:
     | {
@@ -415,7 +416,6 @@ export interface User {
   name?: string | null;
   roles?: ('admin' | 'customer')[] | null;
   purchases?: (string | Product)[] | null;
-  stripeCustomerID?: string | null;
   bcCustomerID?: string | null;
   cart?: {
     items?: CartItems;

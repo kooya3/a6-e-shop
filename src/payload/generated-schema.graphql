@@ -1080,6 +1080,7 @@ type Category {
   id: String
   title: String!
   media(where: Category_Media_where): Media
+  code: String!
   parent: Category
   breadcrumbs: [Category_Breadcrumbs!]
   updatedAt: DateTime
@@ -5771,6 +5772,7 @@ type Categories {
 input Category_where {
   title: Category_title_operator
   media: Category_media_operator
+  code: Category_code_operator
   parent: Category_parent_operator
   breadcrumbs__doc: Category_breadcrumbs__doc_operator
   breadcrumbs__url: Category_breadcrumbs__url_operator
@@ -5797,6 +5799,16 @@ input Category_media_operator {
   equals: String
   not_equals: String
   exists: Boolean
+}
+
+input Category_code_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
 }
 
 input Category_parent_operator {
@@ -5886,6 +5898,7 @@ input Category_id_operator {
 input Category_where_and {
   title: Category_title_operator
   media: Category_media_operator
+  code: Category_code_operator
   parent: Category_parent_operator
   breadcrumbs__doc: Category_breadcrumbs__doc_operator
   breadcrumbs__url: Category_breadcrumbs__url_operator
@@ -5901,6 +5914,7 @@ input Category_where_and {
 input Category_where_or {
   title: Category_title_operator
   media: Category_media_operator
+  code: Category_code_operator
   parent: Category_parent_operator
   breadcrumbs__doc: Category_breadcrumbs__doc_operator
   breadcrumbs__url: Category_breadcrumbs__url_operator
@@ -5924,6 +5938,7 @@ type categoriesDocAccess {
 type CategoriesDocAccessFields {
   title: CategoriesDocAccessFields_title
   media: CategoriesDocAccessFields_media
+  code: CategoriesDocAccessFields_code
   parent: CategoriesDocAccessFields_parent
   breadcrumbs: CategoriesDocAccessFields_breadcrumbs
   updatedAt: CategoriesDocAccessFields_updatedAt
@@ -5973,6 +5988,29 @@ type CategoriesDocAccessFields_media_Update {
 }
 
 type CategoriesDocAccessFields_media_Delete {
+  permission: Boolean!
+}
+
+type CategoriesDocAccessFields_code {
+  create: CategoriesDocAccessFields_code_Create
+  read: CategoriesDocAccessFields_code_Read
+  update: CategoriesDocAccessFields_code_Update
+  delete: CategoriesDocAccessFields_code_Delete
+}
+
+type CategoriesDocAccessFields_code_Create {
+  permission: Boolean!
+}
+
+type CategoriesDocAccessFields_code_Read {
+  permission: Boolean!
+}
+
+type CategoriesDocAccessFields_code_Update {
+  permission: Boolean!
+}
+
+type CategoriesDocAccessFields_code_Delete {
   permission: Boolean!
 }
 
@@ -10300,6 +10338,7 @@ type categoriesAccess {
 type CategoriesFields {
   title: CategoriesFields_title
   media: CategoriesFields_media
+  code: CategoriesFields_code
   parent: CategoriesFields_parent
   breadcrumbs: CategoriesFields_breadcrumbs
   updatedAt: CategoriesFields_updatedAt
@@ -10349,6 +10388,29 @@ type CategoriesFields_media_Update {
 }
 
 type CategoriesFields_media_Delete {
+  permission: Boolean!
+}
+
+type CategoriesFields_code {
+  create: CategoriesFields_code_Create
+  read: CategoriesFields_code_Read
+  update: CategoriesFields_code_Update
+  delete: CategoriesFields_code_Delete
+}
+
+type CategoriesFields_code_Create {
+  permission: Boolean!
+}
+
+type CategoriesFields_code_Read {
+  permission: Boolean!
+}
+
+type CategoriesFields_code_Update {
+  permission: Boolean!
+}
+
+type CategoriesFields_code_Delete {
   permission: Boolean!
 }
 
@@ -12290,6 +12352,7 @@ input mutationMediaUpdateInput {
 input mutationCategoryInput {
   title: String!
   media: String
+  code: String!
   parent: String
   breadcrumbs: [mutationCategory_BreadcrumbsInput]
   updatedAt: String
@@ -12306,6 +12369,7 @@ input mutationCategory_BreadcrumbsInput {
 input mutationCategoryUpdateInput {
   title: String
   media: String
+  code: String
   parent: String
   breadcrumbs: [mutationCategoryUpdate_BreadcrumbsInput]
   updatedAt: String

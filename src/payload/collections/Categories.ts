@@ -19,7 +19,14 @@ const Categories: CollectionConfig = {
       type: 'upload',
       relationTo: 'media',
     },
+    {
+      name: 'code',
+      type: 'text',
+      required: true,
+    },
   ],
 }
 
 export default Categories
+
+
