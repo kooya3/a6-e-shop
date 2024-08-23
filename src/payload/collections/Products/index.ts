@@ -11,13 +11,12 @@ import { checkUserPurchases } from './access/checkUserPurchases'
 import { beforeProductChange } from './hooks/beforeChange'
 import { deleteProductFromCarts } from './hooks/deleteProductFromCarts'
 import { revalidateProduct } from './hooks/revalidateProduct'
-import { ProductSelect } from './ui/ProductSelect'
 
 const Products: CollectionConfig = {
   slug: 'products',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'stripeProductID', '_status'],
+    defaultColumns: ['title', 'bcProductID', '_status'],
     preview: doc => {
       return `${process.env.PAYLOAD_PUBLIC_SERVER_URL}/next/preview?url=${encodeURIComponent(
         `${process.env.PAYLOAD_PUBLIC_SERVER_URL}/products/${doc.slug}`,
@@ -82,13 +81,27 @@ const Products: CollectionConfig = {
           label: 'Product Details',
           fields: [
             {
-              name: 'stripeProductID',
-              label: 'Stripe Product',
+              name: 'bcProductID',
+              label: 'Business Central Product',
               type: 'text',
               admin: {
-                components: {
-                  Field: ProductSelect,
-                },
+                readOnly: true,
+              },
+            },
+            {
+              name: 'inventory',
+              label: 'Inventory',
+              type: 'number',
+              admin: {
+                readOnly: true,
+              },
+            },
+            {
+              name: 'unitPrice',
+              label: 'Unit Price',
+              type: 'number',
+              admin: {
+                readOnly: true,
               },
             },
             {
