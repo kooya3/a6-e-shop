@@ -62,6 +62,8 @@ export const RecoverPasswordForm: React.FC = () => {
               register={register}
               error={errors.email}
               type="email"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+              placeholder="Enter your email"
             />
             <Button
               type="submit"

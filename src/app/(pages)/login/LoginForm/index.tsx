@@ -55,6 +55,8 @@ const LoginForm: React.FC = () => {
         register={register}
         error={errors.email}
         type="email"
+        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
+        placeholder="Enter your email"
       />
       <Input
         name="password"
@@ -63,6 +65,8 @@ const LoginForm: React.FC = () => {
         required
         register={register}
         error={errors.password}
+        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+        placeholder="Enter your password"
       />
       <Button
         type="submit"

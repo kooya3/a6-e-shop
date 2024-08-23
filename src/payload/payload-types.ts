@@ -417,6 +417,7 @@ export interface User {
   name?: string | null;
   roles?: ('admin' | 'customer')[] | null;
   purchases?: (string | Product)[] | null;
+  stripeCustomerID?: string | null;
   bcCustomerID?: string | null;
   cart?: {
     items?: CartItems;

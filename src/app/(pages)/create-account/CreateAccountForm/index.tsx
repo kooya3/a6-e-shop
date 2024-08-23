@@ -10,8 +10,10 @@ import { Button } from '../../../_components/Button'
 import { Input } from '../../../_components/Input'
 import { Message } from '../../../_components/Message'
 import { useAuth } from '../../../_providers/Auth'
+import { addNewCustomerIfNonExist } from '../../../hook/createAccounts'
 
 import classes from './index.module.scss'
+
 
 type FormData = {
   name: string
@@ -19,6 +21,8 @@ type FormData = {
   phoneNumber: string
   password: string
   passwordConfirm: string
+
+  
 }
 
 const CreateAccountForm: React.FC = () => {
@@ -89,70 +93,72 @@ const CreateAccountForm: React.FC = () => {
   )
 
   return (
-    <>
+    <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
+      <Message error={error} success={success} className={classes.message} />
+      <Input
+        name="email"
+        label="Email Address"
+        required
+        register={register}
+        error={errors.email}
+        type="email"
+        placeholder="Enter your email"
+        pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+      />
+      <Input
+        name="name"
+        label="Full Name"
+        required
+        register={register}
+        error={errors.name}
+        type="text"
+        placeholder="Enter your full name"
+        pattern="^[a-zA-Z\s]+$"
+      />
+      <Input
+        name="phoneNumber"
+        label="Phone Number"
+        required
+        register={register}
+        error={errors.phoneNumber}
+        type="text"
+        placeholder="072200000"
+        pattern="^(07|01)\d{8}$"
+      />
+      
+      <Input
+        name="password"
+        type="password"
+        label="Password"
+        required
+        register={register}
+        error={errors.password}
+        placeholder='Password must be at least 8 characters long'
+        pattern=".*" // Add the pattern property with a valid regular expression to enforce a password policy.
+      />
+      <Input
+        name="passwordConfirm"
+        type="password"
+        label="Confirm Password"
+        required
+        register={register}
+        validate={value => value === password.current || 'The passwords do not match'}
+        error={errors.passwordConfirm}
+        pattern=".*" // Add the pattern property with a valid regular expression
+        placeholder="Enter your password again"
+      />
+      <Button
+        type="submit"
+        label={loading ? 'Processing' : 'Sign Up'}
+        disabled={loading}
+        appearance="primary"
+        className={classes.submit}
+      />
       <div>
         {'Already have an account? '}
         <Link href={`/login${allParams}`}>Login</Link>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
-        <Message error={error} success={success} className={classes.message} />
-
-        <Input
-          name="name"
-          label="Full Name"
-          required
-          register={register}
-          error={errors.name}
-          type="text"
-        />
-
-        <Input
-          name="email"
-          label="Email Address"
-          required
-          register={register}
-          error={errors.email}
-          type="email"
-        />
-
-        <Input
-          name="phoneNumber"
-          label="Phone Number"
-          required
-          register={register}
-          error={errors.phoneNumber}
-          type="tel"
-          validate={validatePhoneNumber}
-        />
-
-        <Input
-          name="password"
-          type="password"
-          label="Password"
-          required
-          register={register}
-          error={errors.password}
-        />
-
-        <Input
-          name="passwordConfirm"
-          type="password"
-          label="Confirm Password"
-          required
-          register={register}
-          validate={value => value === password.current || 'The passwords do not match'}
-          error={errors.passwordConfirm}
-        />
-
-        <Button
-          type="submit"
-          label={loading ? 'Processing' : 'Sign Up'}
-          disabled={loading}
-          appearance="primary"
-          className={classes.submit}
-        />
-      </form>
-    </>
+    </form>
   )
 }
 

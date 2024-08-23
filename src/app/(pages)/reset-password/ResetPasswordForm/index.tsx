@@ -74,6 +74,8 @@ export const ResetPasswordForm: React.FC = () => {
         required
         register={register}
         error={errors.password}
+        pattern="[A-Za-z0-9]{8,}"
+        placeholder="Enter a password with at least 8 characters"
       />
       <input type="hidden" {...register('token')} />
       <Button
