@@ -11,7 +11,7 @@ export async function fetchCustomersFromBC({ limit = 50, filters }: { limit?: nu
   if (filters) {
     const filterArray = Object.entries(filters).map(([key, value], index, array) => {
       const encodedFilter = `${key}%20eq%20%27${value}%27`;
-      return index < array.length - 1 ? `${encodedFilter}and%20` : encodedFilter;
+      return index < array.length - 1 ? `${encodedFilter}%20and%20` : encodedFilter;
     });
 
     filterString = filterArray.join();
@@ -22,7 +22,7 @@ export async function fetchCustomersFromBC({ limit = 50, filters }: { limit?: nu
   }
 
   const response = await fetch(
-    `${BC_URL}/Customer_Card?$limit=${limit}${filter}`,
+    `${BC_URL}/Customer_Card?$top=${limit}${filter}`,
     {
       headers: {
         Authorization: 'Basic ' + Buffer.from(USERNAME + ':' + PASSWORD).toString('base64'),
