@@ -48,7 +48,7 @@ export const scheduleFetchProductsFromBusinessCentral = async (): Promise<void> 
             inventory: item.Inventory,
           },
         })
-      } else if (item.Description && item.No && item.Gen_Prod_Posting_Group && item.Inventory && item.Unit_Price) {
+      } else if (item.Description && item.No && item.Gen_Prod_Posting_Group) {
         const product = createProduct(item)
         const category = await payload.find({
           collection: 'categories',
