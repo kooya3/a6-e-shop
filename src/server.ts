@@ -1,6 +1,7 @@
 import dotenv from 'dotenv'
 import next from 'next'
 import nextBuild from 'next/dist/build'
+import cron from 'node-cron';
 import path from 'path'
 
 dotenv.config({
@@ -11,6 +12,7 @@ import cors from 'cors'
 import express from 'express'
 import payload from 'payload'
 
+import { scheduleFetchProductsFromBusinessCentral } from './payload/bc/services/scheduleFetchItemsFromBCByCategory';
 import { seed } from './payload/seed'
 
 const app = express()
@@ -60,6 +62,8 @@ const start = async (): Promise<void> => {
 
     app.listen(PORT, async () => {
       payload.logger.info(`Next.js App URL: ${process.env.PAYLOAD_PUBLIC_SERVER_URL}`)
+
+      cron.schedule('0 6 * * *', scheduleFetchProductsFromBusinessCentral);
     })
   })
 }

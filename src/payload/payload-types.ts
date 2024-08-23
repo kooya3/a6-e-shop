@@ -288,7 +288,9 @@ export interface Product {
           }
       )[]
     | null;
-  stripeProductID?: string | null;
+  bcProductID?: string | null;
+  inventory?: number | null;
+  unitPrice?: number | null;
   priceJSON?: string | null;
   enablePaywall?: boolean | null;
   paywall?:
