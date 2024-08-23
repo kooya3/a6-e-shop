@@ -288,6 +288,7 @@ export interface Product {
           }
       )[]
     | null;
+  stripeProductID?: string | null;
   bcProductID?: string | null;
   inventory?: number | null;
   unitPrice?: number | null;
@@ -418,6 +419,7 @@ export interface User {
   name?: string | null;
   roles?: ('admin' | 'customer')[] | null;
   purchases?: (string | Product)[] | null;
+  stripeCustomerID?: string | null;
   bcCustomerID?: string | null;
   cart?: {
     items?: CartItems;

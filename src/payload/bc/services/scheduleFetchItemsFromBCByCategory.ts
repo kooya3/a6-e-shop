@@ -38,7 +38,7 @@ export const scheduleFetchProductsFromBusinessCentral = async (): Promise<void> 
           data: JSON.parse(
             JSON.stringify({ ...product }).replace(
               /"\{\{PRODUCT_IMAGE\}\}"/g,
-              noImageAvailableID,
+              noImageAvailableID.toString(),
             ),
           ),
         });

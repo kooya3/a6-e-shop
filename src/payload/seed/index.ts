@@ -89,18 +89,21 @@ export const seed = async (payload: Payload): Promise<void> => {
       collection: 'categories',
       data: {
         title: 'Apparel',
+        code: 'APPAREL', // Add the code property
       },
     }),
     await payload.create({
       collection: 'categories',
       data: {
         title: 'E-books',
+        code: 'EBOOKS', // Add the code property
       },
     }),
     await payload.create({
       collection: 'categories',
       data: {
         title: 'Online courses',
+        code: 'COURSES', // Add the code property
       },
     }),
   ])
@@ -112,30 +115,21 @@ export const seed = async (payload: Payload): Promise<void> => {
   const product1Doc = await payload.create({
     collection: 'products',
     data: JSON.parse(
-      JSON.stringify({ ...product1, categories: [apparelCategory.id] }).replace(
-        /"\{\{PRODUCT_IMAGE\}\}"/g,
-        image1ID,
-      ),
+      JSON.stringify({ ...product1, categories: [apparelCategory.id], image: image1ID }),
     ),
   })
 
   const product2Doc = await payload.create({
     collection: 'products',
     data: JSON.parse(
-      JSON.stringify({ ...product2, categories: [ebooksCategory.id] }).replace(
-        /"\{\{PRODUCT_IMAGE\}\}"/g,
-        image2ID,
-      ),
+      JSON.stringify({ ...product2, categories: [ebooksCategory.id], image: image2ID }),
     ),
   })
 
   const product3Doc = await payload.create({
     collection: 'products',
     data: JSON.parse(
-      JSON.stringify({ ...product3, categories: [coursesCategory.id] }).replace(
-        /"\{\{PRODUCT_IMAGE\}\}"/g,
-        image3ID,
-      ),
+      JSON.stringify({ ...product3, categories: [coursesCategory.id], image: image3ID }),
     ),
   })
 
@@ -144,23 +138,23 @@ export const seed = async (payload: Payload): Promise<void> => {
   await Promise.all([
     await payload.update({
       collection: 'products',
-      id: product1Doc.id,
+      id: product1Doc.id as string,
       data: {
-        relatedProducts: [product2Doc.id, product3Doc.id],
+        relatedProducts: [product2Doc.id as string, product3Doc.id as string],
       },
     }),
     await payload.update({
       collection: 'products',
-      id: product2Doc.id,
+      id: product2Doc.id as string,
       data: {
-        relatedProducts: [product1Doc.id, product3Doc.id],
+        relatedProducts: [product1Doc.id as string, product3Doc.id as string],
       },
     }),
     await payload.update({
       collection: 'products',
-      id: product3Doc.id,
+      id: product3Doc.id as string,
       data: {
-        relatedProducts: [product1Doc.id, product2Doc.id],
+        relatedProducts: [product1Doc.id as string, product2Doc.id as string],
       },
     }),
   ])
@@ -184,9 +178,9 @@ export const seed = async (payload: Payload): Promise<void> => {
     collection: 'pages',
     data: JSON.parse(
       JSON.stringify(home)
-        .replace(/"\{\{PRODUCT1_IMAGE\}\}"/g, image1ID)
-        .replace(/"\{\{PRODUCT2_IMAGE\}\}"/g, image2ID)
-        .replace(/"\{\{PRODUCTS_PAGE_ID\}\}"/g, productsPageID),
+        .replace(/"\{\{PRODUCT1_IMAGE\}\}"/g, String(image1ID))
+        .replace(/"\{\{PRODUCT2_IMAGE\}\}"/g, String(image2ID))
+        .replace(/"\{\{PRODUCTS_PAGE_ID\}\}"/g, String(productsPageID)),
     ),
   })
 
@@ -195,7 +189,7 @@ export const seed = async (payload: Payload): Promise<void> => {
   await payload.create({
     collection: 'pages',
     data: JSON.parse(
-      JSON.stringify(cartPage).replace(/"\{\{PRODUCTS_PAGE_ID\}\}"/g, productsPageID),
+      JSON.stringify(cartPage).replace(/"\{\{PRODUCTS_PAGE_ID\}\}"/g, () => String(productsPageID)),
     ),
   })
 
@@ -204,7 +198,7 @@ export const seed = async (payload: Payload): Promise<void> => {
   await payload.updateGlobal({
     slug: 'settings',
     data: {
-      productsPage: productsPageDoc.id,
+      productsPage: String(productsPageDoc.id),
     },
   })
 
@@ -219,7 +213,7 @@ export const seed = async (payload: Payload): Promise<void> => {
             type: 'reference',
             reference: {
               relationTo: 'pages',
-              value: productsPageDoc.id,
+              value: String(productsPageDoc.id),
             },
             label: 'Shop',
           },
