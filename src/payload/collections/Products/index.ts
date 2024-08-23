@@ -11,6 +11,7 @@ import { checkUserPurchases } from './access/checkUserPurchases'
 import { beforeProductChange } from './hooks/beforeChange'
 import { deleteProductFromCarts } from './hooks/deleteProductFromCarts'
 import { revalidateProduct } from './hooks/revalidateProduct'
+import { ProductSelect } from './ui/ProductSelect'
 
 const Products: CollectionConfig = {
   slug: 'products',
@@ -80,6 +81,16 @@ const Products: CollectionConfig = {
         {
           label: 'Product Details',
           fields: [
+            {
+              name: 'stripeProductID',
+              label: 'Stripe Product',
+              type: 'text',
+              admin: {
+                components: {
+                  Field: ProductSelect,
+                },
+              },
+            },
             {
               name: 'bcProductID',
               label: 'Business Central Product',
