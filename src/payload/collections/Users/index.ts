@@ -113,16 +113,16 @@ const Users: CollectionConfig = {
            label: 'Created On',
            type: 'date',
            admin: {
-             readOnly: true
-           }
+             readOnly: true,
+           },
          },
          {
            name: 'lastModified',
            label: 'Last Modified',
            type: 'date',
            admin: {
-             readOnly: true
-           }
+             readOnly: true,
+           },
          },
       ],
     },
