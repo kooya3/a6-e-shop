@@ -23,6 +23,9 @@ type Query {
   docAccessUser(id: String!): usersDocAccess
   meUser: usersMe
   initializedUser: Boolean
+  ProductNotification(id: String!, draft: Boolean): ProductNotification
+  ProductNotifications(draft: Boolean, where: ProductNotification_where, limit: Int, page: Int, sort: String): ProductNotifications
+  docAccessProductNotification(id: String!): productNotificationsDocAccess
   Redirect(id: String!, draft: Boolean): Redirect
   Redirects(draft: Boolean, where: Redirect_where, limit: Int, page: Int, sort: String): Redirects
   docAccessRedirect(id: String!): redirectsDocAccess
@@ -7039,6 +7042,271 @@ type usersMe {
   user: User
 }
 
+type ProductNotification {
+  id: String
+  productID: Product!
+  email: String
+  notified: Boolean
+  updatedAt: DateTime
+  createdAt: DateTime
+}
+
+type ProductNotifications {
+  docs: [ProductNotification]
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
+  limit: Int
+  nextPage: Int
+  offset: Int
+  page: Int
+  pagingCounter: Int
+  prevPage: Int
+  totalDocs: Int
+  totalPages: Int
+}
+
+input ProductNotification_where {
+  productID: ProductNotification_productID_operator
+  email: ProductNotification_email_operator
+  notified: ProductNotification_notified_operator
+  updatedAt: ProductNotification_updatedAt_operator
+  createdAt: ProductNotification_createdAt_operator
+  id: ProductNotification_id_operator
+  AND: [ProductNotification_where_and]
+  OR: [ProductNotification_where_or]
+}
+
+input ProductNotification_productID_operator {
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
+}
+
+input ProductNotification_email_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input ProductNotification_notified_operator {
+  equals: Boolean
+  not_equals: Boolean
+  exists: Boolean
+}
+
+input ProductNotification_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input ProductNotification_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input ProductNotification_id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input ProductNotification_where_and {
+  productID: ProductNotification_productID_operator
+  email: ProductNotification_email_operator
+  notified: ProductNotification_notified_operator
+  updatedAt: ProductNotification_updatedAt_operator
+  createdAt: ProductNotification_createdAt_operator
+  id: ProductNotification_id_operator
+  AND: [ProductNotification_where_and]
+  OR: [ProductNotification_where_or]
+}
+
+input ProductNotification_where_or {
+  productID: ProductNotification_productID_operator
+  email: ProductNotification_email_operator
+  notified: ProductNotification_notified_operator
+  updatedAt: ProductNotification_updatedAt_operator
+  createdAt: ProductNotification_createdAt_operator
+  id: ProductNotification_id_operator
+  AND: [ProductNotification_where_and]
+  OR: [ProductNotification_where_or]
+}
+
+type productNotificationsDocAccess {
+  fields: ProductNotificationsDocAccessFields
+  create: ProductNotificationsCreateDocAccess
+  read: ProductNotificationsReadDocAccess
+  update: ProductNotificationsUpdateDocAccess
+  delete: ProductNotificationsDeleteDocAccess
+}
+
+type ProductNotificationsDocAccessFields {
+  productID: ProductNotificationsDocAccessFields_productID
+  email: ProductNotificationsDocAccessFields_email
+  notified: ProductNotificationsDocAccessFields_notified
+  updatedAt: ProductNotificationsDocAccessFields_updatedAt
+  createdAt: ProductNotificationsDocAccessFields_createdAt
+}
+
+type ProductNotificationsDocAccessFields_productID {
+  create: ProductNotificationsDocAccessFields_productID_Create
+  read: ProductNotificationsDocAccessFields_productID_Read
+  update: ProductNotificationsDocAccessFields_productID_Update
+  delete: ProductNotificationsDocAccessFields_productID_Delete
+}
+
+type ProductNotificationsDocAccessFields_productID_Create {
+  permission: Boolean!
+}
+
+type ProductNotificationsDocAccessFields_productID_Read {
+  permission: Boolean!
+}
+
+type ProductNotificationsDocAccessFields_productID_Update {
+  permission: Boolean!
+}
+
+type ProductNotificationsDocAccessFields_productID_Delete {
+  permission: Boolean!
+}
+
+type ProductNotificationsDocAccessFields_email {
+  create: ProductNotificationsDocAccessFields_email_Create
+  read: ProductNotificationsDocAccessFields_email_Read
+  update: ProductNotificationsDocAccessFields_email_Update
+  delete: ProductNotificationsDocAccessFields_email_Delete
+}
+
+type ProductNotificationsDocAccessFields_email_Create {
+  permission: Boolean!
+}
+
+type ProductNotificationsDocAccessFields_email_Read {
+  permission: Boolean!
+}
+
+type ProductNotificationsDocAccessFields_email_Update {
+  permission: Boolean!
+}
+
+type ProductNotificationsDocAccessFields_email_Delete {
+  permission: Boolean!
+}
+
+type ProductNotificationsDocAccessFields_notified {
+  create: ProductNotificationsDocAccessFields_notified_Create
+  read: ProductNotificationsDocAccessFields_notified_Read
+  update: ProductNotificationsDocAccessFields_notified_Update
+  delete: ProductNotificationsDocAccessFields_notified_Delete
+}
+
+type ProductNotificationsDocAccessFields_notified_Create {
+  permission: Boolean!
+}
+
+type ProductNotificationsDocAccessFields_notified_Read {
+  permission: Boolean!
+}
+
+type ProductNotificationsDocAccessFields_notified_Update {
+  permission: Boolean!
+}
+
+type ProductNotificationsDocAccessFields_notified_Delete {
+  permission: Boolean!
+}
+
+type ProductNotificationsDocAccessFields_updatedAt {
+  create: ProductNotificationsDocAccessFields_updatedAt_Create
+  read: ProductNotificationsDocAccessFields_updatedAt_Read
+  update: ProductNotificationsDocAccessFields_updatedAt_Update
+  delete: ProductNotificationsDocAccessFields_updatedAt_Delete
+}
+
+type ProductNotificationsDocAccessFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type ProductNotificationsDocAccessFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type ProductNotificationsDocAccessFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type ProductNotificationsDocAccessFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type ProductNotificationsDocAccessFields_createdAt {
+  create: ProductNotificationsDocAccessFields_createdAt_Create
+  read: ProductNotificationsDocAccessFields_createdAt_Read
+  update: ProductNotificationsDocAccessFields_createdAt_Update
+  delete: ProductNotificationsDocAccessFields_createdAt_Delete
+}
+
+type ProductNotificationsDocAccessFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type ProductNotificationsDocAccessFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type ProductNotificationsDocAccessFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type ProductNotificationsDocAccessFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type ProductNotificationsCreateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type ProductNotificationsReadDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type ProductNotificationsUpdateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type ProductNotificationsDeleteDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
 type Redirect {
   id: String
   from: String!
@@ -8788,6 +9056,7 @@ type Access {
   media: mediaAccess
   categories: categoriesAccess
   users: usersAccess
+  productNotifications: productNotificationsAccess
   redirects: redirectsAccess
   payload_preferences: payload_preferencesAccess
   settings: settingsAccess
@@ -11363,6 +11632,157 @@ type UsersUnlockAccess {
   where: JSONObject
 }
 
+type productNotificationsAccess {
+  fields: ProductNotificationsFields
+  create: ProductNotificationsCreateAccess
+  read: ProductNotificationsReadAccess
+  update: ProductNotificationsUpdateAccess
+  delete: ProductNotificationsDeleteAccess
+}
+
+type ProductNotificationsFields {
+  productID: ProductNotificationsFields_productID
+  email: ProductNotificationsFields_email
+  notified: ProductNotificationsFields_notified
+  updatedAt: ProductNotificationsFields_updatedAt
+  createdAt: ProductNotificationsFields_createdAt
+}
+
+type ProductNotificationsFields_productID {
+  create: ProductNotificationsFields_productID_Create
+  read: ProductNotificationsFields_productID_Read
+  update: ProductNotificationsFields_productID_Update
+  delete: ProductNotificationsFields_productID_Delete
+}
+
+type ProductNotificationsFields_productID_Create {
+  permission: Boolean!
+}
+
+type ProductNotificationsFields_productID_Read {
+  permission: Boolean!
+}
+
+type ProductNotificationsFields_productID_Update {
+  permission: Boolean!
+}
+
+type ProductNotificationsFields_productID_Delete {
+  permission: Boolean!
+}
+
+type ProductNotificationsFields_email {
+  create: ProductNotificationsFields_email_Create
+  read: ProductNotificationsFields_email_Read
+  update: ProductNotificationsFields_email_Update
+  delete: ProductNotificationsFields_email_Delete
+}
+
+type ProductNotificationsFields_email_Create {
+  permission: Boolean!
+}
+
+type ProductNotificationsFields_email_Read {
+  permission: Boolean!
+}
+
+type ProductNotificationsFields_email_Update {
+  permission: Boolean!
+}
+
+type ProductNotificationsFields_email_Delete {
+  permission: Boolean!
+}
+
+type ProductNotificationsFields_notified {
+  create: ProductNotificationsFields_notified_Create
+  read: ProductNotificationsFields_notified_Read
+  update: ProductNotificationsFields_notified_Update
+  delete: ProductNotificationsFields_notified_Delete
+}
+
+type ProductNotificationsFields_notified_Create {
+  permission: Boolean!
+}
+
+type ProductNotificationsFields_notified_Read {
+  permission: Boolean!
+}
+
+type ProductNotificationsFields_notified_Update {
+  permission: Boolean!
+}
+
+type ProductNotificationsFields_notified_Delete {
+  permission: Boolean!
+}
+
+type ProductNotificationsFields_updatedAt {
+  create: ProductNotificationsFields_updatedAt_Create
+  read: ProductNotificationsFields_updatedAt_Read
+  update: ProductNotificationsFields_updatedAt_Update
+  delete: ProductNotificationsFields_updatedAt_Delete
+}
+
+type ProductNotificationsFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type ProductNotificationsFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type ProductNotificationsFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type ProductNotificationsFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type ProductNotificationsFields_createdAt {
+  create: ProductNotificationsFields_createdAt_Create
+  read: ProductNotificationsFields_createdAt_Read
+  update: ProductNotificationsFields_createdAt_Update
+  delete: ProductNotificationsFields_createdAt_Delete
+}
+
+type ProductNotificationsFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type ProductNotificationsFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type ProductNotificationsFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type ProductNotificationsFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type ProductNotificationsCreateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type ProductNotificationsReadAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type ProductNotificationsUpdateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type ProductNotificationsDeleteAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
 type redirectsAccess {
   fields: RedirectsFields
   create: RedirectsCreateAccess
@@ -12442,6 +12862,9 @@ type Mutation {
   forgotPasswordUser(disableEmail: Boolean, email: String!, expiration: Int): Boolean!
   resetPasswordUser(password: String, token: String): usersResetPassword
   verifyEmailUser(token: String): Boolean
+  createProductNotification(data: mutationProductNotificationInput!, draft: Boolean): ProductNotification
+  updateProductNotification(id: String!, autosave: Boolean, data: mutationProductNotificationUpdateInput!, draft: Boolean): ProductNotification
+  deleteProductNotification(id: String!): ProductNotification
   createRedirect(data: mutationRedirectInput!, draft: Boolean): Redirect
   updateRedirect(id: String!, autosave: Boolean, data: mutationRedirectUpdateInput!, draft: Boolean): Redirect
   deleteRedirect(id: String!): Redirect
@@ -12837,6 +13260,22 @@ type usersLoginResult {
 type usersResetPassword {
   token: String
   user: User
+}
+
+input mutationProductNotificationInput {
+  productID: String
+  email: String
+  notified: Boolean
+  updatedAt: String
+  createdAt: String
+}
+
+input mutationProductNotificationUpdateInput {
+  productID: String
+  email: String
+  notified: Boolean
+  updatedAt: String
+  createdAt: String
 }
 
 input mutationRedirectInput {

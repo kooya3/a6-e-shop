@@ -4,6 +4,7 @@ import { Category, Product } from '../../../payload/payload-types'
 import { AddToCartButton } from '../../_components/AddToCartButton'
 import { Gutter } from '../../_components/Gutter'
 import { Media } from '../../_components/Media'
+import { NotifyMeButton } from '../../_components/NotifyMeButton'
 import { Price } from '../../_components/Price'
 
 import classes from './index.module.scss'
@@ -11,9 +12,7 @@ import classes from './index.module.scss'
 export const ProductHero: React.FC<{
   product: Product
 }> = ({ product }) => {
-  const { title, categories, meta: { image: metaImage, description } = {} } = product
-
-  const inventory = 5
+  const { title, categories, inventory, meta: { image: metaImage, description } = {} } = product
 
   return (
     <Gutter className={classes.productHero}>
@@ -61,7 +60,13 @@ export const ProductHero: React.FC<{
           <p>{description}</p>
         </div>
 
-        <AddToCartButton product={product} className={classes.addToCartButton} />
+        {(() => {
+          if (inventory > 0) {
+            return <AddToCartButton product={product} className={classes.addToCartButton} />
+          } else {
+            return <NotifyMeButton product={product} />
+          }
+        })()}
       </div>
     </Gutter>
   )
