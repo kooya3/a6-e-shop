@@ -21,7 +21,7 @@ export default async function Login() {
           <RenderParams className={classes.params} />
 
           <div className={classes.formTitle}>
-            <h3>Sign In</h3>
+            <h3>Log In</h3>
           </div>
 
           <LoginForm />

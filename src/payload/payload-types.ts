@@ -419,10 +419,11 @@ export interface User {
   name?: string | null;
   roles?: ('admin' | 'customer')[] | null;
   purchases?: (string | Product)[] | null;
-  stripeCustomerID?: string | null;
   bcCustomerID?: string | null;
   cart?: {
     items?: CartItems;
+    createdOn?: string | null;
+    lastModified?: string | null;
   };
   skipSync?: boolean | null;
   updatedAt: string;
