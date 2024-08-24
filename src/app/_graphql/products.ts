@@ -18,7 +18,7 @@ export const PRODUCT = `
       docs {
         id
         title
-        stripeProductID
+        bcProductID
         ${PRODUCT_CATEGORIES}
         layout {
           ${CALL_TO_ACTION}
@@ -26,7 +26,8 @@ export const PRODUCT = `
           ${MEDIA_BLOCK}
           ${ARCHIVE_BLOCK}
         }
-        priceJSON
+        unitPrice
+        inventory
         enablePaywall
         relatedProducts {
           id

@@ -13,6 +13,8 @@ export const ProductHero: React.FC<{
 }> = ({ product }) => {
   const { title, categories, meta: { image: metaImage, description } = {} } = product
 
+  const inventory = 5
+
   return (
     <Gutter className={classes.productHero}>
       <div className={classes.mediaWrapper}>
@@ -21,7 +23,6 @@ export const ProductHero: React.FC<{
           <Media imgClassName={classes.image} resource={metaImage} fill />
         )}
       </div>
-
 
       <div className={classes.details}>
         <h3 className={classes.title}>{title}</h3>
@@ -42,7 +43,15 @@ export const ProductHero: React.FC<{
               )
             })}
           </div>
-          <p className={classes.stock}> In stock</p> {/* // Make as switch to flip between the in stock and out of stock status */}
+          {(() => {
+            if (inventory <= 0) {
+              return <p className={classes.outOfStock}>Out of Stock</p>
+            } else if (inventory > 5) {
+              return <p className={classes.stock}>In Stock</p>
+            } else {
+              return <p className={classes.outOfStock}>Only {inventory} Left</p>
+            }
+          })()}
         </div>
 
         <Price product={product} button={false} />
