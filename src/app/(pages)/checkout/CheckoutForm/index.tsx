@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import { Order } from '../../../../payload/payload-types'
 import { Button } from '../../../_components/Button'
 import { Message } from '../../../_components/Message'
-import { priceFromJSON } from '../../../_components/Price'
+import { calculatePrice } from '../../../_components/Price'
 import { useCart } from '../../../_providers/Cart'
 
 import classes from './index.module.scss'
@@ -36,34 +36,33 @@ export const CheckoutForm: React.FC<{}> = () => {
             quantity,
           })),
         }),
-      });
+      })
 
       if (!orderReq.ok) {
-        throw new Error('Failed to create order');
+        throw new Error('Failed to create order')
       }
 
-      const order = await orderReq.json();
+      const order = await orderReq.json()
 
       // Redirect to Paystack payment page
-      window.location.href = 'https://paystack.com/pay/dnshirtliff';
+      window.location.href = 'https://paystack.com/pay/dnshirtliff'
 
       // Listen for payment success callback
-      window.addEventListener('message', async (event) => {
-        if (event.origin !== 'https://paystack.com/pay/dnshirtliff') return;
+      window.addEventListener('message', async event => {
+        if (event.origin !== 'https://paystack.com/pay/dnshirtliff') return
 
         if (event.data.status === 'success') {
           // Clear the cart after order creation
 
           // Redirect to order confirmation page with the order ID
-          router.push(`/order-confirmation?orderId=${order.id}`);
+          router.push(`/order-confirmation?orderId=${order.id}`)
         }
-      });
+      })
     } catch (error) {
-      console.error('Error handling Paystack payment:', error);
-      setError('Payment failed. Please try again.');
+      console.error('Error handling Paystack payment:', error)
+      setError('Payment failed. Please try again.')
     }
-  }, [cart, cartTotal, router]);
-
+  }, [cart, cartTotal, router])
 
   const handleSubmit = useCallback(
     async e => {
@@ -104,7 +103,7 @@ export const CheckoutForm: React.FC<{}> = () => {
                   quantity,
                   price:
                     typeof product === 'object'
-                      ? priceFromJSON(product.priceJSON, 1, true)
+                      ? calculatePrice(product.unitPrice, 1, true)
                       : undefined,
                 })),
               }),
@@ -152,7 +151,12 @@ export const CheckoutForm: React.FC<{}> = () => {
           appearance="primary"
           disabled={!stripe || isLoading}
         />
-        <Button label="Pay with Mpesa" className={classes.button} onClick={handlePaystackPayment} appearance="primary" />
+        <Button
+          label="Pay with Mpesa"
+          className={classes.button}
+          onClick={handlePaystackPayment}
+          appearance="primary"
+        />
       </div>
     </form>
   )

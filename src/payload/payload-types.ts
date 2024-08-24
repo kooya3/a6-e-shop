@@ -22,6 +22,7 @@ export interface Config {
     media: Media;
     categories: Category;
     users: User;
+    productNotifications: ProductNotification;
     redirects: Redirect;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -436,6 +437,14 @@ export interface User {
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password: string | null;
+}
+export interface ProductNotification {
+  id: string;
+  productID: string | Product;
+  email?: string | null;
+  notified?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
 }
 export interface Redirect {
   id: string;

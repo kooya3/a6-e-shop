@@ -21,7 +21,7 @@ const FilterContext = createContext<IContextType>(INITIAL_FILTER_DATA)
 
 export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
   const [categoryFilters, setCategoryFilters] = useState([])
-  const [sort, setSort] = useState('-createdAt')
+  const [sort, setSort] = useState('-unitPrice')
 
   return (
     <FilterContext.Provider

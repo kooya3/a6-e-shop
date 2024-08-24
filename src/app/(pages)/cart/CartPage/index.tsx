@@ -43,13 +43,13 @@ export const CartPage: React.FC<{
                 <Fragment>
                   {' '}
                   <Link href={`/${productsPage.slug}`}>Click here</Link>
-                  {` to shop.`}
+                  {` to start shopping, or `}
                 </Fragment>
               )}
               {!user && (
                 <Fragment>
                   {' '}
-                  <Link href={`/login?redirect=%2Fcart`}>Log in</Link>
+                  <Link href={`/login?redirect=%2Fcart`}>log in</Link>
                   {` to view a saved cart.`}
                 </Fragment>
               )}
@@ -103,7 +103,8 @@ export const CartPage: React.FC<{
 
                 <div className={classes.row}>
                   <p className={classes.cartTotal}>Delivery Charge</p>
-                  <p className={classes.cartTotal}>{currency}</p>  {/* // Implement the functionality to calculate the delivery charge and display it here */}
+                  <p className={classes.cartTotal}>{currency}</p>{' '}
+                  {/* // Implement the functionality to calculate the delivery charge and display it here */}
                 </div>
 
                 <div className={classes.row}>
