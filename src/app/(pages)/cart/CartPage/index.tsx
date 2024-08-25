@@ -98,7 +98,7 @@ export const CartPage: React.FC<{
                     <dl className="-my-4 divide-y divide-gray-200 text-sm">
                       <div className="flex items-center justify-between py-4">
                         <dt className="text-gray-600">Subtotal</dt>
-                        <dd className="font-medium text-gray-900">{classes.cartTotal}</dd>
+                        <dd className="font-medium text-gray-900">{cartTotal.formatted}</dd>
                       </div>
                       <div className="flex items-center justify-between py-4">
                         <dt className="text-gray-600">Shipping</dt>
