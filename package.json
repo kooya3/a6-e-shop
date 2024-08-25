@@ -33,6 +33,7 @@
     "@payloadcms/plugin-cloud": "^3.0.1",
     "@payloadcms/plugin-nested-docs": "^1.0.8",
     "@payloadcms/plugin-redirects": "^1.0.0",
+    "@payloadcms/plugin-search": "^1.1.1",
     "@payloadcms/plugin-sentry": "^0.0.6",
     "@payloadcms/plugin-seo": "^1.0.10",
     "@payloadcms/plugin-stripe": "^0.0.19",

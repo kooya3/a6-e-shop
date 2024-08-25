@@ -1600,6 +1600,13 @@
   resolved "https://registry.npmjs.org/@payloadcms/plugin-redirects/-/plugin-redirects-1.0.1.tgz"
   integrity sha512-07EbEm6x7s8Nnzi0U+5/7wbqMdZHIGZh4AxKPAILtY/ohqbQ+vxJa4S0f5Xe7hRvc9hLm4Kp9zrC6zvbRvUvSA==
 
+"@payloadcms/plugin-search@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@payloadcms/plugin-search/-/plugin-search-1.1.1.tgz#97b71c5cca088111e1b2eba701bbc5123d2f425f"
+  integrity sha512-0pPDsFWC/YanBtqbgNhZG6AdG0PQHGaJrUJDcgPIuhkLwI7qEhQRILFR29KmjJ6vlSEpm24yKaKAA7OSYm1KVA==
+  dependencies:
+    ts-deepmerge "^2.0.1"
+
 "@payloadcms/plugin-sentry@^0.0.6":
   version "0.0.6"
   resolved "https://registry.npmjs.org/@payloadcms/plugin-sentry/-/plugin-sentry-0.0.6.tgz"
@@ -9232,6 +9239,11 @@ truncate-utf8-bytes@^1.0.0:
   integrity sha512-95Pu1QXQvruGEhv62XCMO3Mm90GscOCClvrIUwCM0PYOXK3kaF3l3sIHxx71ThJfcbM2O5Au6SO3AWCSEfW4mQ==
   dependencies:
     utf8-byte-length "^1.0.1"
+
+ts-deepmerge@^2.0.1:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/ts-deepmerge/-/ts-deepmerge-2.0.7.tgz#36786a9a10b5f3a6f5154007cf17bfba7251e0a7"
+  integrity sha512-3phiGcxPSSR47RBubQxPoZ+pqXsEsozLo4G4AlSrsMKTFg9TA3l+3he5BqpUi9wiuDbaHWXH/amlzQ49uEdXtg==
 
 ts-essentials@7.0.3:
   version "7.0.3"

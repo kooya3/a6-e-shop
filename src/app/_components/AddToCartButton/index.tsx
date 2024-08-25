@@ -70,8 +70,8 @@ export const AddToCartButton: React.FC<{
                 Added to your cart <CloseButton>X</CloseButton>
               </DialogTitle>
 
-              <div className="grid grid-cols-2">
-                <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-3 py-6">
+                <div className="col-span-2 grid grid-cols-2 gap-4">
                   <div className="w-28 h-28">
                     {!metaImage && <div>No image</div>}
                     {metaImage && typeof metaImage !== 'string' && (
