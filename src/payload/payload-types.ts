@@ -24,6 +24,7 @@ export interface Config {
     users: User;
     productNotifications: ProductNotification;
     redirects: Redirect;
+    search: Search;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -462,6 +463,17 @@ export interface Redirect {
           value: string | Product;
         } | null);
     url?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+export interface Search {
+  id: string;
+  title?: string | null;
+  priority?: number | null;
+  doc: {
+    relationTo: 'products';
+    value: string | Product;
   };
   updatedAt: string;
   createdAt: string;

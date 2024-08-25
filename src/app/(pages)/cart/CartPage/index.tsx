@@ -3,13 +3,9 @@
 import React, { Fragment } from 'react'
 import Link from 'next/link'
 
-import { Page, Settings } from '../../../../payload/payload-types'
+import { Settings } from '../../../../payload/payload-types'
 import { Button } from '../../../_components/Button'
-import { HR } from '../../../_components/HR'
 import { LoadingShimmer } from '../../../_components/LoadingShimmer'
-import { Media } from '../../../_components/Media'
-import { Price } from '../../../_components/Price'
-import { RemoveFromCartButton } from '../../../_components/RemoveFromCartButton'
 import { useAuth } from '../../../_providers/Auth'
 import { useCart } from '../../../_providers/Cart'
 import CartItem from '../CartItem'
@@ -18,7 +14,6 @@ import classes from './index.module.scss'
 
 export const CartPage: React.FC<{
   settings: Settings
-  page: Page
 }> = props => {
   const { settings } = props
   const { productsPage } = settings || {}
@@ -57,16 +52,6 @@ export const CartPage: React.FC<{
           ) : (
             <div className={classes.cartWrapper}>
               <div>
-                {/* CART LIST HEADER */}
-                <div className={classes.header}>
-                  <p>Products</p>
-                  <div className={classes.headerItemDetails}>
-                    <p></p>
-                    <p></p>
-                    <p>Quantity</p>
-                  </div>
-                  <p className={classes.headersubtotal}>Subtotal</p>
-                </div>
                 {/* CART ITEM LIST */}
                 <ul className={classes.itemsList}>
                   {cart?.items?.map((item, index) => {
@@ -82,13 +67,22 @@ export const CartPage: React.FC<{
                       const metaImage = meta?.image
 
                       return (
-                        <CartItem
-                          product={product}
-                          title={title}
-                          metaImage={metaImage}
-                          qty={quantity}
-                          addItemToCart={addItemToCart}
-                        />
+                        <div
+                          key={item.product.id}
+                          className={
+                            isLast
+                              ? ''
+                              : 'border-b-[1px] border-b-gray-300 border-solid border-t-0 border-x-0'
+                          }
+                        >
+                          <CartItem
+                            product={product}
+                            title={title}
+                            metaImage={metaImage}
+                            qty={quantity}
+                            addItemToCart={addItemToCart}
+                          />
+                        </div>
                       )
                     }
                     return null
@@ -96,28 +90,46 @@ export const CartPage: React.FC<{
                 </ul>
               </div>
 
-              <div className={classes.summary}>
-                <div className={classes.row}>
-                  <h6 className={classes.cartTotal}>Summary</h6>
+              <div className="mt-10">
+                <div className="rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:p-8">
+                  <h2 className="sr-only">Order summary</h2>
+
+                  <div className="flow-root">
+                    <dl className="-my-4 divide-y divide-gray-200 text-sm">
+                      <div className="flex items-center justify-between py-4">
+                        <dt className="text-gray-600">Subtotal</dt>
+                        <dd className="font-medium text-gray-900">{cartTotal.formatted}</dd>
+                      </div>
+                      <div className="flex items-center justify-between py-4">
+                        <dt className="text-gray-600">Shipping</dt>
+                        <dd className="font-medium text-gray-900">250.00</dd>
+                      </div>
+                      <div className="flex items-center justify-between py-4">
+                        <dt className="text-gray-600">Tax</dt>
+                        <dd className="font-medium text-gray-900">120.32</dd>
+                      </div>
+                      <div className="flex items-center justify-between py-4">
+                        <dt className="text-base font-medium text-gray-900">Order total</dt>
+                        <dd className="text-base font-medium text-gray-900">
+                          {cartTotal.formatted}
+                        </dd>
+                      </div>
+                    </dl>
+                  </div>
                 </div>
 
-                <div className={classes.row}>
-                  <p className={classes.cartTotal}>Delivery Charge</p>
-                  <p className={classes.cartTotal}>{currency}</p>{' '}
-                  {/* // Implement the functionality to calculate the delivery charge and display it here */}
+                <div className="mt-10 flex">
+                  <Button
+                    className="flex-grow"
+                    href={user ? '/checkout' : '/login?redirect=%2Fcheckout'}
+                    label={user ? 'Checkout' : 'Login to checkout'}
+                    appearance="primary"
+                  />
                 </div>
 
-                <div className={classes.row}>
-                  <p className={classes.cartTotal}>Grand Total</p>
-                  <p className={classes.cartTotal}>{cartTotal.formatted}</p>
+                <div className="mt-6 text-center text-sm text-gray-500">
+                  <Link href="/shop">Or Continue Shopping</Link>
                 </div>
-
-                <Button
-                  className={classes.checkoutButton}
-                  href={user ? '/checkout' : '/login?redirect=%2Fcheckout'}
-                  label={user ? 'Checkout' : 'Login to checkout'}
-                  appearance="primary"
-                />
               </div>
             </div>
           )}
