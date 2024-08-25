@@ -14,6 +14,7 @@ import classes from './index.module.scss'
 type FormData = {
   email: string
   name: string
+  phoneNumber: string
   password: string
   passwordConfirm: string
 }
@@ -59,6 +60,7 @@ const AccountForm: React.FC = () => {
           reset({
             email: json.doc.email,
             name: json.doc.name,
+            phoneNumber: json.doc.phoneNumber,
             password: '',
             passwordConfirm: '',
           })
