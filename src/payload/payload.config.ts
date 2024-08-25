@@ -3,6 +3,7 @@ import { mongooseAdapter } from '@payloadcms/db-mongodb' // database-adapter-imp
 import { payloadCloud } from '@payloadcms/plugin-cloud'
 import nestedDocs from '@payloadcms/plugin-nested-docs'
 import redirects from '@payloadcms/plugin-redirects'
+import search from '@payloadcms/plugin-search'
 import seo from '@payloadcms/plugin-seo'
 import type { GenerateTitle } from '@payloadcms/plugin-seo/types'
 import stripePlugin from '@payloadcms/plugin-stripe'
@@ -147,5 +148,11 @@ export default buildConfig({
       uploadsCollection: 'media',
     }),
     payloadCloud(),
+    search({
+      collections: ['products'],
+      defaultPriorities: {
+        pages: 20,
+      },
+    }),
   ],
 })

@@ -26,6 +26,7 @@
     "payload": "cross-env PAYLOAD_CONFIG_PATH=src/payload/payload.config.ts payload"
   },
   "dependencies": {
+    "@google-pay/button-react": "^3.1.0",
     "@headlessui/react": "^2.1.3",
     "@heroicons/react": "^2.1.5",
     "@payloadcms/bundler-webpack": "^1.0.0",
@@ -33,6 +34,7 @@
     "@payloadcms/plugin-cloud": "^3.0.1",
     "@payloadcms/plugin-nested-docs": "^1.0.8",
     "@payloadcms/plugin-redirects": "^1.0.0",
+    "@payloadcms/plugin-search": "^1.1.1",
     "@payloadcms/plugin-sentry": "^0.0.6",
     "@payloadcms/plugin-seo": "^1.0.10",
     "@payloadcms/plugin-stripe": "^0.0.19",
