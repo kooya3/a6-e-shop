@@ -86,6 +86,7 @@ const AccountForm: React.FC = () => {
       reset({
         email: user.email,
         name: user.name,
+        phoneNumber: user.bcCustomerID,
         password: '',
         passwordConfirm: '',
       })
@@ -114,6 +115,15 @@ const AccountForm: React.FC = () => {
             error={errors.name}
             pattern="[A-Za-z\s]+"
             placeholder="Enter your name"
+          />
+          <Input
+            name="phoneNumber"
+            label="Phone Number"
+            register={register}
+            error={errors.phoneNumber}
+            type="tel"
+            pattern="[0-9]{10}"
+            placeholder="Enter your phone number"
           />
 
           <p>
