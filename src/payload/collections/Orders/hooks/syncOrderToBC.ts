@@ -2,16 +2,17 @@
  * Syncs the order to the backend system after it has been changed.
  * @param context - The context object containing the document.
  */
-import { CollectionConfig } from 'payload/types';
+import axios from 'axios';
+import type { AfterChangeHook } from 'payload/dist/collections/config/types';
+import type { CollectionConfig } from 'payload/types';
+
 import { admins } from '../../../access/admins';
 import { adminsOrLoggedIn } from '../../../access/adminsOrLoggedIn';
 import { adminsOrOrderedBy } from '../access/adminsOrOrderedBy';
 import { populateOrderedBy } from '../hooks/populateOrderedBy';
 import { LinkToPaymentIntent } from '../ui/LinkToPaymentIntent';
-import { AfterChangeHook } from 'payload/dist/collections/config/types';
-import axios from 'axios';
-import { updateUserPurchases } from './updateUserPurchases';
 import { clearUserCart } from './clearUserCart';
+import { updateUserPurchases } from './updateUserPurchases';
 
 const BC_URL = 'https://bctest.dayliff.com:7048/BC160/ODataV4/Company(\'KENYA\')/Sales_Order';
 const USERNAME = process.env.BC_USERNAME;
@@ -66,7 +67,9 @@ const syncToBackendSystem: AfterChangeHook = async (context) => {
         // Handle the response from the backend system
         console.log(response.data); // Replace with your own logic
 
-    } catch (error: any) {
+    } catch (error: boolean | any ) {
+        
+    
         // Handle any errors that occur during the request
         console.error(error);
 
