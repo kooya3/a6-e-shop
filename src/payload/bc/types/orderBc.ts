@@ -31,8 +31,8 @@ export async function fetchBCItems(apiUrl: string, token: string): Promise<BCIte
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        }
+            'Content-Type': 'application/json',
+        },
     });
 
     if (!response.ok) {

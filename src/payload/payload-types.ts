@@ -403,7 +403,6 @@ export interface Product {
 export interface Order {
   id: string;
   orderedBy?: (string | null) | User;
-  syncOrdertoBC?: boolean | null;
   stripePaymentIntentID?: string | null;
   total: number;
   items?:
@@ -423,6 +422,7 @@ export interface User {
   roles?: ('admin' | 'customer')[] | null;
   purchases?: (string | Product)[] | null;
   bcCustomerID?: string | null;
+  stripeCustomerID?: string | null;
   cart?: {
     items?: CartItems;
     createdOn?: string | null;
