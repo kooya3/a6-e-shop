@@ -6,14 +6,18 @@ import { fetchDoc } from '../../_api/fetchDoc'
 import { fetchDocs } from '../../_api/fetchDocs'
 import { Blocks } from '../../_components/Blocks'
 import { Gutter } from '../../_components/Gutter'
-import { HR } from '../../_components/HR'
 import Filters from './Filters'
 import Sort from './Sort'
 
 import classes from './index.module.scss'
 
-const Products = async () => {
+type searchParams = { search?: string }
+
+const Products = async ({ search }: searchParams) => {
   const { isEnabled: isDraftMode } = draftMode()
+
+  if (search) {
+  }
 
   let page: Page | null = null
   let categories: Category[] | null = null
