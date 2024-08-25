@@ -422,7 +422,6 @@ export interface User {
   roles?: ('admin' | 'customer')[] | null;
   purchases?: (string | Product)[] | null;
   bcCustomerID?: string | null;
-  stripeCustomerID?: string | null;
   cart?: {
     items?: CartItems;
     createdOn?: string | null;
