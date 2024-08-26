@@ -10,11 +10,11 @@
   --font-body: 'Jost', sans-serif;
   --font-jost: 'Jost', sans-serif; ;
 
-  --gutter-h: 180px;
+  --gutter-h: 48px;
   --block-padding: 120px;
 
   @include large-break {
-    --gutter-h: 144px;
+    --gutter-h: 36px;
     --block-padding: 96px;
   }
 

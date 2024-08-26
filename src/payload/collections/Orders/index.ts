@@ -16,6 +16,7 @@ export const Orders: CollectionConfig = {
     preview: doc => `${process.env.PAYLOAD_PUBLIC_SERVER_URL}/orders/${doc.id}`,
   },
   hooks: {
+    beforeChange: [],
     afterChange: [updateUserPurchases, clearUserCart],
   },
   access: {

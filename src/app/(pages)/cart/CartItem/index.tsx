@@ -34,20 +34,23 @@ const CartItem = ({ product, title, metaImage, qty, addItemToCart }) => {
   }
 
   return (
-    <li className={classes.item} key={title}>
-      <Link href={`/products/${product.slug}`} className={classes.mediaWrapper}>
+    <li
+      className="grid gap-4 md:grid-cols-4 border-b-solid border-b-2 border-b-gray-400 py-6 md:py-8"
+      key={title}
+    >
+      <Link href={`/products/${product.slug}`} className="min-h-24">
         {!metaImage && <span>No image</span>}
         {metaImage && typeof metaImage !== 'string' && (
           <Media className={classes.media} imgClassName={classes.image} resource={metaImage} fill />
         )}
       </Link>
 
-      <div className={classes.itemDetails}>
-        <div className={classes.titleWrapper}>
-          <h6>{title}</h6>
-          <Price product={product} button={false} />
-        </div>
+      <div className="">
+        <h6>{title}</h6>
+        <Price product={product} button={false} />
+      </div>
 
+      <div className="flex justify-start md:justify-center items-start my-2">
         <div className={classes.quantity}>
           <div className={classes.quantityBtn} onClick={decrementQty}>
             <Image
@@ -60,6 +63,7 @@ const CartItem = ({ product, title, metaImage, qty, addItemToCart }) => {
           </div>
 
           <input
+            title="quantity"
             type="text"
             className={classes.quantityInput}
             value={quantity}
@@ -78,11 +82,10 @@ const CartItem = ({ product, title, metaImage, qty, addItemToCart }) => {
         </div>
       </div>
 
-      <div className={classes.subtotalWrapper}>
+      <div className="flex flex-row justify-between md:justify-center items-start my-2 gap-14">
         <Price product={product} button={false} quantity={quantity} />
         <RemoveFromCartButton product={product} />
       </div>
- 
     </li>
   )
 }

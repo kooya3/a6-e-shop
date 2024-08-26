@@ -22,7 +22,9 @@ export interface Config {
     media: Media;
     categories: Category;
     users: User;
+    productNotifications: ProductNotification;
     redirects: Redirect;
+    search: Search;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -419,10 +421,12 @@ export interface User {
   name?: string | null;
   roles?: ('admin' | 'customer')[] | null;
   purchases?: (string | Product)[] | null;
-  stripeCustomerID?: string | null;
   bcCustomerID?: string | null;
+  stripeCustomerID?: string | null;
   cart?: {
     items?: CartItems;
+    createdOn?: string | null;
+    lastModified?: string | null;
   };
   skipSync?: boolean | null;
   updatedAt: string;
@@ -435,6 +439,14 @@ export interface User {
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password: string | null;
+}
+export interface ProductNotification {
+  id: string;
+  productID: string | Product;
+  email?: string | null;
+  notified?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
 }
 export interface Redirect {
   id: string;
@@ -451,6 +463,17 @@ export interface Redirect {
           value: string | Product;
         } | null);
     url?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+export interface Search {
+  id: string;
+  title?: string | null;
+  priority?: number | null;
+  doc: {
+    relationTo: 'products';
+    value: string | Product;
   };
   updatedAt: string;
   createdAt: string;

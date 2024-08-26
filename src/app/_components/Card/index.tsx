@@ -9,24 +9,15 @@ import { Price } from '../Price'
 
 import classes from './index.module.scss'
 
-const priceFromJSON = (priceJSON): string => {
+const getPrice = (unitPrice): string => {
   let price = ''
 
-  if (priceJSON) {
+  if (unitPrice) {
     try {
-      const parsed = JSON.parse(priceJSON)?.data[0]
-      const priceValue = parsed.unit_amount
-      const priceType = parsed.type
-      price = `${parsed.currency === 'usd' ? '$' : ''}${(priceValue / 100).toFixed(2)}`
-      if (priceType === 'recurring') {
-        price += `/${
-          parsed.recurring.interval_count > 1
-            ? `${parsed.recurring.interval_count} ${parsed.recurring.interval}`
-            : parsed.recurring.interval
-        }`
-      }
+      const priceValue = unitPrice
+      price = `${(priceValue / 100).toFixed(2)}`
     } catch (e) {
-      console.error(`Cannot parse priceJSON`) // eslint-disable-line no-console
+      console.error(`Cannot get price`) // eslint-disable-line no-console
     }
   }
 
@@ -46,7 +37,7 @@ export const Card: React.FC<{
     showCategories,
     title: titleFromProps,
     doc,
-    doc: { slug, title, categories, meta, priceJSON } = {},
+    doc: { slug, title, categories, meta, unitPrice } = {},
     className,
   } = props
 
@@ -60,11 +51,11 @@ export const Card: React.FC<{
   const [
     price, // eslint-disable-line no-unused-vars
     setPrice,
-  ] = useState(() => priceFromJSON(priceJSON))
+  ] = useState(() => getPrice(unitPrice))
 
   useEffect(() => {
-    setPrice(priceFromJSON(priceJSON))
-  }, [priceJSON])
+    setPrice(getPrice(unitPrice))
+  }, [unitPrice])
 
   return (
     <Link href={href} className={[classes.card, className].filter(Boolean).join(' ')}>

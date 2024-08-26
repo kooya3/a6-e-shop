@@ -4,6 +4,7 @@ import { Category, Product } from '../../../payload/payload-types'
 import { AddToCartButton } from '../../_components/AddToCartButton'
 import { Gutter } from '../../_components/Gutter'
 import { Media } from '../../_components/Media'
+import { NotifyMeButton } from '../../_components/NotifyMeButton'
 import { Price } from '../../_components/Price'
 
 import classes from './index.module.scss'
@@ -11,7 +12,7 @@ import classes from './index.module.scss'
 export const ProductHero: React.FC<{
   product: Product
 }> = ({ product }) => {
-  const { title, categories, meta: { image: metaImage, description } = {} } = product
+  const { title, categories, inventory, meta: { image: metaImage, description } = {} } = product
 
   return (
     <Gutter className={classes.productHero}>
@@ -21,7 +22,6 @@ export const ProductHero: React.FC<{
           <Media imgClassName={classes.image} resource={metaImage} fill />
         )}
       </div>
-
 
       <div className={classes.details}>
         <h3 className={classes.title}>{title}</h3>
@@ -42,7 +42,15 @@ export const ProductHero: React.FC<{
               )
             })}
           </div>
-          <p className={classes.stock}> In stock</p> {/* // Make as switch to flip between the in stock and out of stock status */}
+          {(() => {
+            if (inventory <= 0) {
+              return <p className={classes.outOfStock}>Out of Stock</p>
+            } else if (inventory > 5) {
+              return <p className={classes.stock}>In Stock</p>
+            } else {
+              return <p className={classes.outOfStock}>Only {inventory} Left</p>
+            }
+          })()}
         </div>
 
         <Price product={product} button={false} />
@@ -52,7 +60,13 @@ export const ProductHero: React.FC<{
           <p>{description}</p>
         </div>
 
-        <AddToCartButton product={product} className={classes.addToCartButton} />
+        {(() => {
+          if (inventory > 0) {
+            return <AddToCartButton product={product} className={classes.addToCartButton} />
+          } else {
+            return <NotifyMeButton product={product} />
+          }
+        })()}
       </div>
     </Gutter>
   )

@@ -3,19 +3,15 @@
 import React, { useEffect, useState } from 'react'
 
 import { Product } from '../../../payload/payload-types'
-import { AddToCartButton } from '../AddToCartButton'
-import { RemoveFromCartButton } from '../RemoveFromCartButton'
 
 import classes from './index.module.scss'
 
-export const priceFromJSON = (priceJSON: string, quantity: number = 1, raw?: boolean): string => {
+export const calculatePrice = (unitPrice: number, quantity: number = 1, raw?: boolean): string => {
   let price = ''
 
-  if (priceJSON) {
+  if (unitPrice) {
     try {
-      const parsed = JSON.parse(priceJSON)?.data[0]
-      const priceValue = parsed.unit_amount * quantity
-      const priceType = parsed.type
+      const priceValue = unitPrice * quantity
 
       if (raw) return priceValue.toString()
 
@@ -23,16 +19,8 @@ export const priceFromJSON = (priceJSON: string, quantity: number = 1, raw?: boo
         style: 'currency',
         currency: 'KES', // TODO: use `parsed.currency`
       })
-
-      if (priceType === 'recurring') {
-        price += `/${
-          parsed.recurring.interval_count > 1
-            ? `${parsed.recurring.interval_count} ${parsed.recurring.interval}`
-            : parsed.recurring.interval
-        }`
-      }
     } catch (e) {
-      console.error(`Cannot parse priceJSON`) // eslint-disable-line no-console
+      console.error(`Cannot calculat price`) // eslint-disable-line no-console
     }
   }
 
@@ -44,22 +32,22 @@ export const Price: React.FC<{
   quantity?: number
   button?: 'addToCart' | 'removeFromCart' | false
 }> = props => {
-  const { product, product: { priceJSON } = {}, button = 'addToCart', quantity } = props
+  const { product: { unitPrice } = {}, button = 'addToCart', quantity } = props
 
   const [price, setPrice] = useState<{
     actualPrice: string
     withQuantity: string
   }>(() => ({
-    actualPrice: priceFromJSON(priceJSON),
-    withQuantity: priceFromJSON(priceJSON, quantity),
+    actualPrice: calculatePrice(unitPrice),
+    withQuantity: calculatePrice(unitPrice, quantity),
   }))
 
   useEffect(() => {
     setPrice({
-      actualPrice: priceFromJSON(priceJSON),
-      withQuantity: priceFromJSON(priceJSON, quantity),
+      actualPrice: calculatePrice(unitPrice),
+      withQuantity: calculatePrice(unitPrice, quantity),
     })
-  }, [priceJSON, quantity])
+  }, [unitPrice, quantity])
 
   return (
     <div className={classes.actions}>
