@@ -1,25 +1,39 @@
 'use client'
 
-import React, { Fragment, useEffect } from 'react'
-import { Elements } from '@stripe/react-stripe-js'
-import { loadStripe } from '@stripe/stripe-js'
+import React, { Fragment, useCallback, useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import GooglePayButton from '@google-pay/button-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { v4 as uuidv4 } from 'uuid'
 
-import { Settings } from '../../../../payload/payload-types'
+import { createPayloadOrder } from '../../../../payload/collections/Orders/utils/create-order'
+import { Order, Settings } from '../../../../payload/payload-types'
+import { submitOrderRequest } from '../../../../payload/pesapal/endpoints/submitOrderRequest'
 import { Button } from '../../../_components/Button'
+import { Input } from '../../../_components/Input'
 import { LoadingShimmer } from '../../../_components/LoadingShimmer'
+import { calculatePrice } from '../../../_components/Price'
 import { useAuth } from '../../../_providers/Auth'
 import { useCart } from '../../../_providers/Cart'
-import { useTheme } from '../../../_providers/Theme'
-import cssVariables from '../../../cssVariables'
-import { CheckoutForm } from '../CheckoutForm'
 import { CheckoutItem } from '../CheckoutItem'
 
 import classes from './index.module.scss'
 
-const apiKey = `${process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}`
-const stripe = loadStripe(apiKey)
+type FormData = {
+  toShipName: string
+  toShipCompany: string
+  toShipAddress: string
+  toShipApartment: string
+  toShipcity: string
+  toShipCountry: string
+  toShipPhone: string
+  toBillName: string
+  toBillPhone: string
+}
+
+const CALLBACK_URL = process.env.NEXT_PUBLIC_SERVER_URL
+const PESAPAL_NOTIFICATION_ID = process.env.NEXT_PUBLIC_PESAPAL_NOTIFICATION_ID
 
 export const CheckoutPage: React.FC<{
   settings: Settings
@@ -31,11 +45,103 @@ export const CheckoutPage: React.FC<{
   const { user } = useAuth()
   const router = useRouter()
   const [error, setError] = React.useState<string | null>(null)
-  const [clientSecret, setClientSecret] = React.useState()
-  const hasMadePaymentIntent = React.useRef(false)
-  const { theme } = useTheme()
+  const [hideBilling, setHideBilling] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   const { cart, cartIsEmpty, cartTotal } = useCart()
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    setValue,
+  } = useForm<FormData>()
+
+  const onSubmit = useCallback(
+    async (data: FormData) => {
+      setLoading(true)
+      const orderReference = uuidv4()
+      const currency = 'KES'
+      const paymentMethod = 'pesapal'
+
+      const payload = {
+        id: orderReference,
+        currency: currency,
+        amount: cartTotal?.raw,
+        description: `Order for ${user?.name}`,
+        callback_url: `${CALLBACK_URL}/order-confirmation`,
+        notification_id: PESAPAL_NOTIFICATION_ID,
+        billing_address: {
+          name: data.toBillName,
+          phone_number: data.toBillPhone,
+        },
+      }
+
+      const response = await submitOrderRequest(payload)
+
+      if (response.status === '200') {
+        const { redirect_url, order_tracking_id } = response
+        const pesaPalDetails = {
+          orderTrackingId: order_tracking_id,
+        }
+
+        try {
+          console.log('trying to create')
+          const orderReq = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/orders`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              orderReference,
+              currency,
+              paymentMethod,
+              pesapalDetails: {
+                OrderTrackingId: pesaPalDetails,
+              },
+              googlePayDetails: {},
+              total: cartTotal.raw,
+              items: (cart?.items || [])?.map(({ product, quantity }) => ({
+                product: typeof product === 'string' ? product : product.id,
+                quantity,
+                price:
+                  typeof product === 'object'
+                    ? calculatePrice(product.unitPrice, 1, true)
+                    : undefined,
+              })),
+            }),
+          })
+
+          console.log('sent request')
+
+          if (!orderReq.ok) throw new Error(orderReq.statusText || 'Something went wrong.')
+        } catch (err: unknown) {
+          setLoading(false)
+          setError(`We could'nt create your order`)
+          throw new Error(`We couldn't create your order`)
+        }
+
+        window.location.href = redirect_url
+      } else {
+        setLoading(false)
+      }
+    },
+    [cart, cartTotal, user?.name],
+  )
+
+  const handleToggleBilling = () => {
+    setHideBilling(!hideBilling)
+
+    if (hideBilling) {
+      setValue('toBillName', watch('toShipName'))
+      setValue('toBillPhone', watch('toShipPhone'))
+    } else {
+      setValue('toBillName', '')
+      setValue('toBillPhone', '')
+    }
+  }
 
   useEffect(() => {
     if (user !== null && cartIsEmpty) {
@@ -43,38 +149,7 @@ export const CheckoutPage: React.FC<{
     }
   }, [router, user, cartIsEmpty])
 
-  useEffect(() => {
-    if (user && cart && hasMadePaymentIntent.current === false) {
-      hasMadePaymentIntent.current = true
-
-      const makeIntent = async () => {
-        try {
-          const paymentReq = await fetch(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/api/create-payment-intent`,
-            {
-              method: 'POST',
-              credentials: 'include',
-            },
-          )
-
-          const res = await paymentReq.json()
-
-          if (res.error) {
-            setError(res.error)
-          } else if (res.client_secret) {
-            setError(null)
-            setClientSecret(res.client_secret)
-          }
-        } catch (e) {
-          setError('Something went wrong.')
-        }
-      }
-
-      makeIntent()
-    }
-  }, [cart, user])
-
-  if (!user || !stripe) return null
+  if (!user) return null
 
   return (
     <Fragment>
@@ -92,94 +167,240 @@ export const CheckoutPage: React.FC<{
         </div>
       )}
       {!cartIsEmpty && (
-        <div className={classes.items}>
-          <div className={classes.header}>
-            <p>Products</p>
-            <div className={classes.headerItemDetails}>
-              <p></p>
-              <p className={classes.quantity}>Quantity</p>
-            </div>
-            <p className={classes.subtotal}>Subtotal</p>
-          </div>
+        <main className="">
+          <h1 className="sr-only">Checkout</h1>
 
-          <ul>
-            {cart?.items?.map((item, index) => {
-              if (typeof item.product === 'object') {
-                const {
-                  quantity,
-                  product,
-                  product: { title, meta },
-                } = item
+          <div className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-2">
+            <div className="w-full max-w-lg">
+              <div className="flex w-full">
+                <GooglePayButton
+                  className="block flex-grow"
+                  buttonSizeMode="fill"
+                  environment="TEST"
+                  paymentRequest={{
+                    apiVersion: 2,
+                    apiVersionMinor: 0,
+                    allowedPaymentMethods: [
+                      {
+                        type: 'CARD',
+                        parameters: {
+                          allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+                          allowedCardNetworks: ['MASTERCARD', 'VISA'],
+                        },
+                        tokenizationSpecification: {
+                          type: 'PAYMENT_GATEWAY',
+                          parameters: {
+                            gateway: 'example',
+                            gatewayMerchantId: 'exampleGatewayMerchantId',
+                          },
+                        },
+                      },
+                    ],
+                    merchantInfo: {
+                      merchantId: '12345678901234567890',
+                      merchantName: 'Demo Merchant',
+                    },
+                    transactionInfo: {
+                      totalPriceStatus: 'FINAL',
+                      totalPriceLabel: 'Total',
+                      totalPrice: '100.00',
+                      currencyCode: 'USD',
+                      countryCode: 'US',
+                    },
+                  }}
+                  onLoadPaymentData={paymentRequest => {
+                    console.log('load payment data', paymentRequest)
+                  }}
+                />
+              </div>
 
-                if (!quantity) return null
+              <div className="relative mt-8">
+                <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                  <div className="w-full border-t border-gray-200" />
+                </div>
+                <div className="relative flex justify-center">
+                  <span className="bg-white px-4 text-sm font-medium text-gray-500">or</span>
+                </div>
+              </div>
 
-                const metaImage = meta?.image
+              <form className="mt-6 flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+                <h2 className="text-lg font-medium text-gray-900">Shipping information</h2>
 
-                return (
-                  <Fragment key={index}>
-                    <CheckoutItem
-                      product={product}
-                      title={title}
-                      metaImage={metaImage}
-                      quantity={quantity}
-                      index={index}
+                <div className="flex flex-col gap-4">
+                  <Input
+                    name="toShipName"
+                    label="Name"
+                    register={register}
+                    error={errors.toShipName}
+                    pattern={''}
+                    placeholder={''}
+                    required
+                  />
+
+                  <Input
+                    name="toShipCompany"
+                    label="Company"
+                    register={register}
+                    error={errors.toShipCompany}
+                    pattern={''}
+                    placeholder={''}
+                  />
+
+                  <Input
+                    name="toShipAddress"
+                    label="Address"
+                    register={register}
+                    error={errors.toShipAddress}
+                    pattern={''}
+                    placeholder={''}
+                    required
+                  />
+
+                  <Input
+                    name="toShipApartment"
+                    label="Apartment"
+                    register={register}
+                    error={errors.toShipApartment}
+                    pattern={''}
+                    placeholder={''}
+                    required
+                  />
+
+                  <div className="flex gap-4">
+                    <Input
+                      name="toShipcity"
+                      label="City"
+                      register={register}
+                      error={errors.toShipcity}
+                      pattern={''}
+                      placeholder={''}
+                      required
                     />
-                  </Fragment>
-                )
-              }
-              return null
-            })}
-            <div className={classes.orderTotal}>
-              <p>Order Total</p>
-              <p>{cartTotal.formatted}</p>
+
+                    <Input
+                      name="toShipCountry"
+                      label="Country"
+                      register={register}
+                      error={errors.toShipCountry}
+                      pattern={''}
+                      placeholder={''}
+                      required
+                    />
+                  </div>
+
+                  <Input
+                    name="toShipPhone"
+                    label="Phone"
+                    register={register}
+                    error={errors.toShipPhone}
+                    pattern={''}
+                    placeholder={''}
+                    required
+                  />
+                </div>
+
+                <h2 className="text-lg font-medium text-gray-900">Billing information</h2>
+
+                <div>
+                  <label className={classes.checkboxWrapper}>
+                    <input
+                      type="checkbox"
+                      checked={hideBilling}
+                      onChange={handleToggleBilling}
+                      className={classes.checkbox}
+                    />
+                    Same as shipping information
+                  </label>
+                </div>
+
+                {!hideBilling && (
+                  <div className="flex flex-col gap-4">
+                    <Input
+                      name="toBillName"
+                      label="Name"
+                      register={register}
+                      error={errors.toBillName}
+                      pattern={''}
+                      placeholder={''}
+                      required
+                    />
+
+                    <Input
+                      name="toBillPhone"
+                      label="Phone"
+                      register={register}
+                      error={errors.toBillPhone}
+                      pattern={''}
+                      placeholder={''}
+                      required
+                    />
+                  </div>
+                )}
+
+                <Button
+                  type="submit"
+                  label={loading ? 'Processing' : `Pay ${cartTotal.formatted}`}
+                  disabled={loading}
+                  appearance="primary"
+                  className={classes.submit}
+                />
+              </form>
             </div>
-          </ul>
-        </div>
+
+            <div className="w-full max-w-lg">
+              <h2 className="sr-only">Order summary</h2>
+
+              <div className="flow-root">
+                <ul className="divide-y divide-gray-200">
+                  {cart?.items?.map(item => {
+                    if (typeof item.product === 'object') {
+                      const {
+                        quantity,
+                        product,
+                        product: { title, meta },
+                      } = item
+
+                      if (!quantity) return null
+
+                      const metaImage = meta?.image
+
+                      return (
+                        <CheckoutItem
+                          key={product.id}
+                          product={product}
+                          title={title}
+                          metaImage={metaImage}
+                          quantity={quantity}
+                        />
+                      )
+                    }
+                    return null
+                  })}
+                </ul>
+              </div>
+
+              <dl className="mt-10 space-y-6 text-sm font-medium text-gray-500">
+                <div className="flex justify-between">
+                  <dt>Subtotal</dt>
+                  <dd className="text-gray-900">$104.00</dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt>Taxes</dt>
+                  <dd className="text-gray-900">$8.32</dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt>Shipping</dt>
+                  <dd className="text-gray-900">$14.00</dd>
+                </div>
+                <div className="flex justify-between border-t border-gray-200 pt-6 text-gray-900">
+                  <dt className="text-base">Total</dt>
+                  <dd className="text-base">$126.32</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </main>
       )}
-      {!clientSecret && !error && (
-        <div className={classes.loading}>
-          <LoadingShimmer number={2} />
-        </div>
-      )}
-      {!clientSecret && error && (
-        <div className={classes.error}>
-          <p>{`Error: ${error}`}</p>
-          <Button label="Back to cart" href="/cart" appearance="secondary" />
-        </div>
-      )}
-      {
-        <Fragment>
-          <h3 className={classes.payment}>Payment Details</h3>
-          {error && <p>{`Error: ${error}`}</p>}
-          <Elements
-            stripe={stripe}
-            options={{
-              clientSecret,
-              appearance: {
-                theme: 'stripe',
-                variables: {
-                  colorText:
-                    theme === 'dark' ? cssVariables.colors.base0 : cssVariables.colors.base1000,
-                  fontSizeBase: '16px',
-                  fontWeightNormal: '500',
-                  fontWeightBold: '600',
-                  colorBackground:
-                    theme === 'dark' ? cssVariables.colors.base850 : cssVariables.colors.base0,
-                  fontFamily: 'Inter, sans-serif',
-                  colorTextPlaceholder: cssVariables.colors.base500,
-                  colorIcon:
-                    theme === 'dark' ? cssVariables.colors.base0 : cssVariables.colors.base1000,
-                  borderRadius: '0px',
-                  colorDanger: cssVariables.colors.error500,
-                  colorDangerText: cssVariables.colors.error500,
-                },
-              },
-            }}
-          >
-            <CheckoutForm />
-          </Elements>
-        </Fragment>
-      }
     </Fragment>
   )
 }

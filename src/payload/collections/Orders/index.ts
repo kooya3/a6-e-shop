@@ -5,19 +5,19 @@ import { adminsOrLoggedIn } from '../../access/adminsOrLoggedIn'
 import { adminsOrOrderedBy } from './access/adminsOrOrderedBy'
 import { clearUserCart } from './hooks/clearUserCart'
 import { populateOrderedBy } from './hooks/populateOrderedBy'
+import { syncOrderToBC } from './hooks/syncOrderToBC'
 import { updateUserPurchases } from './hooks/updateUserPurchases'
-import { LinkToPaymentIntent } from './ui/LinkToPaymentIntent'
 
 export const Orders: CollectionConfig = {
   slug: 'orders',
   admin: {
     useAsTitle: 'createdAt',
-    defaultColumns: ['createdAt', 'orderedBy'],
+    defaultColumns: ['createdAt', 'orderedBy', 'status'],
     preview: doc => `${process.env.PAYLOAD_PUBLIC_SERVER_URL}/orders/${doc.id}`,
   },
   hooks: {
     beforeChange: [],
-    afterChange: [updateUserPurchases, clearUserCart],
+    afterChange: [updateUserPurchases, clearUserCart, syncOrderToBC],
   },
   access: {
     read: adminsOrOrderedBy,
@@ -27,6 +27,11 @@ export const Orders: CollectionConfig = {
   },
   fields: [
     {
+      name: 'orderReference',
+      type: 'text',
+      required: true,
+    },
+    {
       name: 'orderedBy',
       type: 'relationship',
       relationTo: 'users',
@@ -35,21 +40,64 @@ export const Orders: CollectionConfig = {
       },
     },
     {
-      name: 'stripePaymentIntentID',
-      label: 'Stripe Payment Intent ID',
-      type: 'text',
-      admin: {
-        position: 'sidebar',
-        components: {
-          Field: LinkToPaymentIntent,
-        },
-      },
-    },
-    {
       name: 'total',
       type: 'number',
       required: true,
       min: 0,
+    },
+    {
+      name: 'currency',
+      type: 'select',
+      options: [
+        { label: 'KES', value: 'KES' },
+        { label: 'USD', value: 'USD' },
+      ],
+      defaultValue: 'KES',
+      required: true,
+    },
+    {
+      name: 'status',
+      type: 'select',
+      options: [
+        { label: 'Pending', value: 'pending' },
+        { label: 'Paid', value: 'paid' },
+        { label: 'Failed', value: 'failed' },
+      ],
+      defaultValue: 'pending',
+      required: true,
+    },
+    {
+      name: 'paymentMethod',
+      type: 'select',
+      options: [
+        { label: 'PesaPal', value: 'pesapal' },
+        { label: 'Google Pay', value: 'googlepay' },
+      ],
+      required: true,
+    },
+    {
+      name: 'pesapalDetails',
+      type: 'group',
+      fields: [
+        {
+          name: 'orderTrackingId',
+          type: 'text',
+        },
+      ],
+    },
+    {
+      name: 'googlePayDetails',
+      type: 'group',
+      fields: [
+        {
+          name: 'transactionId',
+          type: 'text',
+        },
+        {
+          name: 'paymentMethodToken',
+          type: 'text',
+        },
+      ],
     },
     {
       name: 'items',

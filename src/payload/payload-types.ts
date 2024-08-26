@@ -402,9 +402,19 @@ export interface Product {
 }
 export interface Order {
   id: string;
+  orderReference: string;
   orderedBy?: (string | null) | User;
-  stripePaymentIntentID?: string | null;
   total: number;
+  currency: 'KES' | 'USD';
+  status: 'pending' | 'paid' | 'failed';
+  paymentMethod: 'pesapal' | 'googlepay';
+  pesapalDetails?: {
+    orderTrackingId?: string | null;
+  };
+  googlePayDetails?: {
+    transactionId?: string | null;
+    paymentMethodToken?: string | null;
+  };
   items?:
     | {
         product: string | Product;
