@@ -27,11 +27,6 @@ export const Orders: CollectionConfig = {
   },
   fields: [
     {
-      name: 'orderReference',
-      type: 'text',
-      required: true,
-    },
-    {
       name: 'orderedBy',
       type: 'relationship',
       relationTo: 'users',
@@ -60,8 +55,10 @@ export const Orders: CollectionConfig = {
       type: 'select',
       options: [
         { label: 'Pending', value: 'pending' },
-        { label: 'Paid', value: 'paid' },
+        { label: 'Invalid', value: 'invalid' },
+        { label: 'Completed', value: 'completed' },
         { label: 'Failed', value: 'failed' },
+        { label: 'Reversed', value: 'reversed' },
       ],
       defaultValue: 'pending',
       required: true,

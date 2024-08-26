@@ -4,6 +4,7 @@ import { updateOrderPaymentStatus } from '../../collections/Orders/utils/updateO
 import { getPesapalTransactionStatus } from './getPesapalTransactionStatus';
 
 const ipn: PayloadHandler = async (req, res): Promise<void> => {
+  console.log('calling ipn')
   if (req.method === 'POST') {
     const { OrderTrackingId, OrderMerchantReference, OrderNotificationType } = req.body;
 
@@ -13,12 +14,20 @@ const ipn: PayloadHandler = async (req, res): Promise<void> => {
 
     const transactionStatus = await getPesapalTransactionStatus(OrderTrackingId)
 
-    switch (transactionStatus.description) {
-      case 'COMPLETED':
-        await updateOrderPaymentStatus(OrderMerchantReference, 'paid');
+    console.log('transaction status', transactionStatus)
+
+    switch (transactionStatus.status_code) {
+      case 0:
+        await updateOrderPaymentStatus(OrderMerchantReference, 'invalid');
         break;
-      case 'FAILED':
+      case 1:
+        await updateOrderPaymentStatus(OrderMerchantReference, 'completed');
+        break;
+      case 2:
         await updateOrderPaymentStatus(OrderMerchantReference, 'failed');
+        break;
+      case 3:
+        await updateOrderPaymentStatus(OrderMerchantReference, 'reversed');
         break;
     }
 

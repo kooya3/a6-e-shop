@@ -9,7 +9,7 @@ import classes from './index.module.scss'
 export const calculatePrice = (unitPrice: number, quantity: number = 1, raw?: boolean): string => {
   let price = ''
 
-  if (unitPrice) {
+  if (typeof unitPrice === 'number') {
     try {
       const priceValue = unitPrice * quantity
 

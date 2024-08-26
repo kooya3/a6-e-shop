@@ -1,3 +1,4 @@
+import { calculatePrice } from "../../../../app/_components/Price";
 import type { Order, User } from "../../../payload-types"
 
 interface CreatPayloadOrder {
@@ -9,11 +10,13 @@ interface CreatPayloadOrder {
   orderReference: string;
   currency?: string;
   paymentMethod: string;
-  pesaPalDetails?: { orderTrackingId: string };
+  pesapalDetails?: { orderTrackingId: string };
   googlePayDetails?: string;
 }
 
-export async function createPayloadOrder({ cartTotal, cart, orderReference, currency, paymentMethod, pesaPalDetails, googlePayDetails }: CreatPayloadOrder): Promise<void> {
+export async function createPayloadOrder({ cartTotal, cart, orderReference, currency, paymentMethod, pesapalDetails, googlePayDetails }: CreatPayloadOrder): Promise<void> {
+  console.log('createPayloadOrder called with:', { cartTotal, cart, orderReference, currency, paymentMethod, pesapalDetails, googlePayDetails });
+
   try {
     const orderReq = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/orders`, {
       method: 'POST',
@@ -25,15 +28,15 @@ export async function createPayloadOrder({ cartTotal, cart, orderReference, curr
         orderReference,
         currency,
         paymentMethod,
-        pesapalDetails: {
-          OrderTrackingId: pesaPalDetails,
-        },
+        pesapalDetails,
         googlePayDetails: {},
         total: cartTotal.raw,
         items: (cart?.items || [])?.map(({ product, quantity }) => ({
           product: typeof product === 'string' ? product : product.id,
           quantity,
-          price: 1,
+          price: typeof product === 'object'
+            ? calculatePrice(product.unitPrice, quantity, true)
+            : undefined,
         })),
       }),
     })

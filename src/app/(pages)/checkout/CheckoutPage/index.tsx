@@ -5,9 +5,7 @@ import { useForm } from 'react-hook-form'
 import GooglePayButton from '@google-pay/button-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { v4 as uuidv4 } from 'uuid'
 
-import { createPayloadOrder } from '../../../../payload/collections/Orders/utils/create-order'
 import { Order, Settings } from '../../../../payload/payload-types'
 import { submitOrderRequest } from '../../../../payload/pesapal/endpoints/submitOrderRequest'
 import { Button } from '../../../_components/Button'
@@ -37,10 +35,9 @@ const PESAPAL_NOTIFICATION_ID = process.env.NEXT_PUBLIC_PESAPAL_NOTIFICATION_ID
 
 export const CheckoutPage: React.FC<{
   settings: Settings
-}> = props => {
-  const {
-    settings: { productsPage },
-  } = props
+  token: string
+}> = ({ settings, token }) => {
+  const { productsPage } = settings
 
   const { user } = useAuth()
   const router = useRouter()
@@ -61,74 +58,74 @@ export const CheckoutPage: React.FC<{
   const onSubmit = useCallback(
     async (data: FormData) => {
       setLoading(true)
-      const orderReference = uuidv4()
+
       const currency = 'KES'
       const paymentMethod = 'pesapal'
 
-      const payload = {
-        id: orderReference,
-        currency: currency,
-        amount: cartTotal?.raw,
-        description: `Order for ${user?.name}`,
-        callback_url: `${CALLBACK_URL}/order-confirmation`,
-        notification_id: PESAPAL_NOTIFICATION_ID,
-        billing_address: {
-          name: data.toBillName,
-          phone_number: data.toBillPhone,
-        },
-      }
+      try {
+        const orderReq = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/orders`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `JWT ${token}`,
+          },
+          body: JSON.stringify({
+            currency,
+            paymentMethod,
+            total: cartTotal.raw,
+            items: (cart?.items || [])?.map(({ product, quantity }) => ({
+              product: typeof product === 'string' ? product : product.id,
+              quantity,
+              price:
+                typeof product === 'object'
+                  ? calculatePrice(product.unitPrice, quantity, true)
+                  : undefined,
+            })),
+          }),
+        })
 
-      const response = await submitOrderRequest(payload)
+        if (!orderReq.ok) throw new Error(orderReq.statusText || 'Something went wrong.')
 
-      if (response.status === '200') {
-        const { redirect_url, order_tracking_id } = response
-        const pesaPalDetails = {
-          orderTrackingId: order_tracking_id,
+        const {
+          error: errorFromRes,
+          doc,
+        }: {
+          message?: string
+          error?: string
+          doc: Order
+        } = await orderReq.json()
+
+        if (errorFromRes) throw new Error(errorFromRes)
+
+        const payload = {
+          id: doc.id,
+          currency: currency,
+          amount: cartTotal?.raw,
+          description: `Order for ${user?.name}`,
+          callback_url: `${CALLBACK_URL}/order-confirmation`,
+          notification_id: PESAPAL_NOTIFICATION_ID,
+          billing_address: {
+            name: data.toBillName,
+            phone_number: data.toBillPhone,
+          },
         }
 
-        try {
-          console.log('trying to create')
-          const orderReq = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/orders`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              orderReference,
-              currency,
-              paymentMethod,
-              pesapalDetails: {
-                OrderTrackingId: pesaPalDetails,
-              },
-              googlePayDetails: {},
-              total: cartTotal.raw,
-              items: (cart?.items || [])?.map(({ product, quantity }) => ({
-                product: typeof product === 'string' ? product : product.id,
-                quantity,
-                price:
-                  typeof product === 'object'
-                    ? calculatePrice(product.unitPrice, 1, true)
-                    : undefined,
-              })),
-            }),
-          })
+        const response = await submitOrderRequest(payload)
 
-          console.log('sent request')
+        if (response.status === '200') {
+          const { redirect_url } = response
 
-          if (!orderReq.ok) throw new Error(orderReq.statusText || 'Something went wrong.')
-        } catch (err: unknown) {
+          window.location.href = redirect_url
+        } else {
+          setError(response.status)
           setLoading(false)
-          setError(`We could'nt create your order`)
-          throw new Error(`We couldn't create your order`)
+          throw new Error(`Couldn't process your payment`)
         }
-
-        window.location.href = redirect_url
-      } else {
-        setLoading(false)
+      } catch (err: unknown) {
+        throw new Error(`We couldn't create your order`)
       }
     },
-    [cart, cartTotal, user?.name],
+    [cart, cartTotal, user],
   )
 
   const handleToggleBilling = () => {
@@ -382,19 +379,11 @@ export const CheckoutPage: React.FC<{
               <dl className="mt-10 space-y-6 text-sm font-medium text-gray-500">
                 <div className="flex justify-between">
                   <dt>Subtotal</dt>
-                  <dd className="text-gray-900">$104.00</dd>
-                </div>
-                <div className="flex justify-between">
-                  <dt>Taxes</dt>
-                  <dd className="text-gray-900">$8.32</dd>
-                </div>
-                <div className="flex justify-between">
-                  <dt>Shipping</dt>
-                  <dd className="text-gray-900">$14.00</dd>
+                  <dd className="text-gray-900">{cartTotal.formatted}</dd>
                 </div>
                 <div className="flex justify-between border-t border-gray-200 pt-6 text-gray-900">
                   <dt className="text-base">Total</dt>
-                  <dd className="text-base">$126.32</dd>
+                  <dd className="text-base">{cartTotal.formatted}</dd>
                 </div>
               </dl>
             </div>

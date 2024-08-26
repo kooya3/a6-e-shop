@@ -1,22 +1,20 @@
 import payload from "payload"
-export async function updateOrderPaymentStatus(orderReference: string, paymentStatus: 'pending' | 'failed' | 'paid'): Promise<void> {
+
+import type { Order } from "../../../payload-types"
+export async function updateOrderPaymentStatus(id: string, paymentStatus: Order['status']): Promise<void> {
   try {
-    const order = await payload.find({
+    const order = await payload.findByID({
       collection: 'orders',
-      where: {
-        orderReference: {
-          equals: orderReference,
-        },
-      },
+      id: id,
     })
 
-    if (order.docs.length < 1) {
-      throw new Error(`Order with orderReference ${orderReference} could not be found`)
+    if (!order) {
+      throw new Error(`Order with ID ${id} could not be found`)
     }
 
     await payload.update({
       collection: 'orders',
-      id: order.docs[0].id,
+      id: order.id,
       data: {
         status: paymentStatus,
       },
@@ -25,6 +23,6 @@ export async function updateOrderPaymentStatus(orderReference: string, paymentSt
 
   } catch (err: unknown) {
     payload.logger.error(err)
-    throw new Error(`We couldn't update your order with orderReference ${orderReference}`)
+    throw new Error(`We couldn't update your order with ID ${id}`)
   }
 }

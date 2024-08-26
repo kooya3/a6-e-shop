@@ -4982,7 +4982,6 @@ input versionsProduct_where_or {
 
 type Order {
   id: String
-  orderReference: String!
   orderedBy: User
   total: Float!
   currency: Order_currency!
@@ -5044,8 +5043,10 @@ enum Order_currency {
 
 enum Order_status {
   pending
-  paid
+  invalid
+  completed
   failed
+  reversed
 }
 
 enum Order_paymentMethod {
@@ -5084,7 +5085,6 @@ type Orders {
 }
 
 input Order_where {
-  orderReference: Order_orderReference_operator
   orderedBy: Order_orderedBy_operator
   total: Order_total_operator
   currency: Order_currency_operator
@@ -5102,16 +5102,6 @@ input Order_where {
   id: Order_id_operator
   AND: [Order_where_and]
   OR: [Order_where_or]
-}
-
-input Order_orderReference_operator {
-  equals: String
-  not_equals: String
-  like: String
-  contains: String
-  in: [String]
-  not_in: [String]
-  all: [String]
 }
 
 input Order_orderedBy_operator {
@@ -5155,8 +5145,10 @@ input Order_status_operator {
 
 enum Order_status_Input {
   pending
-  paid
+  invalid
+  completed
   failed
+  reversed
 }
 
 input Order_paymentMethod_operator {
@@ -5278,7 +5270,6 @@ input Order_id_operator {
 }
 
 input Order_where_and {
-  orderReference: Order_orderReference_operator
   orderedBy: Order_orderedBy_operator
   total: Order_total_operator
   currency: Order_currency_operator
@@ -5299,7 +5290,6 @@ input Order_where_and {
 }
 
 input Order_where_or {
-  orderReference: Order_orderReference_operator
   orderedBy: Order_orderedBy_operator
   total: Order_total_operator
   currency: Order_currency_operator
@@ -5328,7 +5318,6 @@ type ordersDocAccess {
 }
 
 type OrdersDocAccessFields {
-  orderReference: OrdersDocAccessFields_orderReference
   orderedBy: OrdersDocAccessFields_orderedBy
   total: OrdersDocAccessFields_total
   currency: OrdersDocAccessFields_currency
@@ -5339,29 +5328,6 @@ type OrdersDocAccessFields {
   items: OrdersDocAccessFields_items
   updatedAt: OrdersDocAccessFields_updatedAt
   createdAt: OrdersDocAccessFields_createdAt
-}
-
-type OrdersDocAccessFields_orderReference {
-  create: OrdersDocAccessFields_orderReference_Create
-  read: OrdersDocAccessFields_orderReference_Read
-  update: OrdersDocAccessFields_orderReference_Update
-  delete: OrdersDocAccessFields_orderReference_Delete
-}
-
-type OrdersDocAccessFields_orderReference_Create {
-  permission: Boolean!
-}
-
-type OrdersDocAccessFields_orderReference_Read {
-  permission: Boolean!
-}
-
-type OrdersDocAccessFields_orderReference_Update {
-  permission: Boolean!
-}
-
-type OrdersDocAccessFields_orderReference_Delete {
-  permission: Boolean!
 }
 
 type OrdersDocAccessFields_orderedBy {
@@ -10996,7 +10962,6 @@ type ordersAccess {
 }
 
 type OrdersFields {
-  orderReference: OrdersFields_orderReference
   orderedBy: OrdersFields_orderedBy
   total: OrdersFields_total
   currency: OrdersFields_currency
@@ -11007,29 +10972,6 @@ type OrdersFields {
   items: OrdersFields_items
   updatedAt: OrdersFields_updatedAt
   createdAt: OrdersFields_createdAt
-}
-
-type OrdersFields_orderReference {
-  create: OrdersFields_orderReference_Create
-  read: OrdersFields_orderReference_Read
-  update: OrdersFields_orderReference_Update
-  delete: OrdersFields_orderReference_Delete
-}
-
-type OrdersFields_orderReference_Create {
-  permission: Boolean!
-}
-
-type OrdersFields_orderReference_Read {
-  permission: Boolean!
-}
-
-type OrdersFields_orderReference_Update {
-  permission: Boolean!
-}
-
-type OrdersFields_orderReference_Delete {
-  permission: Boolean!
 }
 
 type OrdersFields_orderedBy {
@@ -14084,7 +14026,6 @@ enum ProductUpdate__status_MutationInput {
 }
 
 input mutationOrderInput {
-  orderReference: String!
   orderedBy: String
   total: Float!
   currency: Order_currency_MutationInput!
@@ -14104,8 +14045,10 @@ enum Order_currency_MutationInput {
 
 enum Order_status_MutationInput {
   pending
-  paid
+  invalid
+  completed
   failed
+  reversed
 }
 
 enum Order_paymentMethod_MutationInput {
@@ -14130,7 +14073,6 @@ input mutationOrder_ItemsInput {
 }
 
 input mutationOrderUpdateInput {
-  orderReference: String
   orderedBy: String
   total: Float
   currency: OrderUpdate_currency_MutationInput
@@ -14150,8 +14092,10 @@ enum OrderUpdate_currency_MutationInput {
 
 enum OrderUpdate_status_MutationInput {
   pending
-  paid
+  invalid
+  completed
   failed
+  reversed
 }
 
 enum OrderUpdate_paymentMethod_MutationInput {

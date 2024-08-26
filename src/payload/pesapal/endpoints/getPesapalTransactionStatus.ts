@@ -7,7 +7,7 @@ export async function getPesapalTransactionStatus(orderTrackingId: string): Prom
   const authToken = await getPesapalAccessToken()
 
   const response = await fetch(
-    `${PESAPAL_URL}/api/Transactions/GetTransactionStatus?orderTrackingId=${orderTrackingId}`,
+    `${PESAPAL_URL}/Transactions/GetTransactionStatus?orderTrackingId=${orderTrackingId}`,
     {
       headers: {
         'Accept': 'application/json',

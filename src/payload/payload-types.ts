@@ -402,11 +402,10 @@ export interface Product {
 }
 export interface Order {
   id: string;
-  orderReference: string;
   orderedBy?: (string | null) | User;
   total: number;
   currency: 'KES' | 'USD';
-  status: 'pending' | 'paid' | 'failed';
+  status: 'pending' | 'invalid' | 'completed' | 'failed' | 'reversed';
   paymentMethod: 'pesapal' | 'googlepay';
   pesapalDetails?: {
     orderTrackingId?: string | null;

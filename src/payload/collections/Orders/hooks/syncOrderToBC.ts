@@ -7,7 +7,7 @@ import type { Order } from '../../../payload-types'
 export const syncOrderToBC: AfterChangeHook<Order> = async ({ doc, req, operation }) => {
   const { payload } = req
 
-  if ((operation === 'update') && doc.items && doc.status === 'paid') {
+  if ((operation === 'update') && doc.items && doc.status === 'completed') {
     const orderedBy = typeof doc.orderedBy === 'object' ? doc.orderedBy.id : doc.orderedBy
 
     const user = await payload.findByID({
@@ -15,8 +15,8 @@ export const syncOrderToBC: AfterChangeHook<Order> = async ({ doc, req, operatio
       id: orderedBy,
     })
 
-    if (user) {
-      throw new Error(`Couldn't find a user with orderReference ${doc.orderReference}`)
+    if (!user) {
+      throw new Error(`Couldn't find a user with id ${orderedBy}`)
     }
 
     const salesOrderBody = {
@@ -27,7 +27,7 @@ export const syncOrderToBC: AfterChangeHook<Order> = async ({ doc, req, operatio
     const salesOrder = await createSalesHeader(salesOrderBody)
 
     if (!salesOrder) {
-      throw new Error(`Could't create a sales order for order with reference ${doc.orderReference}`)
+      throw new Error(`Could't create a sales order for order with ID ${doc.id}`)
     }
 
     for (const item of doc.items) {
