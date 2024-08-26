@@ -67,7 +67,7 @@ const syncToBackendSystem: AfterChangeHook = async (context) => {
         // Handle the response from the backend system
         console.log(response.data); // Replace with your own logic
 
-    } catch (error: boolean | any ) {
+    } catch (error: boolean | unknown) {
         
     
         // Handle any errors that occur during the request

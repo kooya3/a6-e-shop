@@ -80,13 +80,8 @@ export const createPaymentIntent: PayloadHandler = async (req, res): Promise<voi
         if (typeof product === 'string' || !product?.bcProductID) {
           throw new Error('No BC Product ID')
         }
-
-        const bcPrices = await stripe.prices.list({
-          product: product.bcProductID,
-          limit: 100,
-          expand: ['data.product'],
-        })
-
+        
+        
         if (prices.data.length === 0) {
           res.status(404).json({ error: 'There are no items in your cart to checkout with' })
           return null
