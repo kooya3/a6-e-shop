@@ -3,8 +3,7 @@ import { Metadata } from 'next'
 import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 
-import type { Product } from '../../../../payload/payload-types'
-import {Product as ProductType } from '../../../../payload/payload-types'
+import { Product, Product as ProductType } from '../../../../payload/payload-types'
 import { fetchDoc } from '../../../_api/fetchDoc'
 import { fetchDocs } from '../../../_api/fetchDocs'
 import { Blocks } from '../../../_components/Blocks'
@@ -56,7 +55,7 @@ export default async function Product({ params: { slug } }) {
                     text: 'Related Products',
                   },
                 ],
-              },            
+              },
             ],
             docs: relatedProducts,
           },
