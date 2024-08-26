@@ -68,7 +68,7 @@ export default async function Order({ params: { id } }) {
             const {
               quantity,
               product,
-              product: { id, title, meta, stripeProductID },
+              product: { id, title, meta, stripeProductID, bcProductID },
             } = item
 
             const metaImage = meta?.image

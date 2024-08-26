@@ -71,7 +71,7 @@ export default async function Order({ params: { id } }) {
             const {
               quantity,
               product,
-              product: { id, title, meta, stripeProductID },
+              product: { id, title, meta, stripeProductID, bcProductID },
             } = item
 
             const isLast = index === (order?.items?.length || 0) - 1
