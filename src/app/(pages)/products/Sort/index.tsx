@@ -28,7 +28,7 @@ const Sort = () => {
           Sort By:
         </label>
 
-        <select name="sortBy" id="sortBy" onChange={handleSort}>
+        <select name="sortBy" id="sortBy" value={sort} onChange={handleSort}>
           <option value="-unitPrice">Price High to Low</option>
           <option value="unitPrice">Price Low to High</option>
         </select>

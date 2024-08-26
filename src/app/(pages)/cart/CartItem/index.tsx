@@ -38,7 +38,7 @@ const CartItem = ({ product, title, metaImage, qty, addItemToCart }) => {
       className="grid gap-4 md:grid-cols-4 border-b-solid border-b-2 border-b-gray-400 py-6 md:py-8"
       key={title}
     >
-      <Link href={`/products/${product.slug}`} className="min-h-24">
+      <Link href={`/products/${product.slug}`} className="min-h-24 bg-[var(--gray-4)]">
         {!metaImage && <span>No image</span>}
         {metaImage && typeof metaImage !== 'string' && (
           <Media className={classes.media} imgClassName={classes.image} resource={metaImage} fill />
