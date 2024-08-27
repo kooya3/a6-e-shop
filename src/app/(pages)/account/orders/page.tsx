@@ -43,7 +43,7 @@ export default async function Orders() {
 
   return (
     <div>
-      <h5>My Orders</h5>
+      <h5>Orders</h5>
       {(!orders || !Array.isArray(orders) || orders?.length === 0) && (
         <p className={classes.noOrders}>You have no orders.</p>
       )}
@@ -54,9 +54,9 @@ export default async function Orders() {
             <li key={order.id} className={classes.order}>
               <Link className={classes.item} href={`/account/orders/${order.id}`}>
                 <div className={classes.itemContent}>
-                  <h6 className={classes.itemTitle}>{`Order ${order.id}`}</h6>
+                  <h6 className={classes.itemTitle}>{`Order #${order.id}`}</h6>
                   <div className={classes.itemMeta}>
-                    <p>
+                    <p className="text-[var(--gray-12)]">
                       {'Total: '}
                       {new Intl.NumberFormat('en-US', {
                         style: 'currency',

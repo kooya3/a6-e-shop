@@ -1,28 +1,6 @@
 // Keep these in sync with the colors exported in '../cssVariables.js'
 
 :root {
-  --color-base-0: rgb(255, 255, 255);
-  --color-base-50: rgb(245, 245, 245);
-  --color-base-100: rgb(235, 235, 235);
-  --color-base-150: rgb(221, 221, 221);
-  --color-base-200: rgb(208, 208, 208);
-  --color-base-250: rgb(195, 195, 195);
-  --color-base-300: rgb(181, 181, 181);
-  --color-base-350: rgb(168, 168, 168);
-  --color-base-400: rgb(154, 154, 154);
-  --color-base-450: rgb(141, 141, 141);
-  --color-base-500: rgb(128, 128, 128);
-  --color-base-550: rgb(114, 114, 114);
-  --color-base-600: rgb(101, 101, 101);
-  --color-base-650: rgb(87, 87, 87);
-  --color-base-700: rgb(74, 74, 74);
-  --color-base-750: rgb(60, 60, 60);
-  --color-base-800: rgb(47, 47, 47);
-  --color-base-850: rgb(34, 34, 34);
-  --color-base-900: rgb(20, 20, 20);
-  --color-base-950: rgb(7, 7, 7);
-  --color-base-1000: rgb(42, 172, 223);
-
   --color-success-50: rgb(247, 255, 251);
   --color-success-100: rgb(240, 255, 247);
   --color-success-150: rgb(232, 255, 243);
@@ -83,15 +61,149 @@
   --color-error-900: rgb(51, 22, 24);
   --color-error-950: rgb(25, 11, 12);
 
-    // BRAND COLORS
-  --color-dark-50: rgb(255, 255, 255);
-  --color-dark-60: rgb(30, 148, 194);
-  --color-dark-500: rgba(19, 17, 24, 1);
-  --color-dark-500-5: rgba(19, 17, 24, 0.05);
-  
-  --color-white-500: rgba(255, 255, 255, 1);
-  --color-white-500-20: rgba(255, 255, 255, 0.2);
-  
-  --color-gray-500: rgba(164, 161, 170, 1);
   --color-green-500: rgba(60, 209, 57, 1);
+}
+
+:root, .light, .light-theme {
+  --blue-1: #fafdff;
+  --blue-2: #f2faff;
+  --blue-3: #e3f5ff;
+  --blue-4: #cef0ff;
+  --blue-5: #b6e8ff;
+  --blue-6: #9bdcff;
+  --blue-7: #75ccfd;
+  --blue-8: #21b6f9;
+  --blue-9: #04adef;
+  --blue-10: #00a1e2;
+  --blue-11: #007ebb;
+  --blue-12: #00395c;
+
+  --blue-a1: #0099ff05;
+  --blue-a2: #009dff0d;
+  --blue-a3: #00a4ff1c;
+  --blue-a4: #00b1ff31;
+  --blue-a5: #00afff49;
+  --blue-a6: #00a6ff64;
+  --blue-a7: #00a1fc8a;
+  --blue-a8: #00abf8de;
+  --blue-a9: #00aceffb;
+  --blue-a10: #00a1e2;
+  --blue-a11: #007ebb;
+  --blue-a12: #00395c;
+
+  --blue-contrast: #fff;
+  --blue-surface: #eff9ffcc;
+  --blue-indicator: #04adef;
+  --blue-track: #04adef;
+}
+
+@supports (color: color(display-p3 1 1 1)) {
+  @media (color-gamut: p3) {
+    :root, .light, .light-theme {
+      --blue-1: oklch(99.3% 0.004 235);
+      --blue-2: oklch(98.2% 0.0118 235);
+      --blue-3: oklch(96% 0.0245 235);
+      --blue-4: oklch(93.7% 0.0457 235);
+      --blue-5: oklch(90.6% 0.0659 235);
+      --blue-6: oklch(86.4% 0.0845 235);
+      --blue-7: oklch(80.9% 0.1089 235);
+      --blue-8: oklch(73.5% 0.1492 235);
+      --blue-9: oklch(70.6% 0.1492 235);
+      --blue-10: oklch(66.9% 0.1492 235);
+      --blue-11: oklch(55.8% 0.1492 235);
+      --blue-12: oklch(32.4% 0.1189 235);
+
+      --blue-a1: color(display-p3 0.0235 0.5137 1 / 0.016);
+      --blue-a2: color(display-p3 0.0235 0.5922 0.9216 / 0.048);
+      --blue-a3: color(display-p3 0.0118 0.5647 0.9608 / 0.099);
+      --blue-a4: color(display-p3 0.0039 0.6235 0.9529 / 0.165);
+      --blue-a5: color(display-p3 0.0039 0.6235 0.9529 / 0.248);
+      --blue-a6: color(display-p3 0.0039 0.5725 0.9569 / 0.338);
+      --blue-a7: color(display-p3 0.0039 0.549 0.9412 / 0.459);
+      --blue-a8: color(display-p3 0 0.549 0.9294 / 0.659);
+      --blue-a9: color(display-p3 0 0.5216 0.8745 / 0.699);
+      --blue-a10: color(display-p3 0 0.4784 0.8118 / 0.722);
+      --blue-a11: color(display-p3 0 0.349 0.6353 / 0.789);
+      --blue-a12: color(display-p3 0 0.149 0.2902 / 0.918);
+
+      --blue-contrast: #fff;
+      --blue-surface: color(display-p3 0.9412 0.9765 1 / 0.8);
+      --blue-indicator: oklch(70.6% 0.1492 235);
+      --blue-track: oklch(70.6% 0.1492 235);
+    }
+  }
+}
+
+:root, .light, .light-theme {
+  --gray-1: #fcfcfd;
+  --gray-2: #f9f9fb;
+  --gray-3: #eff0f3;
+  --gray-4: #e7e8ec;
+  --gray-5: #e0e1e6;
+  --gray-6: #d8d9e0;
+  --gray-7: #cdced7;
+  --gray-8: #b9bbc6;
+  --gray-9: #8b8d98;
+  --gray-10: #80828d;
+  --gray-11: #62636c;
+  --gray-12: #1e1f24;
+
+  --gray-a1: #00005503;
+  --gray-a2: #00005506;
+  --gray-a3: #00104010;
+  --gray-a4: #000b3618;
+  --gray-a5: #0009321f;
+  --gray-a6: #00073527;
+  --gray-a7: #00063332;
+  --gray-a8: #00083046;
+  --gray-a9: #00051d74;
+  --gray-a10: #00051b7f;
+  --gray-a11: #0002119d;
+  --gray-a12: #000107e1;
+
+  --gray-contrast: #FFFFFF;
+  --gray-surface: #ffffffcc;
+  --gray-indicator: #8b8d98;
+  --gray-track: #8b8d98;
+}
+
+@supports (color: color(display-p3 1 1 1)) {
+  @media (color-gamut: p3) {
+    :root, .light, .light-theme {
+      --gray-1: oklch(99.1% 0.0015 277.7);
+      --gray-2: oklch(98.2% 0.003 277.7);
+      --gray-3: oklch(95.6% 0.0045 277.7);
+      --gray-4: oklch(93.1% 0.0061 277.7);
+      --gray-5: oklch(91% 0.0077 277.7);
+      --gray-6: oklch(88.8% 0.0093 277.7);
+      --gray-7: oklch(85.3% 0.0117 277.7);
+      --gray-8: oklch(79.4% 0.016 277.7);
+      --gray-9: oklch(64.6% 0.0165 277.7);
+      --gray-10: oklch(61% 0.0161 277.7);
+      --gray-11: oklch(50.3% 0.0139 277.7);
+      --gray-12: oklch(24.1% 0.0099 277.7);
+
+      --gray-a1: color(display-p3 0.0235 0.0235 0.349 / 0.012);
+      --gray-a2: color(display-p3 0.0235 0.0235 0.349 / 0.024);
+      --gray-a3: color(display-p3 0.0078 0.0667 0.2549 / 0.063);
+      --gray-a4: color(display-p3 0.0118 0.051 0.2157 / 0.095);
+      --gray-a5: color(display-p3 0.0039 0.0392 0.2 / 0.122);
+      --gray-a6: color(display-p3 0.0039 0.0275 0.1804 / 0.153);
+      --gray-a7: color(display-p3 0.0078 0.0275 0.1843 / 0.197);
+      --gray-a8: color(display-p3 0.0039 0.0314 0.1765 / 0.275);
+      --gray-a9: color(display-p3 0.0039 0.0196 0.1059 / 0.455);
+      --gray-a10: color(display-p3 0.0039 0.0196 0.098 / 0.499);
+      --gray-a11: color(display-p3 0 0.0078 0.0588 / 0.616);
+      --gray-a12: color(display-p3 0 0.0039 0.0275 / 0.883);
+
+      --gray-contrast: #FFFFFF;
+      --gray-surface: color(display-p3 1 1 1 / 80%);
+      --gray-indicator: oklch(64.6% 0.0165 277.7);
+      --gray-track: oklch(64.6% 0.0165 277.7);
+    }
+  }
+}
+
+:root, .light, .light-theme, .radix-themes {
+  --color-background: #fff;
 }

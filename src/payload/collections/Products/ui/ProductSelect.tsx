@@ -12,9 +12,9 @@ export const ProductSelect: React.FC<TextField> = props => {
     }[]
   >([])
   
-  const { value: stripeProductID, setValue: setStripeProductID } = useFormFields(([fields]) => fields[name])
-  const { value: bcProductID, setValue: setBcProductID } = useFormFields(([fields]) => fields['bcProductID'])
-
+  const { value: stripeProductID } = useFormFields(([fields]) => fields[name])
+  const { value: bcProductID } = useFormFields(([fields]) => fields['bcProductID'])
+ 
   React.useEffect(() => {
     const getStripeProducts = async () => {
       const productsFetch = await fetch('/api/stripe/products', {
@@ -117,11 +117,7 @@ export const ProductSelect: React.FC<TextField> = props => {
       )}
       <div>
         <p style={{ marginBottom: '0' }}>bcProductID</p>
-        <input
-          type="text"
-          value={bcProductID}
-          onChange={e => setBcProductID(e.target.value)}
-        />
+        
       </div>
     </div>
   )

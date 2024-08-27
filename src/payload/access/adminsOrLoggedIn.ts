@@ -8,5 +8,7 @@ export const adminsOrLoggedIn: Access = ({ req }: AccessArgs<User>) => {
     return true
   }
 
+  console.log('logged in', !!req.user)
+
   return !!req.user
 }

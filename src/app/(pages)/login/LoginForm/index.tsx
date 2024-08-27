@@ -23,22 +23,25 @@ const LoginForm: React.FC = () => {
   const redirect = useRef(searchParams.get('redirect'))
   const { login } = useAuth()
   const router = useRouter()
+  const [isLoading, setIsLoading] = React.useState(false)
   const [error, setError] = React.useState<string | null>(null)
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isLoading },
+    formState: { errors },
   } = useForm<FormData>()
 
   const onSubmit = useCallback(
     async (data: FormData) => {
       try {
+        setIsLoading(true)
         await login(data)
         if (redirect?.current) router.push(redirect.current as string)
         else router.push('/')
         window.location.href = '/'
       } catch (_) {
+        setIsLoading(false)
         setError('There was an error with the credentials provided. Please try again.')
       }
     },
@@ -71,14 +74,14 @@ const LoginForm: React.FC = () => {
       <Button
         type="submit"
         appearance="primary"
-        label={isLoading ? 'Processing' : 'Login'}
+        label={isLoading ? 'Logging In' : 'Log in'}
         disabled={isLoading}
         className={classes.submit}
       />
       <div className={classes.links}>
-        <Link href={`/create-account${allParams}`}>Create an account</Link>
+        <Link href={`/create-account${allParams}`}>Create account</Link>
         <br />
-        <Link href={`/recover-password${allParams}`}>Recover your password</Link>
+        <Link href={`/recover-password${allParams}`}>Recover password</Link>
       </div>
     </form>
   )

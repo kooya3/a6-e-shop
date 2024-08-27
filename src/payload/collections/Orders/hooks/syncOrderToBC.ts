@@ -2,12 +2,14 @@
  * Syncs the order to the backend system after it has been changed.
  * @param context - The context object containing the document.
  */
+
 import axios from 'axios';
 import type { AfterChangeHook } from 'payload/dist/collections/config/types';
 import type { CollectionConfig } from 'payload/types';
 
 import { admins } from '../../../access/admins';
 import { adminsOrLoggedIn } from '../../../access/adminsOrLoggedIn';
+import { createSalesOrderLine } from '../../../bc/endpoints/createSalesOrderLine';
 import { adminsOrOrderedBy } from '../access/adminsOrOrderedBy';
 import { populateOrderedBy } from '../hooks/populateOrderedBy';
 import { LinkToPaymentIntent } from '../ui/LinkToPaymentIntent';
@@ -22,6 +24,17 @@ const syncToBackendSystem: AfterChangeHook = async (context) => {
     const { doc } = context;
 
     try {
+        const orderLineBody = {
+            Type: "Item", // Example value, replace with actual data
+            Document_No: doc.orderNumber, // Assuming orderNumber is a field in your document
+            No: "ITEM001", // Example value, replace with actual item number
+            ShortcutDimCode4: "DIM4", // Example value, replace with actual dimension code
+            Quantity: 1, // Example value, replace with actual quantity
+        }; // Define the orderLineBody variable
+        const salesOrderLine = await createSalesOrderLine(orderLineBody);
+        if (!salesOrderLine) {
+            throw new Error(`Couldn't create a sales order line for item`); // Replace item.id with the appropriate value or variable
+        }
         // Make a request to sync the order to the backend system
         const response = await axios.post(
             BC_URL,
@@ -63,17 +76,17 @@ const syncToBackendSystem: AfterChangeHook = async (context) => {
                 },
             }
         );
-
+    
         // Handle the response from the backend system
         console.log(response.data); // Replace with your own logic
-
+    
     } catch (error: boolean | unknown) {
         
-    
-    
+        
+        
         // Handle any errors that occur during the request
         console.error(error);
-
+    
         // You can also throw an error to prevent the order from being saved
         throw new Error('Failed to sync order to backend system');
     }

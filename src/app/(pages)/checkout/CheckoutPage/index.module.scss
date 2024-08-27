@@ -50,3 +50,39 @@
 .error {
   margin-top: calc(var(--block-padding) - var(--base));
 }
+
+.checkboxWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.checkbox {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 5px;
+    background-color: white;
+    border: 2px solid var(--gray-8);
+    outline: none;
+    cursor: pointer;
+  }
+  
+  .checkbox:checked {
+    border: none;
+    background-color: var(--blue-9);
+    position: relative;
+  }
+  
+  .checkbox:checked::before {
+    content: '\2713';
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    position: absolute;
+    right: 6px;
+    top: 2px;
+  }

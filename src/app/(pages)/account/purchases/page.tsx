@@ -37,7 +37,7 @@ export default async function Purchases() {
                         )}
                       </div>
                       <div className={classes.itemDetails}>
-                        <h6>{purchase.title}</h6>
+                        <h6 className="text-[var(--gray-12)]">{purchase.title}</h6>
                         <Price product={purchase} />
                         <p className={classes.purchasedDate}>{`Purchased On: ${formatDateTime(
                           purchase.createdAt,

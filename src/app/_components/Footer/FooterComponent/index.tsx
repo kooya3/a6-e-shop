@@ -21,7 +21,7 @@ const FooterComponent = ({ footer }: { footer: Footer }) => {
       <Gutter>
         <ul className={classes.inclusions}>
           {inclusions.map(inclusion => (
-            <li key={inclusion.title}>
+            <li key={inclusion.title} className="flex flex-col items-center">
               <Image
                 src={inclusion.icon}
                 alt={inclusion.title}
@@ -42,14 +42,7 @@ const FooterComponent = ({ footer }: { footer: Footer }) => {
           <div className={classes.wrap}>
             <p>{footer?.copyright}</p>
             <section className={classes.section}>
-              Dundori Road, Industrial Area
-
-              Nairobi
-
-              P.O Box P.O Box 41762 - 00100
-
-              Kenya
-
+              Dundori Road, Industrial Area Nairobi P.O Box P.O Box 41762 - 00100 Kenya
             </section>
 
             <div className={classes.socialLinks}>

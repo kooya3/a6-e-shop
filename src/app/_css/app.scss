@@ -7,8 +7,6 @@
 
 :root {
   --base: 24px;
-  --font-body: 'Jost', sans-serif;
-  --font-jost: 'Jost', sans-serif; ;
 
   --gutter-h: 48px;
   --block-padding: 120px;
@@ -30,7 +28,7 @@
 
 html {
   @extend %body;
-  background: var(--theme-bg);
+  background: var(--color-background);
   -webkit-font-smoothing: antialiased;
   opacity: 0;
 
@@ -50,7 +48,7 @@ body {
   font-family: var(--font-noto-sans);
   margin: 0;
   padding: 0;
-  color: var(--color-dark-500);
+  color: var(--gray-12);
 
   display: flex;
   flex-flow: column;
@@ -61,13 +59,11 @@ body {
 }
 
 ::selection {
-  background: var(--color-dark-500);
-  color: var(--color-base-800);
+  background: var(--blue-4);
 }
 
 ::-moz-selection {
-  background: var(--color-dark-50);
-  color: var(--color-base-800);
+  background: var(--blue-4);
 }
 
 img {
@@ -112,8 +108,7 @@ ol {
 }
 
 a {
-  color: var(--color-dark-500);
-  text-decoration: none;
+  color: var(--blue-9);
 
   &:focus {
     opacity: .8;

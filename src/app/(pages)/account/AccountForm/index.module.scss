@@ -6,10 +6,10 @@
   flex-direction: column;
   gap: calc(var(--base) / 2);
   align-items: flex-start;
-  width: 100%;
+  max-width: 600px;
 
   @include mid-break {
-    width: 100%;
+    max-width: 600px;
   }
 }
 
@@ -21,4 +21,5 @@
 
 .submit {
   margin-top: calc(var(--base) / 2);
+  width: 100%;
 }

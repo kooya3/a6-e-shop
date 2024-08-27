@@ -291,6 +291,7 @@ export interface Product {
       )[]
     | null;
   stripeProductID?: string | null;
+  bcProductID?: string | null; 
   inventory?: number | null;
   unitPrice?: number | null;
   priceJSON?: string | null;
@@ -405,6 +406,16 @@ export interface Order {
   stripePaymentIntentID?: string | null;
   bcProductID?: string | null;
   total: number;
+  currency: 'KES' | 'USD';
+  status: 'pending' | 'invalid' | 'completed' | 'failed' | 'reversed';
+  paymentMethod: 'pesapal' | 'googlepay';
+  pesapalDetails?: {
+    orderTrackingId?: string | null;
+  };
+  googlePayDetails?: {
+    transactionId?: string | null;
+    paymentMethodToken?: string | null;
+  };
   items?:
     | {
         product: string | Product;
