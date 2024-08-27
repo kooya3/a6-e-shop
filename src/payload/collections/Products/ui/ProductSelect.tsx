@@ -11,8 +11,9 @@ export const ProductSelect: React.FC<TextField> = props => {
       value: string
     }[]
   >([])
-
-  const { value: stripeProductID } = useFormFields(([fields]) => fields[name])
+  
+  const { value: stripeProductID, setValue: setStripeProductID } = useFormFields(([fields]) => fields[name])
+  const { value: bcProductID, setValue: setBcProductID } = useFormFields(([fields]) => fields['bcProductID'])
 
   React.useEffect(() => {
     const getStripeProducts = async () => {
@@ -114,6 +115,14 @@ export const ProductSelect: React.FC<TextField> = props => {
           </div>
         </div>
       )}
+      <div>
+        <p style={{ marginBottom: '0' }}>bcProductID</p>
+        <input
+          type="text"
+          value={bcProductID}
+          onChange={e => setBcProductID(e.target.value)}
+        />
+      </div>
     </div>
   )
 }
