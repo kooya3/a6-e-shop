@@ -3,12 +3,12 @@ import { Metadata } from 'next'
 import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 
-import type { Product, Product as ProductType } from '../../../../payload/payload-types'
+import type { Product } from '../../../../payload/payload-types'
 import { fetchDoc } from '../../../_api/fetchDoc'
 import { fetchDocs } from '../../../_api/fetchDocs'
 import { Blocks } from '../../../_components/Blocks'
 import { PaywallBlocks } from '../../../_components/PaywallBlocks'
-import { ProductHero } from '../../../_heros/Product'
+import { ProductHero } from '../../../_heros/CustomHero'
 import { generateMeta } from '../../../_utilities/generateMeta'
 
 // Force this page to be dynamic so that Next.js does not cache it
@@ -67,7 +67,7 @@ export default async function Product({ params: { slug } }) {
 
 export async function generateStaticParams() {
   try {
-    const products = await fetchDocs<ProductType>('products')
+    const products = await fetchDocs<Product>('products')
     return products?.map(({ slug }) => slug)
   } catch (error) {
     return []

@@ -59,7 +59,7 @@ export const CartPage: React.FC<{
                       const {
                         quantity,
                         product,
-                        product: { id, title, meta, stripeProductID },
+                        product: { id, title, meta, stripeProductID, bcProductID },
                       } = item
 
                       const isLast = index === (cart?.items?.length || 0) - 1

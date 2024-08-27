@@ -54,7 +54,7 @@ export const productsPage: Omit<Page, 'updatedAt' | 'createdAt' | 'id'> = {
       ],
       populateBy: 'collection',
       relationTo: 'products',
-      limit: 10,
+      limit: 21,
       categories: [],
     },
   ],
