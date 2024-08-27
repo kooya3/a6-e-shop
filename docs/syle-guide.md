@@ -4,42 +4,7 @@
 
 The colors chosen for the E-shop were inspired by the Davis and Shirtliff logo and usage of the colors is as documented below.
 
-<div>
-<svg
-  width="1452"
-  height="524"
-  viewBox="0 0 1452 524"
-  fill="none"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <rect width="1452" height="524" fill="#fff" />
-
-  <rect x="128" y="192" width="96" height="48" fill="#fafdff" />
-  <rect x="228" y="192" width="96" height="48" fill="#f2faff" />
-  <rect x="328" y="192" width="96" height="48" fill="#e3f5ff" />
-  <rect x="428" y="192" width="96" height="48" fill="#cef0ff" />
-  <rect x="528" y="192" width="96" height="48" fill="#b6e8ff" />
-  <rect x="628" y="192" width="96" height="48" fill="#9bdcff" />
-  <rect x="728" y="192" width="96" height="48" fill="#75ccfd" />
-  <rect x="828" y="192" width="96" height="48" fill="#21b6f9" />
-  <rect x="928" y="192" width="96" height="48" fill="#04adef" />
-  <rect x="1028" y="192" width="96" height="48" fill="#00a1e2" />
-  <rect x="1128" y="192" width="96" height="48" fill="#007ebb" />
-  <rect x="1228" y="192" width="96" height="48" fill="#00395c" />
-  <rect x="128" y="244" width="96" height="48" fill="#0099ff05" />
-  <rect x="228" y="244" width="96" height="48" fill="#009dff0d" />
-  <rect x="328" y="244" width="96" height="48" fill="#00a4ff1c" />
-  <rect x="428" y="244" width="96" height="48" fill="#00b1ff31" />
-  <rect x="528" y="244" width="96" height="48" fill="#00afff49" />
-  <rect x="628" y="244" width="96" height="48" fill="#00a6ff64" />
-  <rect x="728" y="244" width="96" height="48" fill="#00a1fc8a" />
-  <rect x="828" y="244" width="96" height="48" fill="#00abf8de" />
-  <rect x="928" y="244" width="96" height="48" fill="#00aceffb" />
-  <rect x="1028" y="244" width="96" height="48" fill="#00a1e2" />
-  <rect x="1128" y="244" width="96" height="48" fill="#007ebb" />
-  <rect x="1228" y="244" width="96" height="48" fill="#00395c" />
-
-  <rect x="128" y="296" width="96" height="48" fill="#fcfcfd" />
+![Colors](https://github.com/kooya3/a6-e-shop/blob/main/public/colors.png?raw=true)
   <rect x="228" y="296" width="96" height="48" fill="#f9f9fb" />
   <rect x="328" y="296" width="96" height="48" fill="#eff0f3" />
   <rect x="428" y="296" width="96" height="48" fill="#e7e8ec" />

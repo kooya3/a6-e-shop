@@ -8,7 +8,7 @@
   </p>
 </div>
 
-![alt text](https://github.com/kooya3/a6-e-shop/blob/main/public/dayliff-logo.jpg?raw=true)
+![Davis and Shirtliff Logo](https://github.com/kooya3/a6-e-shop/blob/main/public/dayliff-logo.jpg?raw=true)
 
 ## Docs
 
