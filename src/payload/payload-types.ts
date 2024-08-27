@@ -23,6 +23,8 @@ export interface Config {
     categories: Category;
     users: User;
     productNotifications: ProductNotification;
+    payments: Payment;
+    'pickup-locations': PickupLocation;
     redirects: Redirect;
     search: Search;
     'payload-preferences': PayloadPreference;
@@ -404,16 +406,7 @@ export interface Order {
   id: string;
   orderedBy?: (string | null) | User;
   total: number;
-  currency: 'KES' | 'USD';
   status: 'pending' | 'invalid' | 'completed' | 'failed' | 'reversed';
-  paymentMethod: 'pesapal' | 'googlepay';
-  pesapalDetails?: {
-    orderTrackingId?: string | null;
-  };
-  googlePayDetails?: {
-    transactionId?: string | null;
-    paymentMethodToken?: string | null;
-  };
   items?:
     | {
         product: string | Product;
@@ -422,6 +415,16 @@ export interface Order {
         id?: string | null;
       }[]
     | null;
+  deliveryInfo:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  skipSync?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -431,7 +434,6 @@ export interface User {
   roles?: ('admin' | 'customer')[] | null;
   purchases?: (string | Product)[] | null;
   bcCustomerID?: string | null;
-  stripeCustomerID?: string | null;
   cart?: {
     items?: CartItems;
     createdOn?: string | null;
@@ -454,6 +456,28 @@ export interface ProductNotification {
   productID: string | Product;
   email?: string | null;
   notified?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+export interface Payment {
+  id: string;
+  trackingID: string;
+  paidBy?: (string | null) | User;
+  order?: (string | null) | Order;
+  paymentMethod?: string | null;
+  amount?: number | null;
+  confirmationCode?: string | null;
+  paymentStatusDescription?: string | null;
+  description?: string | null;
+  message?: string | null;
+  paymentAccount?: string | null;
+  currency?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+export interface PickupLocation {
+  id: string;
+  title: string;
   updatedAt: string;
   createdAt: string;
 }

@@ -1,35 +1,34 @@
 import { calculatePrice } from "../../../../app/_components/Price";
 import type { Order, User } from "../../../payload-types"
 
-interface CreatPayloadOrder {
+interface CreatePayloadOrder {
+  token: string;
   cartTotal: {
     formatted: string
     raw: number
   }
   cart: User['cart'];
-  orderReference: string;
-  currency?: string;
-  paymentMethod: string;
-  pesapalDetails?: { orderTrackingId: string };
-  googlePayDetails?: string;
+  deliveryInfo: Partial<{
+    Location_Code: string
+    Contact_Name: string
+    Contact_Phone_No: string
+    Physical_Address: string
+    Physical_Address_2: string
+    City: string
+    Delivery_Instruction: string
+  }>
 }
 
-export async function createPayloadOrder({ cartTotal, cart, orderReference, currency, paymentMethod, pesapalDetails, googlePayDetails }: CreatPayloadOrder): Promise<void> {
-  console.log('createPayloadOrder called with:', { cartTotal, cart, orderReference, currency, paymentMethod, pesapalDetails, googlePayDetails });
-
+export async function createPayloadOrder({ token, cartTotal, cart, deliveryInfo }: CreatePayloadOrder): Promise<Order> {
   try {
-    const orderReq = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/orders`, {
+    const payloadOrder = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/orders`, {
       method: 'POST',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `JWT ${token}`,
       },
       body: JSON.stringify({
-        orderReference,
-        currency,
-        paymentMethod,
-        pesapalDetails,
-        googlePayDetails: {},
         total: cartTotal.raw,
         items: (cart?.items || [])?.map(({ product, quantity }) => ({
           product: typeof product === 'string' ? product : product.id,
@@ -38,21 +37,25 @@ export async function createPayloadOrder({ cartTotal, cart, orderReference, curr
             ? calculatePrice(product.unitPrice, quantity, true)
             : undefined,
         })),
+        deliveryInfo,
       }),
     })
 
-    if (!orderReq.ok) throw new Error(orderReq.statusText || 'Something went wrong.')
+    if (!payloadOrder.ok) throw new Error(payloadOrder.statusText || 'Something went wrong while creating payload order.')
 
     const {
       error: errorFromRes,
+      doc,
     }: {
       message?: string
       error?: string
       doc: Order
-    } = await orderReq.json()
+    } = await payloadOrder.json()
 
     if (errorFromRes) throw new Error(errorFromRes)
+
+    return doc
   } catch (err: unknown) {
-    throw new Error(`We couldn't create your order`)
+    throw new Error(`Couldn't create payload order`)
   }
 }

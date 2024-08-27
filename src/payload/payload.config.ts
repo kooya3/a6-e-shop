@@ -15,6 +15,8 @@ import Categories from './collections/Categories'
 import { Media } from './collections/Media'
 import { Orders } from './collections/Orders'
 import { Pages } from './collections/Pages'
+import { Payments } from './collections/Payments'
+import PickupLocations from './collections/PickupLocations'
 import { ProductNotifications } from './collections/ProductNotifications'
 import Products from './collections/Products'
 import Users from './collections/Users'
@@ -78,7 +80,7 @@ export default buildConfig({
   }),
   // database-adapter-config-end
   serverURL: process.env.PAYLOAD_PUBLIC_BASE_DNS,
-  collections: [Pages, Products, Orders, Media, Categories, Users, ProductNotifications],
+  collections: [Pages, Products, Orders, Media, Categories, Users, ProductNotifications, Payments, PickupLocations],
   globals: [Settings, Header, Footer],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),

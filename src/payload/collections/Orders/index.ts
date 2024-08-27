@@ -41,16 +41,6 @@ export const Orders: CollectionConfig = {
       min: 0,
     },
     {
-      name: 'currency',
-      type: 'select',
-      options: [
-        { label: 'KES', value: 'KES' },
-        { label: 'USD', value: 'USD' },
-      ],
-      defaultValue: 'KES',
-      required: true,
-    },
-    {
       name: 'status',
       type: 'select',
       options: [
@@ -62,39 +52,9 @@ export const Orders: CollectionConfig = {
       ],
       defaultValue: 'pending',
       required: true,
-    },
-    {
-      name: 'paymentMethod',
-      type: 'select',
-      options: [
-        { label: 'PesaPal', value: 'pesapal' },
-        { label: 'Google Pay', value: 'googlepay' },
-      ],
-      required: true,
-    },
-    {
-      name: 'pesapalDetails',
-      type: 'group',
-      fields: [
-        {
-          name: 'orderTrackingId',
-          type: 'text',
-        },
-      ],
-    },
-    {
-      name: 'googlePayDetails',
-      type: 'group',
-      fields: [
-        {
-          name: 'transactionId',
-          type: 'text',
-        },
-        {
-          name: 'paymentMethodToken',
-          type: 'text',
-        },
-      ],
+      admin: {
+        readOnly: true,
+      },
     },
     {
       name: 'items',
@@ -117,6 +77,25 @@ export const Orders: CollectionConfig = {
           min: 0,
         },
       ],
+    },
+    {
+      name: 'deliveryInfo',
+      type: 'json',
+      required: true,
+      admin: {
+        hidden: true,
+      },
+    },
+    {
+      name: 'skipSync',
+      label: 'Skip Sync',
+      type: 'checkbox',
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
+        hidden: true,
+      },
+      defaultValue: false,
     },
   ],
 }
