@@ -11,11 +11,13 @@ import { CheckoutPage } from './CheckoutPage'
 import classes from './index.module.scss'
 
 export default async function Checkout() {
-  await getMeUser({
+  const me = await getMeUser({
     nullUserRedirect: `/login?error=${encodeURIComponent(
       'You must be logged in to checkout.',
     )}&redirect=${encodeURIComponent('/checkout')}`,
   })
+
+  const token = me.token
 
   let settings: Settings | null = null
 
@@ -29,7 +31,7 @@ export default async function Checkout() {
   return (
     <div className={classes.checkout}>
       <Gutter>
-        <CheckoutPage settings={settings} />
+        <CheckoutPage settings={settings} token={token} />
       </Gutter>
     </div>
   )

@@ -4,7 +4,7 @@ const BC_URL = process.env.BC_URL
 const USERNAME = process.env.BC_USERNAME
 const PASSWORD = process.env.BC_PASSWORD;
 
-export async function fetchCustomersFromBC({ limit = 50, filters }: { limit?: number; filters?: Record<string, string> }): Promise<BCCustomer> {
+export async function fetchCustomersFromBC({ limit = 50, filters }: { limit?: number; filters?: Partial<Record<(keyof BCCustomer['value'][number]), string>> }): Promise<BCCustomer> {
   let filterString: string | undefined;
   let filter: string | undefined;
 

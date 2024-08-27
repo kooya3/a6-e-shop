@@ -87,6 +87,7 @@
   border-radius: 10px;
 
   @include mid-break {
+    -webkit-backdrop-filter: blur(30px);
     backdrop-filter: blur(30px);
     background-color: rgba(255, 255, 255, 0.9);
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);

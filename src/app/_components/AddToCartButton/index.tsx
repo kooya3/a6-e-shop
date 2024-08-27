@@ -35,7 +35,7 @@ export const AddToCartButton: React.FC<{
       <Button
         href={isInCart ? '/cart' : undefined}
         type={!isInCart ? 'button' : undefined}
-        label={isInCart ? `✓ View in cart` : `Add to cart`}
+        label={isInCart ? `✓ View in Cart` : `Add to Cart`}
         el={isInCart ? 'link' : undefined}
         appearance={appearance}
         className={[
@@ -53,64 +53,21 @@ export const AddToCartButton: React.FC<{
                   product,
                   quantity,
                 })
-                setIsOpen(true)
               }
             : undefined
         }
       />
 
-      <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
-        <DialogBackdrop
-          transition
-          className="fixed inset-0 bg-black/30 duration-300 ease-out data-[closed]:opacity-0"
-        >
-          <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
-            <DialogPanel className="max-w-lg space-y-4 border bg-white p-12">
-              <DialogTitle className="font-bold text-lg flex justify-between">
-                Added to your cart <CloseButton>X</CloseButton>
-              </DialogTitle>
-
-              <div className="grid grid-cols-3 py-6">
-                <div className="col-span-2 grid grid-cols-2 gap-4">
-                  <div className="w-28 h-28">
-                    {!metaImage && <div>No image</div>}
-                    {metaImage && typeof metaImage !== 'string' && (
-                      <Media imgClassName={classes.image} resource={metaImage} />
-                    )}
-                  </div>
-
-                  <div className="flex flex-col justify-between">
-                    <div>
-                      <h3 className="text-sm text-gray-700">{product.title}</h3>
-                      <p className="mt-1 text-sm text-[var(--color-dark-60)]">
-                        {product.unitPrice}
-                      </p>
-                    </div>
-                    <div>
-                      <p>Quantity: {quantity}</p>
-                      <p>Total: {quantity * product.unitPrice}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <Button
-                    href={user ? '/checkout' : 'cart'}
-                    type="button"
-                    label={user ? `CHECKOUT NOW` : `VIEW CART`}
-                    el="link"
-                    appearance="primary"
-                  />
-
-                  <div>
-                    <Link href="/shop">Or continue shopping</Link>
-                  </div>
-                </div>
-              </div>
-            </DialogPanel>
-          </div>
-        </DialogBackdrop>
-      </Dialog>
+      {isInCart && (
+        <Button
+          href="/products"
+          type="button"
+          label="Continue Shopping"
+          el="link"
+          appearance="secondary"
+          className="mt-3"
+        />
+      )}
     </>
   )
 }

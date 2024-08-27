@@ -10,10 +10,8 @@ import { Button } from '../../../_components/Button'
 import { Input } from '../../../_components/Input'
 import { Message } from '../../../_components/Message'
 import { useAuth } from '../../../_providers/Auth'
-import { addNewCustomerIfNonExist } from '../../../hook/createAccounts'
 
 import classes from './index.module.scss'
-
 
 type FormData = {
   name: string
@@ -21,8 +19,6 @@ type FormData = {
   phoneNumber: string
   password: string
   passwordConfirm: string
-
-  
 }
 
 const CreateAccountForm: React.FC = () => {
@@ -59,6 +55,7 @@ const CreateAccountForm: React.FC = () => {
 
   const onSubmit = useCallback(
     async (data: FormData) => {
+      setLoading(true)
       const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/users`, {
         method: 'POST',
         body: JSON.stringify({ ...data, phoneNumber: data.phoneNumber.replace('+', '') }),
@@ -75,17 +72,12 @@ const CreateAccountForm: React.FC = () => {
 
       const redirect = searchParams.get('redirect')
 
-      const timer = setTimeout(() => {
-        setLoading(true)
-      }, 1000)
-
       try {
         await login(data)
-        clearTimeout(timer)
         if (redirect) router.push(redirect as string)
         else router.push(`/account?success=${encodeURIComponent('Account created successfully')}`)
       } catch (_) {
-        clearTimeout(timer)
+        setLoading(false)
         setError('There was an error with the credentials provided. Please try again.')
       }
     },
@@ -125,7 +117,7 @@ const CreateAccountForm: React.FC = () => {
         placeholder="072200000"
         pattern="^(07|01)\d{8}$"
       />
-      
+
       <Input
         name="password"
         type="password"
@@ -133,7 +125,7 @@ const CreateAccountForm: React.FC = () => {
         required
         register={register}
         error={errors.password}
-        placeholder='Password must be at least 8 characters long'
+        placeholder="Password must be at least 8 characters long"
         pattern=".*" // Add the pattern property with a valid regular expression to enforce a password policy.
       />
       <Input
@@ -147,16 +139,22 @@ const CreateAccountForm: React.FC = () => {
         pattern=".*" // Add the pattern property with a valid regular expression
         placeholder="Enter your password again"
       />
+
       <Button
         type="submit"
-        label={loading ? 'Processing' : 'Sign Up'}
+        label={loading ? 'Creating account' : 'Create account'}
         disabled={loading}
         appearance="primary"
         className={classes.submit}
       />
       <div>
         {'Already have an account? '}
-        <Link href={`/login${allParams}`}>Login</Link>
+        <Link
+          href={`/login${allParams}`}
+          className="text-[var(--blue-9)] hover:text-[var(--blue-10)] hover:underline hover:decoration[var(--blue-4)]"
+        >
+          Login
+        </Link>
       </div>
     </form>
   )

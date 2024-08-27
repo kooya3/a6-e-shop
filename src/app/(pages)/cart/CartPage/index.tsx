@@ -101,14 +101,6 @@ export const CartPage: React.FC<{
                         <dd className="font-medium text-gray-900">{cartTotal.formatted}</dd>
                       </div>
                       <div className="flex items-center justify-between py-4">
-                        <dt className="text-gray-600">Shipping</dt>
-                        <dd className="font-medium text-gray-900">250.00</dd>
-                      </div>
-                      <div className="flex items-center justify-between py-4">
-                        <dt className="text-gray-600">Tax</dt>
-                        <dd className="font-medium text-gray-900">120.32</dd>
-                      </div>
-                      <div className="flex items-center justify-between py-4">
                         <dt className="text-base font-medium text-gray-900">Order total</dt>
                         <dd className="text-base font-medium text-gray-900">
                           {cartTotal.formatted}

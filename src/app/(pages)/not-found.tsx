@@ -5,9 +5,13 @@ import { VerticalPadding } from '../_components/VerticalPadding'
 export default function NotFound() {
   return (
     <Gutter>
-      <VerticalPadding top="none" bottom="large">
-        <h1 style={{ marginBottom: 0 }}>404</h1>
-        <p>This page could not be found.</p>
+      <VerticalPadding
+        top="none"
+        bottom="large"
+        className="flex flex-col items-center justify-center gap-4 pt-[var(--block-padding)]"
+      >
+        <h1>404</h1>
+        <p>The page you are looking for couldn't not be found.</p>
         <Button href="/" label="Go Home" appearance="primary" />
       </VerticalPadding>
     </Gutter>

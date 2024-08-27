@@ -4983,8 +4983,12 @@ input versionsProduct_where_or {
 type Order {
   id: String
   orderedBy: User
-  stripePaymentIntentID: String
   total: Float!
+  currency: Order_currency!
+  status: Order_status!
+  paymentMethod: Order_paymentMethod!
+  pesapalDetails: Order_PesapalDetails
+  googlePayDetails: Order_GooglePayDetails
   items: [Order_Items!]
   updatedAt: DateTime
   createdAt: DateTime
@@ -5032,6 +5036,33 @@ A field whose value conforms to the standard internet email address format as sp
 """
 scalar EmailAddress @specifiedBy(url: "https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address")
 
+enum Order_currency {
+  KES
+  USD
+}
+
+enum Order_status {
+  pending
+  invalid
+  completed
+  failed
+  reversed
+}
+
+enum Order_paymentMethod {
+  pesapal
+  googlepay
+}
+
+type Order_PesapalDetails {
+  orderTrackingId: String
+}
+
+type Order_GooglePayDetails {
+  transactionId: String
+  paymentMethodToken: String
+}
+
 type Order_Items {
   product: Product
   price: Float
@@ -5055,8 +5086,13 @@ type Orders {
 
 input Order_where {
   orderedBy: Order_orderedBy_operator
-  stripePaymentIntentID: Order_stripePaymentIntentID_operator
   total: Order_total_operator
+  currency: Order_currency_operator
+  status: Order_status_operator
+  paymentMethod: Order_paymentMethod_operator
+  pesapalDetails__orderTrackingId: Order_pesapalDetails__orderTrackingId_operator
+  googlePayDetails__transactionId: Order_googlePayDetails__transactionId_operator
+  googlePayDetails__paymentMethodToken: Order_googlePayDetails__paymentMethodToken_operator
   items__product: Order_items__product_operator
   items__price: Order_items__price_operator
   items__quantity: Order_items__quantity_operator
@@ -5077,7 +5113,58 @@ input Order_orderedBy_operator {
   exists: Boolean
 }
 
-input Order_stripePaymentIntentID_operator {
+input Order_total_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+}
+
+input Order_currency_operator {
+  equals: Order_currency_Input
+  not_equals: Order_currency_Input
+  in: [Order_currency_Input]
+  not_in: [Order_currency_Input]
+  all: [Order_currency_Input]
+}
+
+enum Order_currency_Input {
+  KES
+  USD
+}
+
+input Order_status_operator {
+  equals: Order_status_Input
+  not_equals: Order_status_Input
+  in: [Order_status_Input]
+  not_in: [Order_status_Input]
+  all: [Order_status_Input]
+}
+
+enum Order_status_Input {
+  pending
+  invalid
+  completed
+  failed
+  reversed
+}
+
+input Order_paymentMethod_operator {
+  equals: Order_paymentMethod_Input
+  not_equals: Order_paymentMethod_Input
+  in: [Order_paymentMethod_Input]
+  not_in: [Order_paymentMethod_Input]
+  all: [Order_paymentMethod_Input]
+}
+
+enum Order_paymentMethod_Input {
+  pesapal
+  googlepay
+}
+
+input Order_pesapalDetails__orderTrackingId_operator {
   equals: String
   not_equals: String
   like: String
@@ -5088,13 +5175,26 @@ input Order_stripePaymentIntentID_operator {
   exists: Boolean
 }
 
-input Order_total_operator {
-  equals: Float
-  not_equals: Float
-  greater_than_equal: Float
-  greater_than: Float
-  less_than_equal: Float
-  less_than: Float
+input Order_googlePayDetails__transactionId_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Order_googlePayDetails__paymentMethodToken_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
 }
 
 input Order_items__product_operator {
@@ -5171,8 +5271,13 @@ input Order_id_operator {
 
 input Order_where_and {
   orderedBy: Order_orderedBy_operator
-  stripePaymentIntentID: Order_stripePaymentIntentID_operator
   total: Order_total_operator
+  currency: Order_currency_operator
+  status: Order_status_operator
+  paymentMethod: Order_paymentMethod_operator
+  pesapalDetails__orderTrackingId: Order_pesapalDetails__orderTrackingId_operator
+  googlePayDetails__transactionId: Order_googlePayDetails__transactionId_operator
+  googlePayDetails__paymentMethodToken: Order_googlePayDetails__paymentMethodToken_operator
   items__product: Order_items__product_operator
   items__price: Order_items__price_operator
   items__quantity: Order_items__quantity_operator
@@ -5186,8 +5291,13 @@ input Order_where_and {
 
 input Order_where_or {
   orderedBy: Order_orderedBy_operator
-  stripePaymentIntentID: Order_stripePaymentIntentID_operator
   total: Order_total_operator
+  currency: Order_currency_operator
+  status: Order_status_operator
+  paymentMethod: Order_paymentMethod_operator
+  pesapalDetails__orderTrackingId: Order_pesapalDetails__orderTrackingId_operator
+  googlePayDetails__transactionId: Order_googlePayDetails__transactionId_operator
+  googlePayDetails__paymentMethodToken: Order_googlePayDetails__paymentMethodToken_operator
   items__product: Order_items__product_operator
   items__price: Order_items__price_operator
   items__quantity: Order_items__quantity_operator
@@ -5209,8 +5319,12 @@ type ordersDocAccess {
 
 type OrdersDocAccessFields {
   orderedBy: OrdersDocAccessFields_orderedBy
-  stripePaymentIntentID: OrdersDocAccessFields_stripePaymentIntentID
   total: OrdersDocAccessFields_total
+  currency: OrdersDocAccessFields_currency
+  status: OrdersDocAccessFields_status
+  paymentMethod: OrdersDocAccessFields_paymentMethod
+  pesapalDetails: OrdersDocAccessFields_pesapalDetails
+  googlePayDetails: OrdersDocAccessFields_googlePayDetails
   items: OrdersDocAccessFields_items
   updatedAt: OrdersDocAccessFields_updatedAt
   createdAt: OrdersDocAccessFields_createdAt
@@ -5239,29 +5353,6 @@ type OrdersDocAccessFields_orderedBy_Delete {
   permission: Boolean!
 }
 
-type OrdersDocAccessFields_stripePaymentIntentID {
-  create: OrdersDocAccessFields_stripePaymentIntentID_Create
-  read: OrdersDocAccessFields_stripePaymentIntentID_Read
-  update: OrdersDocAccessFields_stripePaymentIntentID_Update
-  delete: OrdersDocAccessFields_stripePaymentIntentID_Delete
-}
-
-type OrdersDocAccessFields_stripePaymentIntentID_Create {
-  permission: Boolean!
-}
-
-type OrdersDocAccessFields_stripePaymentIntentID_Read {
-  permission: Boolean!
-}
-
-type OrdersDocAccessFields_stripePaymentIntentID_Update {
-  permission: Boolean!
-}
-
-type OrdersDocAccessFields_stripePaymentIntentID_Delete {
-  permission: Boolean!
-}
-
 type OrdersDocAccessFields_total {
   create: OrdersDocAccessFields_total_Create
   read: OrdersDocAccessFields_total_Read
@@ -5282,6 +5373,201 @@ type OrdersDocAccessFields_total_Update {
 }
 
 type OrdersDocAccessFields_total_Delete {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_currency {
+  create: OrdersDocAccessFields_currency_Create
+  read: OrdersDocAccessFields_currency_Read
+  update: OrdersDocAccessFields_currency_Update
+  delete: OrdersDocAccessFields_currency_Delete
+}
+
+type OrdersDocAccessFields_currency_Create {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_currency_Read {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_currency_Update {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_currency_Delete {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_status {
+  create: OrdersDocAccessFields_status_Create
+  read: OrdersDocAccessFields_status_Read
+  update: OrdersDocAccessFields_status_Update
+  delete: OrdersDocAccessFields_status_Delete
+}
+
+type OrdersDocAccessFields_status_Create {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_status_Read {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_status_Update {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_status_Delete {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_paymentMethod {
+  create: OrdersDocAccessFields_paymentMethod_Create
+  read: OrdersDocAccessFields_paymentMethod_Read
+  update: OrdersDocAccessFields_paymentMethod_Update
+  delete: OrdersDocAccessFields_paymentMethod_Delete
+}
+
+type OrdersDocAccessFields_paymentMethod_Create {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_paymentMethod_Read {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_paymentMethod_Update {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_paymentMethod_Delete {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_pesapalDetails {
+  create: OrdersDocAccessFields_pesapalDetails_Create
+  read: OrdersDocAccessFields_pesapalDetails_Read
+  update: OrdersDocAccessFields_pesapalDetails_Update
+  delete: OrdersDocAccessFields_pesapalDetails_Delete
+  fields: OrdersDocAccessFields_pesapalDetails_Fields
+}
+
+type OrdersDocAccessFields_pesapalDetails_Create {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_pesapalDetails_Read {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_pesapalDetails_Update {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_pesapalDetails_Delete {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_pesapalDetails_Fields {
+  orderTrackingId: OrdersDocAccessFields_pesapalDetails_orderTrackingId
+}
+
+type OrdersDocAccessFields_pesapalDetails_orderTrackingId {
+  create: OrdersDocAccessFields_pesapalDetails_orderTrackingId_Create
+  read: OrdersDocAccessFields_pesapalDetails_orderTrackingId_Read
+  update: OrdersDocAccessFields_pesapalDetails_orderTrackingId_Update
+  delete: OrdersDocAccessFields_pesapalDetails_orderTrackingId_Delete
+}
+
+type OrdersDocAccessFields_pesapalDetails_orderTrackingId_Create {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_pesapalDetails_orderTrackingId_Read {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_pesapalDetails_orderTrackingId_Update {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_pesapalDetails_orderTrackingId_Delete {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_googlePayDetails {
+  create: OrdersDocAccessFields_googlePayDetails_Create
+  read: OrdersDocAccessFields_googlePayDetails_Read
+  update: OrdersDocAccessFields_googlePayDetails_Update
+  delete: OrdersDocAccessFields_googlePayDetails_Delete
+  fields: OrdersDocAccessFields_googlePayDetails_Fields
+}
+
+type OrdersDocAccessFields_googlePayDetails_Create {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_googlePayDetails_Read {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_googlePayDetails_Update {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_googlePayDetails_Delete {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_googlePayDetails_Fields {
+  transactionId: OrdersDocAccessFields_googlePayDetails_transactionId
+  paymentMethodToken: OrdersDocAccessFields_googlePayDetails_paymentMethodToken
+}
+
+type OrdersDocAccessFields_googlePayDetails_transactionId {
+  create: OrdersDocAccessFields_googlePayDetails_transactionId_Create
+  read: OrdersDocAccessFields_googlePayDetails_transactionId_Read
+  update: OrdersDocAccessFields_googlePayDetails_transactionId_Update
+  delete: OrdersDocAccessFields_googlePayDetails_transactionId_Delete
+}
+
+type OrdersDocAccessFields_googlePayDetails_transactionId_Create {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_googlePayDetails_transactionId_Read {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_googlePayDetails_transactionId_Update {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_googlePayDetails_transactionId_Delete {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_googlePayDetails_paymentMethodToken {
+  create: OrdersDocAccessFields_googlePayDetails_paymentMethodToken_Create
+  read: OrdersDocAccessFields_googlePayDetails_paymentMethodToken_Read
+  update: OrdersDocAccessFields_googlePayDetails_paymentMethodToken_Update
+  delete: OrdersDocAccessFields_googlePayDetails_paymentMethodToken_Delete
+}
+
+type OrdersDocAccessFields_googlePayDetails_paymentMethodToken_Create {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_googlePayDetails_paymentMethodToken_Read {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_googlePayDetails_paymentMethodToken_Update {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_googlePayDetails_paymentMethodToken_Delete {
   permission: Boolean!
 }
 
@@ -10677,8 +10963,12 @@ type ordersAccess {
 
 type OrdersFields {
   orderedBy: OrdersFields_orderedBy
-  stripePaymentIntentID: OrdersFields_stripePaymentIntentID
   total: OrdersFields_total
+  currency: OrdersFields_currency
+  status: OrdersFields_status
+  paymentMethod: OrdersFields_paymentMethod
+  pesapalDetails: OrdersFields_pesapalDetails
+  googlePayDetails: OrdersFields_googlePayDetails
   items: OrdersFields_items
   updatedAt: OrdersFields_updatedAt
   createdAt: OrdersFields_createdAt
@@ -10707,29 +10997,6 @@ type OrdersFields_orderedBy_Delete {
   permission: Boolean!
 }
 
-type OrdersFields_stripePaymentIntentID {
-  create: OrdersFields_stripePaymentIntentID_Create
-  read: OrdersFields_stripePaymentIntentID_Read
-  update: OrdersFields_stripePaymentIntentID_Update
-  delete: OrdersFields_stripePaymentIntentID_Delete
-}
-
-type OrdersFields_stripePaymentIntentID_Create {
-  permission: Boolean!
-}
-
-type OrdersFields_stripePaymentIntentID_Read {
-  permission: Boolean!
-}
-
-type OrdersFields_stripePaymentIntentID_Update {
-  permission: Boolean!
-}
-
-type OrdersFields_stripePaymentIntentID_Delete {
-  permission: Boolean!
-}
-
 type OrdersFields_total {
   create: OrdersFields_total_Create
   read: OrdersFields_total_Read
@@ -10750,6 +11017,201 @@ type OrdersFields_total_Update {
 }
 
 type OrdersFields_total_Delete {
+  permission: Boolean!
+}
+
+type OrdersFields_currency {
+  create: OrdersFields_currency_Create
+  read: OrdersFields_currency_Read
+  update: OrdersFields_currency_Update
+  delete: OrdersFields_currency_Delete
+}
+
+type OrdersFields_currency_Create {
+  permission: Boolean!
+}
+
+type OrdersFields_currency_Read {
+  permission: Boolean!
+}
+
+type OrdersFields_currency_Update {
+  permission: Boolean!
+}
+
+type OrdersFields_currency_Delete {
+  permission: Boolean!
+}
+
+type OrdersFields_status {
+  create: OrdersFields_status_Create
+  read: OrdersFields_status_Read
+  update: OrdersFields_status_Update
+  delete: OrdersFields_status_Delete
+}
+
+type OrdersFields_status_Create {
+  permission: Boolean!
+}
+
+type OrdersFields_status_Read {
+  permission: Boolean!
+}
+
+type OrdersFields_status_Update {
+  permission: Boolean!
+}
+
+type OrdersFields_status_Delete {
+  permission: Boolean!
+}
+
+type OrdersFields_paymentMethod {
+  create: OrdersFields_paymentMethod_Create
+  read: OrdersFields_paymentMethod_Read
+  update: OrdersFields_paymentMethod_Update
+  delete: OrdersFields_paymentMethod_Delete
+}
+
+type OrdersFields_paymentMethod_Create {
+  permission: Boolean!
+}
+
+type OrdersFields_paymentMethod_Read {
+  permission: Boolean!
+}
+
+type OrdersFields_paymentMethod_Update {
+  permission: Boolean!
+}
+
+type OrdersFields_paymentMethod_Delete {
+  permission: Boolean!
+}
+
+type OrdersFields_pesapalDetails {
+  create: OrdersFields_pesapalDetails_Create
+  read: OrdersFields_pesapalDetails_Read
+  update: OrdersFields_pesapalDetails_Update
+  delete: OrdersFields_pesapalDetails_Delete
+  fields: OrdersFields_pesapalDetails_Fields
+}
+
+type OrdersFields_pesapalDetails_Create {
+  permission: Boolean!
+}
+
+type OrdersFields_pesapalDetails_Read {
+  permission: Boolean!
+}
+
+type OrdersFields_pesapalDetails_Update {
+  permission: Boolean!
+}
+
+type OrdersFields_pesapalDetails_Delete {
+  permission: Boolean!
+}
+
+type OrdersFields_pesapalDetails_Fields {
+  orderTrackingId: OrdersFields_pesapalDetails_orderTrackingId
+}
+
+type OrdersFields_pesapalDetails_orderTrackingId {
+  create: OrdersFields_pesapalDetails_orderTrackingId_Create
+  read: OrdersFields_pesapalDetails_orderTrackingId_Read
+  update: OrdersFields_pesapalDetails_orderTrackingId_Update
+  delete: OrdersFields_pesapalDetails_orderTrackingId_Delete
+}
+
+type OrdersFields_pesapalDetails_orderTrackingId_Create {
+  permission: Boolean!
+}
+
+type OrdersFields_pesapalDetails_orderTrackingId_Read {
+  permission: Boolean!
+}
+
+type OrdersFields_pesapalDetails_orderTrackingId_Update {
+  permission: Boolean!
+}
+
+type OrdersFields_pesapalDetails_orderTrackingId_Delete {
+  permission: Boolean!
+}
+
+type OrdersFields_googlePayDetails {
+  create: OrdersFields_googlePayDetails_Create
+  read: OrdersFields_googlePayDetails_Read
+  update: OrdersFields_googlePayDetails_Update
+  delete: OrdersFields_googlePayDetails_Delete
+  fields: OrdersFields_googlePayDetails_Fields
+}
+
+type OrdersFields_googlePayDetails_Create {
+  permission: Boolean!
+}
+
+type OrdersFields_googlePayDetails_Read {
+  permission: Boolean!
+}
+
+type OrdersFields_googlePayDetails_Update {
+  permission: Boolean!
+}
+
+type OrdersFields_googlePayDetails_Delete {
+  permission: Boolean!
+}
+
+type OrdersFields_googlePayDetails_Fields {
+  transactionId: OrdersFields_googlePayDetails_transactionId
+  paymentMethodToken: OrdersFields_googlePayDetails_paymentMethodToken
+}
+
+type OrdersFields_googlePayDetails_transactionId {
+  create: OrdersFields_googlePayDetails_transactionId_Create
+  read: OrdersFields_googlePayDetails_transactionId_Read
+  update: OrdersFields_googlePayDetails_transactionId_Update
+  delete: OrdersFields_googlePayDetails_transactionId_Delete
+}
+
+type OrdersFields_googlePayDetails_transactionId_Create {
+  permission: Boolean!
+}
+
+type OrdersFields_googlePayDetails_transactionId_Read {
+  permission: Boolean!
+}
+
+type OrdersFields_googlePayDetails_transactionId_Update {
+  permission: Boolean!
+}
+
+type OrdersFields_googlePayDetails_transactionId_Delete {
+  permission: Boolean!
+}
+
+type OrdersFields_googlePayDetails_paymentMethodToken {
+  create: OrdersFields_googlePayDetails_paymentMethodToken_Create
+  read: OrdersFields_googlePayDetails_paymentMethodToken_Read
+  update: OrdersFields_googlePayDetails_paymentMethodToken_Update
+  delete: OrdersFields_googlePayDetails_paymentMethodToken_Delete
+}
+
+type OrdersFields_googlePayDetails_paymentMethodToken_Create {
+  permission: Boolean!
+}
+
+type OrdersFields_googlePayDetails_paymentMethodToken_Read {
+  permission: Boolean!
+}
+
+type OrdersFields_googlePayDetails_paymentMethodToken_Update {
+  permission: Boolean!
+}
+
+type OrdersFields_googlePayDetails_paymentMethodToken_Delete {
   permission: Boolean!
 }
 
@@ -13565,11 +14027,42 @@ enum ProductUpdate__status_MutationInput {
 
 input mutationOrderInput {
   orderedBy: String
-  stripePaymentIntentID: String
   total: Float!
+  currency: Order_currency_MutationInput!
+  status: Order_status_MutationInput!
+  paymentMethod: Order_paymentMethod_MutationInput!
+  pesapalDetails: mutationOrder_PesapalDetailsInput
+  googlePayDetails: mutationOrder_GooglePayDetailsInput
   items: [mutationOrder_ItemsInput]
   updatedAt: String
   createdAt: String
+}
+
+enum Order_currency_MutationInput {
+  KES
+  USD
+}
+
+enum Order_status_MutationInput {
+  pending
+  invalid
+  completed
+  failed
+  reversed
+}
+
+enum Order_paymentMethod_MutationInput {
+  pesapal
+  googlepay
+}
+
+input mutationOrder_PesapalDetailsInput {
+  orderTrackingId: String
+}
+
+input mutationOrder_GooglePayDetailsInput {
+  transactionId: String
+  paymentMethodToken: String
 }
 
 input mutationOrder_ItemsInput {
@@ -13581,11 +14074,42 @@ input mutationOrder_ItemsInput {
 
 input mutationOrderUpdateInput {
   orderedBy: String
-  stripePaymentIntentID: String
   total: Float
+  currency: OrderUpdate_currency_MutationInput
+  status: OrderUpdate_status_MutationInput
+  paymentMethod: OrderUpdate_paymentMethod_MutationInput
+  pesapalDetails: mutationOrderUpdate_PesapalDetailsInput
+  googlePayDetails: mutationOrderUpdate_GooglePayDetailsInput
   items: [mutationOrderUpdate_ItemsInput]
   updatedAt: String
   createdAt: String
+}
+
+enum OrderUpdate_currency_MutationInput {
+  KES
+  USD
+}
+
+enum OrderUpdate_status_MutationInput {
+  pending
+  invalid
+  completed
+  failed
+  reversed
+}
+
+enum OrderUpdate_paymentMethod_MutationInput {
+  pesapal
+  googlepay
+}
+
+input mutationOrderUpdate_PesapalDetailsInput {
+  orderTrackingId: String
+}
+
+input mutationOrderUpdate_GooglePayDetailsInput {
+  transactionId: String
+  paymentMethodToken: String
 }
 
 input mutationOrderUpdate_ItemsInput {

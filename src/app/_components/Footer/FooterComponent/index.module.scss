@@ -2,8 +2,8 @@
 
 .footer {
   padding: 30px 0;
-  background-color: var(--theme-elevation-1000);
-  color: var(--theme-elevation-0);
+  background-color: var(--blue-9);
+  color: var(--blue-contrast);
 
   @include small-break {
     padding: calc(var(--base) * 2) 0;

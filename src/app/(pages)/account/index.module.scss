@@ -11,7 +11,7 @@
 
 .account {
   display: grid;
-  grid-template-columns: 30% 1fr;
+  grid-template-columns: 20% 1fr;
   gap: 60px;
   margin-top: 30px;
 
@@ -33,7 +33,7 @@
 .navItem {
   display: flex;
   gap: 12px;
-  padding: 20px;
+  padding: 0 20px 20px 10px;
 }
 
 .personalInfo {

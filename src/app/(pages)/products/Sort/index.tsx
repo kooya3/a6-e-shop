@@ -5,17 +5,7 @@ import React, { ChangeEvent } from 'react'
 import { useFilter } from '../../../_providers/Filter'
 
 const Sort = () => {
-  const { categoryFilters, sort, setCategoryFilters, setSort } = useFilter()
-
-  const handleCategories = (categoryId: string) => {
-    if (categoryFilters.includes(categoryId)) {
-      const updatedCategories = categoryFilters.filter(id => id !== categoryId)
-
-      setCategoryFilters(updatedCategories)
-    } else {
-      setCategoryFilters([...categoryFilters, categoryId])
-    }
-  }
+  const { sort, setSort } = useFilter()
 
   const handleSort = (event: ChangeEvent<HTMLSelectElement>) => {
     setSort(event.target.value)
@@ -28,7 +18,7 @@ const Sort = () => {
           Sort By:
         </label>
 
-        <select name="sortBy" id="sortBy" onChange={handleSort}>
+        <select name="sortBy" id="sortBy" value={sort} onChange={handleSort}>
           <option value="-unitPrice">Price High to Low</option>
           <option value="unitPrice">Price Low to High</option>
         </select>

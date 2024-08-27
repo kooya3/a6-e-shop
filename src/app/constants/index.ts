@@ -23,13 +23,13 @@ export const inclusions = [
           icon: '/assets/icons/user.svg',
         },
         {
-            title: 'My Purchases',
+          title: 'Purchases',
             url: '/account/purchases',
             icon: '/assets/icons/purchases.svg',
           },  
     
           {
-            title: 'My Orders',
+            title: 'Orders',
             url: '/account/orders',
             icon: '/assets/icons/orders.svg',
           },

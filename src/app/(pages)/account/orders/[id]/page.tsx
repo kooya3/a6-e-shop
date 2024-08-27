@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-import { Order } from '../../../../../payload/payload-types'
+import type { Order } from '../../../../../payload/payload-types'
 import { HR } from '../../../../_components/HR'
 import { Media } from '../../../../_components/Media'
 import { Price } from '../../../../_components/Price'
@@ -47,11 +47,10 @@ export default async function Order({ params: { id } }) {
     <div>
       <h5>
         {`Order`}
-        <span className={classes.id}>{` ${order.id}`}</span>
+        <span className={classes.id}>{` #${order.id}`}</span>
       </h5>
       <div className={classes.itemMeta}>
         <p>{`ID: ${order.id}`}</p>
-        <p>{`Payment Intent: ${order.stripePaymentIntentID}`}</p>
         <p>{`Ordered On: ${formatDateTime(order.createdAt)}`}</p>
         <p className={classes.total}>
           {'Total: '}
@@ -88,17 +87,6 @@ export default async function Order({ params: { id } }) {
                     )}
                   </Link>
                   <div className={classes.rowContent}>
-                    {!stripeProductID && (
-                      <p className={classes.warning}>
-                        {'This product is not yet connected to Stripe. To link this product, '}
-                        <Link
-                          href={`${process.env.NEXT_PUBLIC_SERVER_URL}/admin/collections/products/${id}`}
-                        >
-                          edit this product in the admin panel
-                        </Link>
-                        {'.'}
-                      </p>
-                    )}
                     <h6 className={classes.title}>
                       <Link href={`/products/${product.slug}`} className={classes.titleLink}>
                         {title}

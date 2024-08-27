@@ -403,8 +403,17 @@ export interface Product {
 export interface Order {
   id: string;
   orderedBy?: (string | null) | User;
-  stripePaymentIntentID?: string | null;
   total: number;
+  currency: 'KES' | 'USD';
+  status: 'pending' | 'invalid' | 'completed' | 'failed' | 'reversed';
+  paymentMethod: 'pesapal' | 'googlepay';
+  pesapalDetails?: {
+    orderTrackingId?: string | null;
+  };
+  googlePayDetails?: {
+    transactionId?: string | null;
+    paymentMethodToken?: string | null;
+  };
   items?:
     | {
         product: string | Product;

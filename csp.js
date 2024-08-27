@@ -8,10 +8,23 @@ const policies = {
     'https://js.stripe.com',
     'https://maps.googleapis.com',
     'https://bctest.dayliff.com:7048',
+    'https://cybqa.pesapal.com',
+    'https://pay.google.com',
+    'https://google.com/pay',
   ],
   'child-src': ["'self'"],
-  'style-src': ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
-  'img-src': ["'self'", 'https://*.stripe.com', 'https://raw.githubusercontent.com'],
+  'style-src': [
+    "'self'",
+    "'unsafe-inline'",
+    'https://fonts.googleapis.com',
+    'http://fonts.googleapis.com/css',
+  ],
+  'img-src': [
+    "'self'",
+    'https://*.stripe.com',
+    'https://raw.githubusercontent.com',
+    'https://www.gstatic.com/images/icons/material/system/1x/payment_white_36dp.png',
+  ],
   'font-src': ["'self'"],
   'frame-src': [
     "'self'",
@@ -19,6 +32,9 @@ const policies = {
     'https://js.stripe.com',
     'https://hooks.stripe.com',
     'https://bctest.dayliff.com:7048',
+    'https://cybqa.pesapal.com',
+    'https://pay.google.com',
+    'https://google.com/pay',
   ],
   'connect-src': [
     "'self'",
@@ -26,6 +42,9 @@ const policies = {
     'https://api.stripe.com',
     'https://maps.googleapis.com',
     'https://bctest.dayliff.com:7048',
+    'https://cybqa.pesapal.com',
+    'https://pay.google.com',
+    'https://google.com/pay',
   ],
 }
 
