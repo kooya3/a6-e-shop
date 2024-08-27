@@ -70,17 +70,12 @@ const syncToBackendSystem: AfterChangeHook = async (context) => {
     } catch (error: boolean | unknown) {
         
     
+    
         // Handle any errors that occur during the request
         console.error(error);
 
-        // Handle specific errors related to the order page
-        if (error.response && error.response.status === 404) {
-            // Handle 404 error
-            console.log("Order not found");
-        } else {
-            // Handle other errors
-            console.log("Error syncing order to backend system");
-        }
+        // You can also throw an error to prevent the order from being saved
+        throw new Error('Failed to sync order to backend system');
     }
     }
 
