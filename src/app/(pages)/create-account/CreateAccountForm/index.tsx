@@ -88,16 +88,6 @@ const CreateAccountForm: React.FC = () => {
     <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
       <Message error={error} success={success} className={classes.message} />
       <Input
-        name="email"
-        label="Email Address"
-        required
-        register={register}
-        error={errors.email}
-        type="email"
-        placeholder="Enter your email"
-        pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-      />
-      <Input
         name="name"
         label="Full Name"
         required
@@ -107,15 +97,16 @@ const CreateAccountForm: React.FC = () => {
         placeholder="Enter your full name"
         pattern="^[a-zA-Z\s]+$"
       />
+
       <Input
-        name="phoneNumber"
-        label="Phone Number"
+        name="email"
+        label="Email Address"
         required
         register={register}
-        error={errors.phoneNumber}
-        type="text"
-        placeholder="072200000"
-        pattern="^(07|01)\d{8}$"
+        error={errors.email}
+        type="email"
+        placeholder="Enter your email"
+        pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
       />
 
       <Input
@@ -128,6 +119,7 @@ const CreateAccountForm: React.FC = () => {
         placeholder="Password must be at least 8 characters long"
         pattern=".*" // Add the pattern property with a valid regular expression to enforce a password policy.
       />
+
       <Input
         name="passwordConfirm"
         type="password"

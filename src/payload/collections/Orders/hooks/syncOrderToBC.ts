@@ -1,5 +1,6 @@
 import type { AfterChangeHook } from 'payload/dist/collections/config/types'
 
+import type { DeliveryInfo } from '../../../../app/(pages)/checkout/CheckoutPage'
 import { createSalesHeader } from '../../../bc/endpoints/createSalesHeader'
 import { createSalesOrderLine } from '../../../bc/endpoints/createSalesOrderLine'
 import type { Order } from '../../../payload-types'
@@ -19,12 +20,11 @@ export const syncOrderToBC: AfterChangeHook<Order> = async ({ doc, req, operatio
             throw new Error(`Couldn't find a user with id ${orderedBy}`)
         }
 
-        const deliveryInfo = typeof doc.deliveryInfo === 'object' ? doc.deliveryInfo : {}
+        const deliveryInfo = doc.deliveryInfo as DeliveryInfo
 
         const salesOrderBody = {
             Document_Type: 'Order' as const,
             Sell_to_Customer_No: user.bcCustomerID,
-            Location_Code: "21510",
             ...deliveryInfo,
         }
 
@@ -43,6 +43,7 @@ export const syncOrderToBC: AfterChangeHook<Order> = async ({ doc, req, operatio
                 No: bcProductID,
                 ShortcutDimCode4: "41040",
                 Quantity: item.quantity,
+                Location_Code: deliveryInfo.Location_Code,
             }
 
             const salesOrderLine = await createSalesOrderLine(orderLineBody)

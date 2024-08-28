@@ -63,7 +63,7 @@ const start = async (): Promise<void> => {
     app.listen(PORT, async () => {
       payload.logger.info(`Next.js App URL: ${process.env.PAYLOAD_PUBLIC_SERVER_URL}`)
 
-      // cron.schedule('0 */6 * * *', scheduleFetchProductsFromBusinessCentral);
+      cron.schedule('0 */6 * * *', scheduleFetchProductsFromBusinessCentral);
     })
   })
 }

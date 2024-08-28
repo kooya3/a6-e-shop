@@ -293,7 +293,7 @@ export interface Product {
       )[]
     | null;
   stripeProductID?: string | null;
-  bcProductID?: string | null; 
+  bcProductID?: string | null;
   inventory?: number | null;
   unitPrice?: number | null;
   priceJSON?: string | null;
@@ -405,8 +405,6 @@ export interface Product {
 export interface Order {
   id: string;
   orderedBy?: (string | null) | User;
-  stripePaymentIntentID?: string | null;
-  bcProductID?: string | null;
   total: number;
   status: 'pending' | 'invalid' | 'completed' | 'failed' | 'reversed';
   items?:

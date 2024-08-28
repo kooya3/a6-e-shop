@@ -8,10 +8,10 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import { BCLocation } from '../../../../payload/bc/types/BCLocation'
-import { createPayloadOrder } from '../../../../payload/collections/Orders/utils/createPayloadorder'
+import { createPayloadOrder } from '../../../../payload/collections/Orders/utils/createPayloadOrder'
 import { createPayloadPayment } from '../../../../payload/collections/Payments/utils/createPayloadPayment'
 import { Settings } from '../../../../payload/payload-types'
-import { submitPesapalOrderRequest } from '../../../../payload/pesapal/endpoints/submitPesapalOrderRequest'
+import { submitPesapalOrderRequest } from '../../../../payload/pesapal/utils/submitPesapalOrderRequest'
 import { Button } from '../../../_components/Button'
 import { Input } from '../../../_components/Input'
 import { useAuth } from '../../../_providers/Auth'
@@ -20,7 +20,7 @@ import { CheckoutItem } from '../CheckoutItem'
 
 import classes from './index.module.scss'
 
-type FormData = {
+export type DeliveryInfo = {
   Location_Code: string
   Contact_Name: string
   Contact_Phone_No: string
@@ -70,10 +70,10 @@ export const CheckoutPage: React.FC<{
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>()
+  } = useForm<DeliveryInfo>()
 
   const onSubmit = useCallback(
-    async (data: FormData) => {
+    async (data: DeliveryInfo) => {
       setLoading(true)
 
       const currency = 'KES'

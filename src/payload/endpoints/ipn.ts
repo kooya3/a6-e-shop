@@ -1,8 +1,10 @@
 import type { PayloadHandler } from 'payload/config';
 
-import { updateOrderPaymentStatus } from '../../collections/Orders/utils/updateOrderPaymentStatus';
-import { updatePayment } from '../../collections/Payments/utils/updatePayment';
-import { getPesapalTransactionStatus } from './getPesapalTransactionStatus';
+import { updateOrderPaymentStatus } from '../collections/Orders/utils/updateOrderPaymentStatus';
+import { updatePayment } from '../collections/Payments/utils/updatePayment';
+import { getPesapalTransactionStatus } from '../pesapal/utils/getPesapalTransactionStatus';
+
+
 
 const ipn: PayloadHandler = async (req, res): Promise<void> => {
   if (req.method === 'POST') {

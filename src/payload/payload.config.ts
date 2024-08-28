@@ -22,11 +22,12 @@ import Products from './collections/Products'
 import Users from './collections/Users'
 import BeforeDashboard from './components/BeforeDashboard'
 import BeforeLogin from './components/BeforeLogin'
+import ipn from './endpoints/ipn'
 import { seed } from './endpoints/seed'
 import { Footer } from './globals/Footer'
 import { Header } from './globals/Header'
 import { Settings } from './globals/Settings'
-import ipn from './pesapal/endpoints/ipn'
+
 
 const generateTitle: GenerateTitle = () => {
   return 'My Store'
@@ -61,12 +62,8 @@ export default buildConfig({
           alias: {
             ...config.resolve?.alias,
             dotenv: path.resolve(__dirname, './dotenv.js'),
-            [path.resolve(__dirname, 'endpoints/products')]: mockModulePath,
             [path.resolve(__dirname, 'endpoints/seed')]: mockModulePath,
             [path.resolve(__dirname, 'pesapal/endpoints/ipn')]: mockModulePath,
-            [path.resolve(__dirname, 'pesapal/endpoints/getPesapalAccessToken')]: mockModulePath,
-            [path.resolve(__dirname, 'pesapal/endpoints/getPesapalTransactionStatus')]: mockModulePath,
-            [path.resolve(__dirname, 'pesapal/endpoints/submitOrderRequest')]: mockModulePath,
             express: mockModulePath,
           },
         },

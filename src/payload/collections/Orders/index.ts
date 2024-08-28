@@ -5,6 +5,7 @@ import { adminsOrLoggedIn } from '../../access/adminsOrLoggedIn'
 import { adminsOrOrderedBy } from './access/adminsOrOrderedBy'
 import { clearUserCart } from './hooks/clearUserCart'
 import { populateOrderedBy } from './hooks/populateOrderedBy'
+import { syncOrderToBC } from './hooks/syncOrderToBC'
 import { updateUserPurchases } from './hooks/updateUserPurchases'
 
 export const Orders: CollectionConfig = {
@@ -16,7 +17,7 @@ export const Orders: CollectionConfig = {
   },
   hooks: {
     beforeChange: [],
-    afterChange: [updateUserPurchases, clearUserCart],
+    afterChange: [updateUserPurchases, clearUserCart, syncOrderToBC],
   },
   access: {
     read: adminsOrOrderedBy,
