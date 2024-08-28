@@ -18,7 +18,6 @@ export const PRODUCT = `
       docs {
         id
         title
-        bcProductID
         ${PRODUCT_CATEGORIES}
         layout {
           ${CALL_TO_ACTION}
