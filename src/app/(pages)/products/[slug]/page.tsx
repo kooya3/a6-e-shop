@@ -1,15 +1,14 @@
-import React from 'react'
-import { Metadata } from 'next'
-import { draftMode } from 'next/headers'
-import { notFound } from 'next/navigation'
+import { Metadata } from 'next';
+import { draftMode } from 'next/headers';
+import { notFound } from 'next/navigation';
 
-import type { Product } from '../../../../payload/payload-types'
-import { fetchDoc } from '../../../_api/fetchDoc'
-import { fetchDocs } from '../../../_api/fetchDocs'
-import { Blocks } from '../../../_components/Blocks'
-import { PaywallBlocks } from '../../../_components/PaywallBlocks'
-import { ProductHero } from '../../../_heros/CustomHero'
-import { generateMeta } from '../../../_utilities/generateMeta'
+import type { Product } from '../../../../payload/payload-types';
+import { fetchDoc } from '../../../_api/fetchDoc';
+import { fetchDocs } from '../../../_api/fetchDocs';
+import { Blocks } from '../../../_components/Blocks';
+import { PaywallBlocks } from '../../../_components/PaywallBlocks';
+import { ProductHero } from '../../../_heros/CustomHero';
+import { generateMeta } from '../../../_utilities/generateMeta';
 
 // Force this page to be dynamic so that Next.js does not cache it
 // See the note in '../../../[slug]/page.tsx' about this
@@ -55,7 +54,7 @@ export default async function Product({ params: { slug } }) {
                     text: 'Related Products',
                   },
                 ],
-              },
+              },            
             ],
             docs: relatedProducts,
           },

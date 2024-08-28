@@ -3,7 +3,6 @@ import type { Product } from '../payload-types'
 export const product2: Partial<Product> = {
   title: 'E-Book',
   stripeProductID: '',
-  bcProductID: '',
   slug: 'ebook',
   _status: 'published',
   meta: {

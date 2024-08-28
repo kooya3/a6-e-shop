@@ -15,13 +15,14 @@
     height: 24px;
     border-radius: 5px;
     background-color: white;
-    border: 2px solid var(--color-dark-60);
+    border: 2px solid var(--gray-8);
     outline: none;
     cursor: pointer;
   }
   
   .checkbox:checked {
-    background-color: var(--color-dark-60);
+    border: none;
+    background-color: var(--blue-9);
     position: relative;
   }
   
@@ -31,6 +32,6 @@
     font-weight: bold;
     color: #fff;
     position: absolute;
-    right: 5px;
-    top: 0;
+    right: 6px;
+    top: 2px;
   }

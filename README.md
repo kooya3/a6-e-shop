@@ -8,7 +8,8 @@
   </p>
 </div>
 
-![Davis and Shirtliff Logo](https://github.com/kooya3/a6-e-shop/blob/main/public/dayliff-logo.jpg?raw=true)
+![davisnshirtliff](https://github.com/user-attachments/assets/f3f21026-e331-40a7-aa67-72a64b4ee153)
+
 
 ## Docs
 
