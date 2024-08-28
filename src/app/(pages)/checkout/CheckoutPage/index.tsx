@@ -8,7 +8,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import { BCLocation } from '../../../../payload/bc/types/BCLocation'
-import { createPayloadOrder } from '../../../../payload/collections/Orders/utils/createPayloadOrder'
+import { createPayloadOrder } from '../../../../payload/collections/Orders/utils/createPayloadorder'
 import { createPayloadPayment } from '../../../../payload/collections/Payments/utils/createPayloadPayment'
 import { Settings } from '../../../../payload/payload-types'
 import { submitPesapalOrderRequest } from '../../../../payload/pesapal/utils/submitPesapalOrderRequest'
