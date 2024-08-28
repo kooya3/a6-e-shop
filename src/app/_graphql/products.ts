@@ -13,12 +13,11 @@ export const PRODUCTS = `
 `
 
 export const PRODUCT = `
-  query Product($slug: String, $draft: Boolean, $unitPrice: Float, $bcProductID: String, $inventory: Int) {
+  query Product($slug: String, $draft: Boolean) {
     Products(where: { slug: { equals: $slug}}, limit: 1, draft: $draft) {
       docs {
         id
         title
-        bcProductID: bcProductID
         ${PRODUCT_CATEGORIES}
         layout {
           ${CALL_TO_ACTION}
@@ -26,8 +25,6 @@ export const PRODUCT = `
           ${MEDIA_BLOCK}
           ${ARCHIVE_BLOCK}
         }
-        unitPrice: unitPrice
-        inventory: inventory
         enablePaywall
         relatedProducts {
           id
