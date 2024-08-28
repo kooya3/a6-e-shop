@@ -23,6 +23,6 @@ export async function updateOrderPaymentStatus(id: string, paymentStatus: Order[
 
   } catch (err: unknown) {
     payload.logger.error(err)
-    throw new Error(`We couldn't update your order with ID ${id}`)
+    throw new Error(`Couldn't update your order with ID ${id}`)
   }
 }

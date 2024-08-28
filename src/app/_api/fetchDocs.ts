@@ -4,6 +4,7 @@ import type { Config } from '../../payload/payload-types'
 import { CATEGORIES } from '../_graphql/categories'
 import { ORDERS } from '../_graphql/orders'
 import { PAGES } from '../_graphql/pages'
+import { PICKUP_LOCATIONS } from '../_graphql/pickupLocations'
 import { PRODUCTS } from '../_graphql/products'
 import { GRAPHQL_API_URL } from './shared'
 import { payloadToken } from './token'
@@ -24,6 +25,10 @@ const queryMap = {
   categories: {
     query: CATEGORIES,
     key: 'Categories',
+  },
+  'pickup-locations': {
+    query: PICKUP_LOCATIONS,
+    key: 'PickupLocations',
   },
 }
 

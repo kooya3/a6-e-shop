@@ -12,8 +12,8 @@ export interface MutatePesapal {
 }
 
 export interface BillingAddress {
-  email_address?: string;
-  phone_number: string;
+  email_address: string;
+  phone_number?: string;
   country_code?: string;
   first_name?: string;
   middle_name?: string;

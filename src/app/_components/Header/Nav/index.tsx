@@ -22,32 +22,23 @@ export const HeaderNav: React.FC<{ header: HeaderType }> = ({ header }) => {
         .join(' ')}
     >
       {navItems.map(({ link }, i) => {
-        return <CMSLink key={i} {...link} appearance="none" className="hover:underline" />
+        return (
+          <CMSLink
+            key={i}
+            {...link}
+            appearance="none"
+            className="hover:underline !text-[var(--gray-12)]"
+          />
+        )
       })}
-      <CartLink className="hover:underline" />
+      <CartLink className="hover:underline !text-[var(--gray-12)]" />
       {user && (
-        <Link href="/account" className="hover:underline">
+        <Link href="/account" className="hover:underline !text-[var(--gray-12)]">
           Account
         </Link>
       )}
       {!user && (
-        <>
-          <Button
-            el="link"
-            href="/login"
-            label="Login"
-            appearance="secondary"
-            className="capitalize"
-          />
-
-          <Button
-            el="link"
-            href="/create-account"
-            label="Create Account"
-            appearance="primary"
-            className="capitalize"
-          />
-        </>
+        <Button el="link" href="/login" label="Login" appearance="primary" className="capitalize" />
       )}
     </nav>
   )
