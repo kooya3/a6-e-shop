@@ -25,7 +25,6 @@ export const PRODUCT = `
           ${MEDIA_BLOCK}
           ${ARCHIVE_BLOCK}
         }
-        inventory
         enablePaywall
         relatedProducts {
           id
