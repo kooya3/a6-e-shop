@@ -1,4 +1,5 @@
 import React from 'react'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { Metadata } from 'next'
 import { Noto_Sans } from 'next/font/google'
 
@@ -24,6 +25,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <InitTheme />
         <link rel="icon" href="/favicon.ico" sizes="32x32" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <GoogleAnalytics gaId="G-H2E4EWMKTG" />
       </head>
       <body className={noto.variable}>
         <Providers>
