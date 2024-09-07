@@ -7,7 +7,7 @@ export const inclusions = [
     
     {
         title: 'Online Support',
-        description: '24 hours a day, 7 days a week',
+        description: '24 hours a day, 7 days',
         icon: '/assets/icons/support.svg',
       },
       {
